@@ -48,6 +48,32 @@ AEGIS SUPERSTACK is a comprehensive security intelligence platform combining rea
 - Predictive threat scoring with confidence intervals
 - Continuous model retraining on accumulated data
 
+## Security Modules
+
+### API Server (`modules/api_server.py`)
+REST API exposing all AEGIS capabilities over HTTP. Zero external dependencies.
+
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/status` | System health overview |
+| `GET /api/threats` | Scan live connections with QByte-22 |
+| `GET /api/scan/<ip>` | Analyze specific IP threat level |
+| `GET /api/connections` | Active network connections |
+| `GET /api/entropy` | Generate cryptographic key material |
+| `GET /api/blocklist` | Auto-blocked IP list |
+| `GET /api/uptime` | Service availability report |
+| `GET /api/logs/analysis` | System log security analysis |
+| `GET /api/predict` | ML-based threat prediction |
+
+### Log Analyzer (`modules/log_analyzer.py`)
+Pattern-based security log analysis — scans auth.log, syslog, kern.log for brute force, privilege escalation, SSH scanning, suspicious commands, and firewall changes.
+
+### Uptime Monitor (`modules/uptime_monitor.py`)
+Service availability tracking with HTTP endpoint monitoring, TCP port checks, DNS resolution, and SSL certificate expiry warnings.
+
+### Vulnerability Scanner (`modules/vuln_scanner.py`)
+Local system security assessment: SUID files, world-writable files, SSH config, firewall, exposed ports, sensitive file permissions, kernel hardening (ASLR, ptrace, core dumps). Produces a 0-10 security score.
+
 ## Quick Start
 
 ```bash
