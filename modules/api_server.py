@@ -16,6 +16,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from aegis_omni import QByteEngine, SystemAnalyzer, EntropyModule, PredictiveEngine, BLOCKLIST, __version__
 from modules.uptime_monitor import run_checks as uptime_checks
 from modules.log_analyzer import analyze_system_logs, analyze_aegis_threats
+from modules.vuln_scanner import full_scan as vuln_scan
+from modules.ioc_scanner import full_scan as ioc_scan
+from modules.forensics import full_forensic_capture
+from modules.password_audit import full_audit as password_audit
+from modules.payload_detector import scan_web_logs as payload_scan
+from modules.honeypot import analyze_honeypot_logs
 
 
 qbyte = QByteEngine()
@@ -40,6 +46,12 @@ class AegisAPIHandler(BaseHTTPRequestHandler):
             "/api/logs/analysis": self._log_analysis,
             "/api/logs/threats": self._threat_analysis,
             "/api/predict": self._predict,
+            "/api/vuln": self._vuln_scan,
+            "/api/ioc": self._ioc_scan,
+            "/api/forensics": self._forensics,
+            "/api/passwords": self._password_audit,
+            "/api/payloads": self._payload_scan,
+            "/api/honeypot": self._honeypot_stats,
         }
 
         handler = routes.get(path)
@@ -83,6 +95,12 @@ class AegisAPIHandler(BaseHTTPRequestHandler):
                 "GET /api/logs/analysis",
                 "GET /api/logs/threats",
                 "GET /api/predict",
+                "GET /api/vuln",
+                "GET /api/ioc",
+                "GET /api/forensics",
+                "GET /api/passwords",
+                "GET /api/payloads",
+                "GET /api/honeypot",
             ],
         })
 
@@ -145,6 +163,24 @@ class AegisAPIHandler(BaseHTTPRequestHandler):
 
     def _predict(self):
         self._respond(200, predictor.train_on_history())
+
+    def _vuln_scan(self):
+        self._respond(200, vuln_scan())
+
+    def _ioc_scan(self):
+        self._respond(200, ioc_scan())
+
+    def _forensics(self):
+        self._respond(200, full_forensic_capture())
+
+    def _password_audit(self):
+        self._respond(200, password_audit())
+
+    def _payload_scan(self):
+        self._respond(200, payload_scan())
+
+    def _honeypot_stats(self):
+        self._respond(200, analyze_honeypot_logs())
 
     def log_message(self, format, *args):
         pass
