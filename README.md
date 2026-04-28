@@ -51,7 +51,7 @@ AEGIS SUPERSTACK is a comprehensive security intelligence platform combining rea
 ## Security Modules
 
 ### API Server (`modules/api_server.py`)
-REST API exposing all AEGIS capabilities over HTTP. Zero external dependencies.
+REST API exposing all AEGIS capabilities — 18 endpoints, zero external dependencies.
 
 | Endpoint | Description |
 |----------|-------------|
@@ -64,6 +64,12 @@ REST API exposing all AEGIS capabilities over HTTP. Zero external dependencies.
 | `GET /api/uptime` | Service availability report |
 | `GET /api/logs/analysis` | System log security analysis |
 | `GET /api/predict` | ML-based threat prediction |
+| `GET /api/vuln` | Vulnerability scan with security score |
+| `GET /api/ioc` | Indicators of Compromise scan |
+| `GET /api/forensics` | Full forensic state capture |
+| `GET /api/passwords` | Password policy & credential audit |
+| `GET /api/payloads` | Web attack payload detection |
+| `GET /api/honeypot` | Honeypot connection analytics |
 
 ### Log Analyzer (`modules/log_analyzer.py`)
 Pattern-based security log analysis — scans auth.log, syslog, kern.log for brute force, privilege escalation, SSH scanning, suspicious commands, and firewall changes.
@@ -72,7 +78,22 @@ Pattern-based security log analysis — scans auth.log, syslog, kern.log for bru
 Service availability tracking with HTTP endpoint monitoring, TCP port checks, DNS resolution, and SSL certificate expiry warnings.
 
 ### Vulnerability Scanner (`modules/vuln_scanner.py`)
-Local system security assessment: SUID files, world-writable files, SSH config, firewall, exposed ports, sensitive file permissions, kernel hardening (ASLR, ptrace, core dumps). Produces a 0-10 security score.
+Local system security assessment: SUID files, world-writable files, SSH config, firewall, exposed ports, sensitive file permissions, kernel hardening. Produces a 0-10 security score.
+
+### Honeypot (`modules/honeypot.py`)
+Lightweight decoy service that opens fake ports with realistic banners (SSH, FTP, MySQL, Redis, Elasticsearch). Logs every connection attempt with full metadata for threat intelligence.
+
+### IOC Scanner (`modules/ioc_scanner.py`)
+Indicators of Compromise detection: suspicious processes (crypto miners, reverse shells), persistence mechanisms, rogue SSH keys, hidden temp files, DNS hijacking, and shell history analysis.
+
+### Forensics Toolkit (`modules/forensics.py`)
+System forensic analysis and evidence collection. Captures volatile state, analyzes file timelines, inspects kernel modules, audits user accounts, and SHA-256 hashes critical binaries.
+
+### Password Auditor (`modules/password_audit.py`)
+Credential security assessment: password aging policies, empty passwords, PAM configuration, password hashing strength, and brute force login detection.
+
+### Payload Detector (`modules/payload_detector.py`)
+Web attack payload detection engine. Scans logs and files for SQL injection, XSS, command injection, path traversal, web shells, XXE, SSRF, and Log4Shell signatures.
 
 ## Quick Start
 
