@@ -1,1 +1,84 @@
-# AEGIS_SUPERSTACK
+# AEGIS SUPERSTACK
+
+**Master AI Sovereign Stack — Enterprise Security & Intelligence Platform**
+
+AEGIS SUPERSTACK is a comprehensive security intelligence platform combining real-time threat detection, ML-powered prediction, enterprise task scheduling, GPU-accelerated analysis, and autonomous defense capabilities.
+
+---
+
+## Core Components
+
+| Module | File | Purpose |
+|--------|------|---------|
+| **QByte-22 Engine** | `qbyte_engine.py` | Production IP threat scoring with 50+ signal vectors |
+| **AEGIS Unified** | `aegis_unified.py` | Full security platform with interactive CLI |
+| **AEGIS OMNI-XEON** | `aegis_omni.py` | Autonomous security operations center |
+| **AEGIS Real** | `aegis_real.py` | Live system monitoring and forensics |
+| **Task Scheduler** | `scheduler.py` | FastAPI task routing with NATS message bus |
+| **GPU Worker** | `gpu_worker.py` | Async GPU-accelerated threat classification |
+| **Quantum Service** | `quantum_service.py` | Quantum security decision engine |
+| **GPU Benchmark** | `gpu_benchmark.py` | PyTorch/TensorFlow GPU performance testing |
+
+## Features
+
+### Threat Intelligence (QByte-22)
+- Real-time IP reputation scoring against Tor exit nodes, threat intel feeds, and scanner networks
+- Behavioral analysis: brute force detection, credential stuffing, injection attempts
+- Reverse DNS analysis for hosting provider identification
+- Session velocity tracking and repeat offender escalation
+- Auto-blocklisting with persistent threat database
+- Confidence scoring across 50+ signal vectors
+
+### Network Security
+- Live connection scanning with suspicious port detection
+- Listening service inventory with risk classification
+- Authentication log auditing (failed logins, privilege escalation)
+- Firewall status inspection (UFW + iptables)
+- High-frequency connection detection
+
+### Enterprise Architecture
+- FastAPI-based task scheduler with intelligent routing
+- NATS message bus integration for distributed processing
+- GPU worker pool for compute-intensive analysis
+- Quantum decision service with multi-signal threat scoring
+- Kubernetes-ready deployment architecture
+
+### ML & Prediction
+- Random Forest classifier trained on real threat history
+- Predictive threat scoring with confidence intervals
+- Continuous model retraining on accumulated data
+
+## Quick Start
+
+```bash
+git clone https://github.com/irstabyjorge/AEGIS_SUPERSTACK.git
+cd AEGIS_SUPERSTACK
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python3 aegis_unified.py
+```
+
+## License
+
+- **Personal & Academic**: Free under [MIT License](LICENSE)
+- **Commercial**: See [COMMERCIAL_LICENSE.md](COMMERCIAL_LICENSE.md)
+
+| Tier | Monthly | Annual |
+|------|---------|--------|
+| Professional | $2,499 | $29,988 |
+| Business | $9,999 | $119,988 |
+| Enterprise | $24,999 | $299,988 |
+| Enterprise Plus | $49,999 | $599,988 |
+| Sovereign / Gov | $99,999 | $1,199,988 |
+
+## Author
+
+**Jorge Francisco Paredes** (irstabyjorge)
+- GitHub: [github.com/irstabyjorge](https://github.com/irstabyjorge)
+- Email: IRSTAXBYJORGE@GMAIL.COM
+
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-GitHub-ea4aaa?logo=github)](https://github.com/sponsors/irstabyjorge)
+
+---
+
+Copyright (c) 2024-2026 Jorge Francisco Paredes. All rights reserved.
