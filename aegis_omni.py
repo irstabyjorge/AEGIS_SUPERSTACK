@@ -4,7 +4,7 @@
 
 __version__ = "2.0.0"
 
-import os, time, json, hashlib, ipaddress, socket, queue, threading
+import os, time, json, hashlib, ipaddress, socket, queue, threading, sys
 from dataclasses import dataclass, field
 from datetime import datetime, UTC
 from typing import Dict, Any, List
@@ -16,6 +16,16 @@ from sklearn.ensemble import RandomForestClassifier
 from rich.console import Console
 from rich.table import Table
 from cryptography.fernet import Fernet
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from modules.uptime_monitor import run_checks as uptime_checks
+from modules.log_analyzer import analyze_system_logs, analyze_aegis_threats
+from modules.vuln_scanner import full_scan as vuln_full_scan
+from modules.ioc_scanner import full_scan as ioc_full_scan
+from modules.forensics import full_forensic_capture, hash_critical_binaries
+from modules.password_audit import full_audit as password_full_audit
+from modules.payload_detector import scan_web_logs as payload_scan_web
+from modules.honeypot import start as honeypot_start, analyze_honeypot_logs
 
 console = Console()
 BASE = Path.home() / "aegis_omni_xeon"
@@ -126,7 +136,9 @@ class PolicyEngine:
         "PREDICT", "REPORT", "ENTROPY", "SYSTEM_ANALYSIS",
         "AUTH_AUDIT", "FIREWALL_STATUS", "CONNECTIONS",
         "LISTENERS", "FULL_AUDIT", "WATCH", "BLOCKLIST",
-        "THREAT_FEED",
+        "THREAT_FEED", "VULN_SCAN", "IOC_SCAN", "FORENSICS",
+        "PASSWORD_AUDIT", "PAYLOAD_SCAN", "HONEYPOT",
+        "HONEYPOT_STATS", "UPTIME", "LOG_ANALYSIS", "HASHES",
     }
     REQUIRES_MANUAL = {
         "FIREWALL_BLOCK", "SYSTEM_MODIFY", "SHUTDOWN"
@@ -443,6 +455,16 @@ class CommandRouter:
         if c in {"all", "full audit"}: return "FULL_AUDIT", {}
         if c == "watch": return "WATCH", {}
         if c in {"blocklist", "blocked"}: return "BLOCKLIST", {}
+        if c == "vuln": return "VULN_SCAN", {}
+        if c == "ioc": return "IOC_SCAN", {}
+        if c == "forensics": return "FORENSICS", {}
+        if c in {"passwords", "password audit"}: return "PASSWORD_AUDIT", {}
+        if c == "payloads": return "PAYLOAD_SCAN", {}
+        if c == "honeypot": return "HONEYPOT", {}
+        if c == "honeypot stats": return "HONEYPOT_STATS", {}
+        if c == "uptime": return "UPTIME", {}
+        if c in {"loganalysis", "log analysis"}: return "LOG_ANALYSIS", {}
+        if c == "hashes": return "HASHES", {}
         if c.startswith("scan "):
             parts = c.split()
             payload = {}
@@ -511,6 +533,26 @@ class Orchestrator:
             return self._watch()
         if intent == "BLOCKLIST":
             return {"blocklist": sorted(BLOCKLIST), "count": len(BLOCKLIST), "file": str(BLOCKLIST_FILE)}
+        if intent == "VULN_SCAN":
+            return vuln_full_scan()
+        if intent == "IOC_SCAN":
+            return ioc_full_scan()
+        if intent == "FORENSICS":
+            return full_forensic_capture()
+        if intent == "PASSWORD_AUDIT":
+            return password_full_audit()
+        if intent == "PAYLOAD_SCAN":
+            return payload_scan_web()
+        if intent == "HONEYPOT":
+            return self._run_honeypot()
+        if intent == "HONEYPOT_STATS":
+            return analyze_honeypot_logs()
+        if intent == "UPTIME":
+            return uptime_checks()
+        if intent == "LOG_ANALYSIS":
+            return analyze_system_logs()
+        if intent == "HASHES":
+            return hash_critical_binaries()
         if intent == "REPORT":
             return self.report()
 
@@ -563,7 +605,23 @@ class Orchestrator:
             "entropy": self.entropy.generate(),
             "blocklist": {"count": len(BLOCKLIST)},
             "prediction_model": self.predictor.train_on_history(),
+            "vulnerability_scan": vuln_full_scan(),
+            "ioc_scan": ioc_full_scan(),
+            "password_audit": password_full_audit(),
+            "uptime": uptime_checks(),
+            "log_analysis": analyze_system_logs(),
         }
+
+    def _run_honeypot(self):
+        console.print("[green]Starting honeypot on decoy ports. Ctrl+C to stop.[/green]")
+        stop_event, threads = honeypot_start()
+        try:
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt:
+            stop_event.set()
+            console.print("\n[yellow]Honeypot stopped.[/yellow]")
+        return analyze_honeypot_logs()
 
     def _watch(self):
         console.print("[green]Live threat monitoring (10s interval). Ctrl+C to stop.[/green]")
@@ -594,6 +652,16 @@ class Orchestrator:
                 "predict          — train ML model on threat history",
                 "entropy          — generate cryptographic key material",
                 "blocklist        — show blocked IPs",
+                "vuln             — vulnerability scan with security score",
+                "ioc              — indicators of compromise scan",
+                "forensics        — forensic state capture & analysis",
+                "passwords        — password policy & credential audit",
+                "payloads         — web attack payload detection",
+                "honeypot         — start decoy port listeners",
+                "honeypot stats   — honeypot connection analytics",
+                "uptime           — service availability check",
+                "loganalysis      — security log pattern analysis",
+                "hashes           — SHA-256 hash critical system binaries",
                 "all              — run full security audit",
                 "watch            — continuous threat monitoring",
                 "report           — summary report",
