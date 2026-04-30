@@ -4,7 +4,7 @@
 
 __version__ = "2.0.0"
 
-import os, json, subprocess, hashlib, time, ipaddress, socket
+import os, json, subprocess, hashlib, time, ipaddress, socket, sys
 from pathlib import Path
 from datetime import datetime, UTC
 from collections import Counter
@@ -12,6 +12,16 @@ import psutil
 from rich.console import Console
 from rich.table import Table
 from cryptography.fernet import Fernet
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from modules.uptime_monitor import run_checks as uptime_checks
+from modules.log_analyzer import analyze_system_logs, analyze_aegis_threats
+from modules.vuln_scanner import full_scan as vuln_full_scan
+from modules.ioc_scanner import full_scan as ioc_full_scan
+from modules.forensics import full_forensic_capture, hash_critical_binaries
+from modules.password_audit import full_audit as password_full_audit
+from modules.payload_detector import scan_web_logs as payload_scan_web
+from modules.honeypot import start as honeypot_start, analyze_honeypot_logs
 
 console = Console()
 BASE = Path.home() / "aegis_omni_xeon"
@@ -325,9 +335,14 @@ def full_audit():
         "packages": packages(),
         "entropy": entropy(),
         "blocklist": blocklist_info(),
+        "vulnerability_scan": vuln_full_scan(),
+        "ioc_scan": ioc_full_scan(),
+        "password_audit": password_full_audit(),
+        "uptime": uptime_checks(),
+        "log_analysis": analyze_system_logs(),
         "logfile": str(LOGFILE),
     }
-    log("full_audit", {"complete": True})
+    log("full_audit", {"complete": True, "modules": 15})
     return data
 
 def print_table(title, rows):
@@ -355,6 +370,16 @@ def help_menu():
             "packages         — list installed packages",
             "entropy          — generate cryptographic key material",
             "blocklist        — show blocked IPs",
+            "vuln             — vulnerability scan with security score",
+            "ioc              — indicators of compromise scan",
+            "forensics        — forensic state capture & analysis",
+            "passwords        — password policy & credential audit",
+            "payloads         — web attack payload detection",
+            "honeypot         — start decoy port listeners",
+            "honeypot stats   — honeypot connection analytics",
+            "uptime           — service availability check",
+            "loganalysis      — security log pattern analysis",
+            "hashes           — SHA-256 hash critical system binaries",
             "all              — run full security audit",
             "watch            — continuous threat monitoring",
             "logs             — view recent event log",
@@ -401,6 +426,39 @@ def main():
                 console.print_json(json.dumps(entropy(), default=str))
             elif cmd in {"blocklist", "blocked"}:
                 console.print_json(json.dumps(blocklist_info(), default=str))
+            elif cmd == "vuln":
+                console.print("[cyan]Running vulnerability scan...[/cyan]")
+                console.print_json(json.dumps(vuln_full_scan(), default=str))
+            elif cmd == "ioc":
+                console.print("[cyan]Scanning for indicators of compromise...[/cyan]")
+                console.print_json(json.dumps(ioc_full_scan(), default=str))
+            elif cmd == "forensics":
+                console.print("[cyan]Capturing forensic state...[/cyan]")
+                console.print_json(json.dumps(full_forensic_capture(), default=str))
+            elif cmd == "passwords":
+                console.print("[cyan]Auditing password security...[/cyan]")
+                console.print_json(json.dumps(password_full_audit(), default=str))
+            elif cmd == "payloads":
+                console.print("[cyan]Scanning web logs for attack payloads...[/cyan]")
+                console.print_json(json.dumps(payload_scan_web(), default=str))
+            elif cmd == "honeypot":
+                console.print("[green]Starting honeypot on decoy ports. Ctrl+C to stop.[/green]")
+                stop_event, threads = honeypot_start()
+                try:
+                    while True:
+                        time.sleep(1)
+                except KeyboardInterrupt:
+                    stop_event.set()
+                    console.print("\n[yellow]Honeypot stopped.[/yellow]")
+            elif cmd == "honeypot stats":
+                console.print_json(json.dumps(analyze_honeypot_logs(), default=str))
+            elif cmd == "uptime":
+                console.print_json(json.dumps(uptime_checks(), default=str))
+            elif cmd in {"loganalysis", "log analysis"}:
+                console.print("[cyan]Analyzing system logs...[/cyan]")
+                console.print_json(json.dumps(analyze_system_logs(), default=str))
+            elif cmd == "hashes":
+                console.print_json(json.dumps(hash_critical_binaries(), default=str))
             elif cmd == "logs":
                 console.print(run_cmd(f"tail -n 80 {LOGFILE}")["stdout"])
             elif cmd == "all":
