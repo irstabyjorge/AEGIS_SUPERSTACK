@@ -3,3 +3,16 @@ scikit-learn
 rich
 psutil
 cryptography
+anthropic
+openai
+torch
+transformers
+sentence-transformers
+fastapi
+uvicorn
+httpx
+aiohttp
+pydantic
+tiktoken
+safetensors
+huggingface-hub
