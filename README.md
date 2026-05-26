@@ -19,6 +19,11 @@ AEGIS SUPERSTACK is a comprehensive security intelligence platform combining rea
 | **Quantum Service** | `quantum_service.py` | Quantum security decision engine |
 | **GPU Benchmark** | `gpu_benchmark.py` | PyTorch/TensorFlow GPU performance testing |
 
+## External Design Reference
+
+- ChatGPT shared context/reference: https://chatgpt.com/s/cd_6a1519fdd3588191a5a202b0a35b31f4
+- Note: this external link is supplemental context; repository source files remain the authoritative implementation reference.
+
 ## Repository File Map (What each file is)
 
 ### Top-level Python services
