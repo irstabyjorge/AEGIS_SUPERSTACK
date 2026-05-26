@@ -95,6 +95,67 @@ Credential security assessment: password aging policies, empty passwords, PAM co
 ### Payload Detector (`modules/payload_detector.py`)
 Web attack payload detection engine. Scans logs and files for SQL injection, XSS, command injection, path traversal, web shells, XXE, SSRF, and Log4Shell signatures.
 
+## Responsible Use
+
+AEGIS SUPERSTACK is intended for defensive security, blue-team operations, and authorized testing only.
+
+### Allowed Use Cases
+- Security monitoring for infrastructure you own or are contractually authorized to assess.
+- Internal threat hunting, incident response support, and controlled purple-team validation.
+- Lab and educational experiments in isolated, non-production environments.
+
+### Prohibited Use Cases
+- Building unrestricted or safety-disabled AI systems.
+- Deploying offensive automation against systems you do not own or explicitly control.
+- Mass surveillance, unauthorized data collection, or policy/law-violating telemetry capture.
+- Automating destructive actions without auditable human approval.
+
+### Operational Guardrails
+- Keep human oversight for any autonomous response workflow.
+- Define explicit scope (targets, time window, and data retention) before any scan.
+- Run high-impact actions in simulation or dry-run mode first when available.
+- Maintain logs for all scans, blocks, and automated decisions for audit/review.
+- Follow all applicable laws, contracts, and organizational policies before running scans or collecting telemetry.
+
+## MCP Apps & ChatGPT Compatibility Notes
+
+If you build ChatGPT-facing UI surfaces for AEGIS integrations, prefer the MCP Apps standard first for portability.
+
+### Recommended Baseline (Portable)
+- Declare UI resources with `_meta.ui.resourceUri`.
+- Use the standard `ui/*` JSON-RPC bridge over `postMessage` for initialization, notifications, and host interaction.
+- Use MCP tool calls (`tools/call`) from UI components instead of host-specific globals by default.
+
+### Optional ChatGPT Extensions
+- Use `window.openai` only for capabilities that are ChatGPT-specific (for example checkout, file APIs, and modals).
+- Feature-detect extensions and provide fallback behavior for hosts where these APIs are unavailable.
+
+### Mapping Guidance
+
+| Goal | MCP Apps standard | ChatGPT extension (optional) |
+|------|-------------------|------------------------------|
+| Link a tool to a UI resource | `_meta.ui.resourceUri` | `_meta["openai/outputTemplate"]` |
+| Receive tool input | `ui/initialize` + `ui/notifications/tool-input` | `window.openai.toolInput` |
+| Receive tool results | `ui/notifications/tool-result` | `window.openai.toolOutput` |
+| Call a tool from UI | `tools/call` | `window.openai.callTool` |
+| Send follow-up message | `ui/message` | `window.openai.sendFollowUpMessage` |
+| Update model-visible UI context | `ui/update-model-context` | `window.openai.setWidgetState` |
+
+### Extension Best Practice Snippet
+```js
+const openai = typeof window !== "undefined" ? window.openai : undefined;
+
+if (openai?.requestModal) {
+  await openai.requestModal({
+    /* modal payload */
+  });
+} else {
+  // Fallback behavior for hosts without this extension.
+}
+```
+
+This approach keeps AEGIS app surfaces portable across MCP-compatible hosts while still allowing enhanced ChatGPT experiences when available.
+
 ## Quick Start
 
 ```bash
