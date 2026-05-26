@@ -19,6 +19,55 @@ AEGIS SUPERSTACK is a comprehensive security intelligence platform combining rea
 | **Quantum Service** | `quantum_service.py` | Quantum security decision engine |
 | **GPU Benchmark** | `gpu_benchmark.py` | PyTorch/TensorFlow GPU performance testing |
 
+## Repository File Map (What each file is)
+
+### Top-level Python services
+- `aegis_unified.py` — Main unified CLI/security platform entrypoint.
+- `aegis_omni.py` — Autonomous SOC-style operations workflow.
+- `aegis_real.py` — Real-time monitoring and live forensics checks.
+- `aegis_brain.py` — Core AI/security reasoning orchestration logic.
+- `aegis_chat.py` — Chat-style interface for interacting with AEGIS modules.
+- `aegis_daemon.py` — Background daemon/service runner for persistent tasks.
+
+### Threat scoring, scheduling, and acceleration
+- `qbyte_engine.py` — QByte-22 threat scoring engine (IP/signal analysis).
+- `scheduler.py` — FastAPI task scheduling and routing layer.
+- `gpu_worker.py` — Async GPU-backed worker for heavy analysis jobs.
+- `gpu_benchmark.py` — GPU performance benchmark utility.
+- `quantum_service.py` — Quantum decision/scoring service integration layer.
+
+### Security modules (`modules/`)
+- `modules/api_server.py` — REST API exposing AEGIS capabilities.
+- `modules/log_analyzer.py` — Security-focused log pattern analysis.
+- `modules/uptime_monitor.py` — Service health, DNS/port/SSL availability checks.
+- `modules/vuln_scanner.py` — Local vulnerability posture scanning/scoring.
+- `modules/ioc_scanner.py` — Indicators-of-compromise detection routines.
+- `modules/forensics.py` — Forensic collection and evidence-oriented inspection.
+- `modules/password_audit.py` — Password policy and credential hygiene audit.
+- `modules/payload_detector.py` — Web attack payload/signature detection.
+- `modules/honeypot.py` — Decoy service/honeypot telemetry collection.
+- `modules/__init__.py` — Package marker for module imports.
+
+### Sovereign AI JavaScript components (`sovereign-ai/`)
+- `sovereign-ai/core/system.js` — Core system orchestration (JS stack).
+- `sovereign-ai/matrix/agents.js` — Agent matrix coordination logic.
+- `sovereign-ai/vector/memory.js` — Vector/memory subsystem implementation.
+- `sovereign-ai/economic/economic.js` — Economic/finance simulation module.
+- `sovereign-ai/package.json` — Node package metadata and scripts.
+
+### Setup, docs, and policy files
+- `requirements.txt` — Python dependencies.
+- `install_service.sh` — Service installation/bootstrap script.
+- `LICENSE` — AEGIS MIT-style non-commercial license terms.
+- `COMMERCIAL_LICENSE.md` — Commercial license terms/pricing details.
+- `README.md` — Project overview and operational guidance.
+- `CONTRIBUTING.md` — Contribution process and standards.
+- `SECURITY.md` — Security reporting and policy notes.
+
+### Other assets/utilities
+- `aegis_icon.svg` — Project icon/branding asset.
+- `search_truepeoplesearch.py` — Auxiliary search utility script.
+
 ## Features
 
 ### Threat Intelligence (QByte-22)
@@ -95,6 +144,67 @@ Credential security assessment: password aging policies, empty passwords, PAM co
 ### Payload Detector (`modules/payload_detector.py`)
 Web attack payload detection engine. Scans logs and files for SQL injection, XSS, command injection, path traversal, web shells, XXE, SSRF, and Log4Shell signatures.
 
+## Responsible Use
+
+AEGIS SUPERSTACK is intended for defensive security, blue-team operations, and authorized testing only.
+
+### Allowed Use Cases
+- Security monitoring for infrastructure you own or are contractually authorized to assess.
+- Internal threat hunting, incident response support, and controlled purple-team validation.
+- Lab and educational experiments in isolated, non-production environments.
+
+### Prohibited Use Cases
+- Building unrestricted or safety-disabled AI systems.
+- Deploying offensive automation against systems you do not own or explicitly control.
+- Mass surveillance, unauthorized data collection, or policy/law-violating telemetry capture.
+- Automating destructive actions without auditable human approval.
+
+### Operational Guardrails
+- Keep human oversight for any autonomous response workflow.
+- Define explicit scope (targets, time window, and data retention) before any scan.
+- Run high-impact actions in simulation or dry-run mode first when available.
+- Maintain logs for all scans, blocks, and automated decisions for audit/review.
+- Follow all applicable laws, contracts, and organizational policies before running scans or collecting telemetry.
+
+## MCP Apps & ChatGPT Compatibility Notes
+
+If you build ChatGPT-facing UI surfaces for AEGIS integrations, prefer the MCP Apps standard first for portability.
+
+### Recommended Baseline (Portable)
+- Declare UI resources with `_meta.ui.resourceUri`.
+- Use the standard `ui/*` JSON-RPC bridge over `postMessage` for initialization, notifications, and host interaction.
+- Use MCP tool calls (`tools/call`) from UI components instead of host-specific globals by default.
+
+### Optional ChatGPT Extensions
+- Use `window.openai` only for capabilities that are ChatGPT-specific (for example checkout, file APIs, and modals).
+- Feature-detect extensions and provide fallback behavior for hosts where these APIs are unavailable.
+
+### Mapping Guidance
+
+| Goal | MCP Apps standard | ChatGPT extension (optional) |
+|------|-------------------|------------------------------|
+| Link a tool to a UI resource | `_meta.ui.resourceUri` | `_meta["openai/outputTemplate"]` |
+| Receive tool input | `ui/initialize` + `ui/notifications/tool-input` | `window.openai.toolInput` |
+| Receive tool results | `ui/notifications/tool-result` | `window.openai.toolOutput` |
+| Call a tool from UI | `tools/call` | `window.openai.callTool` |
+| Send follow-up message | `ui/message` | `window.openai.sendFollowUpMessage` |
+| Update model-visible UI context | `ui/update-model-context` | `window.openai.setWidgetState` |
+
+### Extension Best Practice Snippet
+```js
+const openai = typeof window !== "undefined" ? window.openai : undefined;
+
+if (openai?.requestModal) {
+  await openai.requestModal({
+    /* modal payload */
+  });
+} else {
+  // Fallback behavior for hosts without this extension.
+}
+```
+
+This approach keeps AEGIS app surfaces portable across MCP-compatible hosts while still allowing enhanced ChatGPT experiences when available.
+
 ## Quick Start
 
 ```bash
@@ -107,8 +217,13 @@ python3 aegis_unified.py
 
 ## License
 
-- **Personal & Academic**: Free under [MIT License](LICENSE)
+- **Personal & Academic**: Free under the [AEGIS MIT-style Non-Commercial License](LICENSE)
 - **Commercial**: See [COMMERCIAL_LICENSE.md](COMMERCIAL_LICENSE.md)
+
+
+### License FAQ
+- **Why is there a license if this is your project?** Because you own the copyright by default, and the license is how you decide what other people are allowed to do with your code.
+- This repository uses an MIT-style non-commercial license for personal/academic use, while commercial use requires the separate terms in `COMMERCIAL_LICENSE.md`.
 
 | Tier | Monthly | Annual |
 |------|---------|--------|
