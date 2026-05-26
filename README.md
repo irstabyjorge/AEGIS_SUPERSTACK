@@ -168,8 +168,13 @@ python3 aegis_unified.py
 
 ## License
 
-- **Personal & Academic**: Free under [MIT License](LICENSE)
+- **Personal & Academic**: Free under the [AEGIS MIT-style Non-Commercial License](LICENSE)
 - **Commercial**: See [COMMERCIAL_LICENSE.md](COMMERCIAL_LICENSE.md)
+
+
+### License FAQ
+- **Why is there a license if this is your project?** Because you own the copyright by default, and the license is how you decide what other people are allowed to do with your code.
+- This repository uses an MIT-style non-commercial license for personal/academic use, while commercial use requires the separate terms in `COMMERCIAL_LICENSE.md`.
 
 | Tier | Monthly | Annual |
 |------|---------|--------|
