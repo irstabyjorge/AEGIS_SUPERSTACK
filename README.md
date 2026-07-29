@@ -19,6 +19,60 @@ AEGIS SUPERSTACK is a comprehensive security intelligence platform combining rea
 | **Quantum Service** | `quantum_service.py` | Quantum security decision engine |
 | **GPU Benchmark** | `gpu_benchmark.py` | PyTorch/TensorFlow GPU performance testing |
 
+## External Design Reference
+
+- ChatGPT shared context/reference: https://chatgpt.com/s/cd_6a1519fdd3588191a5a202b0a35b31f4
+- **Source-of-truth notice:** this shared link is supplemental context only. The source of truth for behavior, architecture, and implementation is this repository (code + docs in git).
+
+## Repository File Map (What each file is)
+
+### Top-level Python services
+- `aegis_unified.py` — Main unified CLI/security platform entrypoint.
+- `aegis_omni.py` — Autonomous SOC-style operations workflow.
+- `aegis_real.py` — Real-time monitoring and live forensics checks.
+- `aegis_brain.py` — Core AI/security reasoning orchestration logic.
+- `aegis_chat.py` — Chat-style interface for interacting with AEGIS modules.
+- `aegis_daemon.py` — Background daemon/service runner for persistent tasks.
+
+### Threat scoring, scheduling, and acceleration
+- `qbyte_engine.py` — QByte-22 threat scoring engine (IP/signal analysis).
+- `scheduler.py` — FastAPI task scheduling and routing layer.
+- `gpu_worker.py` — Async GPU-backed worker for heavy analysis jobs.
+- `gpu_benchmark.py` — GPU performance benchmark utility.
+- `quantum_service.py` — Quantum decision/scoring service integration layer.
+
+### Security modules (`modules/`)
+- `modules/api_server.py` — REST API exposing AEGIS capabilities.
+- `modules/log_analyzer.py` — Security-focused log pattern analysis.
+- `modules/uptime_monitor.py` — Service health, DNS/port/SSL availability checks.
+- `modules/vuln_scanner.py` — Local vulnerability posture scanning/scoring.
+- `modules/ioc_scanner.py` — Indicators-of-compromise detection routines.
+- `modules/forensics.py` — Forensic collection and evidence-oriented inspection.
+- `modules/password_audit.py` — Password policy and credential hygiene audit.
+- `modules/payload_detector.py` — Web attack payload/signature detection.
+- `modules/honeypot.py` — Decoy service/honeypot telemetry collection.
+- `modules/__init__.py` — Package marker for module imports.
+
+### Sovereign AI JavaScript components (`sovereign-ai/`)
+- `sovereign-ai/core/system.js` — Core system orchestration (JS stack).
+- `sovereign-ai/matrix/agents.js` — Agent matrix coordination logic.
+- `sovereign-ai/vector/memory.js` — Vector/memory subsystem implementation.
+- `sovereign-ai/economic/economic.js` — Economic/finance simulation module.
+- `sovereign-ai/package.json` — Node package metadata and scripts.
+
+### Setup, docs, and policy files
+- `requirements.txt` — Python dependencies.
+- `install_service.sh` — Service installation/bootstrap script.
+- `LICENSE` — AEGIS MIT-style non-commercial license terms.
+- `COMMERCIAL_LICENSE.md` — Commercial license terms/pricing details.
+- `README.md` — Project overview and operational guidance.
+- `CONTRIBUTING.md` — Contribution process and standards.
+- `SECURITY.md` — Security reporting and policy notes.
+
+### Other assets/utilities
+- `aegis_icon.svg` — Project icon/branding asset.
+- `search_truepeoplesearch.py` — Auxiliary search utility script.
+
 ## Features
 
 ### Threat Intelligence (QByte-22)
@@ -156,15 +210,64 @@ if (openai?.requestModal) {
 
 This approach keeps AEGIS app surfaces portable across MCP-compatible hosts while still allowing enhanced ChatGPT experiences when available.
 
-## Quick Start
+## How to Run Locally (Safe / Defensive)
 
 ```bash
 git clone https://github.com/irstabyjorge/AEGIS_SUPERSTACK.git
 cd AEGIS_SUPERSTACK
-python3 -m venv .venv && source .venv/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
+
+# Primary interface (interactive defensive tooling)
 python3 aegis_unified.py
 ```
+
+Optional local runs:
+
+```bash
+# API mode (local-only unless you intentionally expose it)
+python3 modules/api_server.py
+
+# Autonomous SOC workflow (authorized environments only)
+python3 aegis_omni.py
+
+# Real-time monitoring and forensics
+python3 aegis_real.py
+```
+
+## Testing
+
+Run these checks locally before opening a PR:
+
+```bash
+# 1) Validate Python syntax across repository
+python3 -m compileall .
+
+# 2) Validate imports for key entry points
+python3 -c "import aegis_unified, aegis_omni, aegis_real, qbyte_engine, scheduler, gpu_worker, quantum_service, gpu_benchmark"
+
+# 3) Optional: run API module import check
+python3 -c "from modules import api_server, log_analyzer, uptime_monitor, vuln_scanner, ioc_scanner, forensics, password_audit, payload_detector, honeypot"
+```
+
+## Security Boundaries (Authorized Defensive Use Only)
+
+- Use AEGIS only on systems you own or where you have explicit written authorization.
+- Do not use AEGIS for credential harvesting, malware development, stealth/persistence abuse, destructive actions, or unauthorized access.
+- Keep scans and response actions auditable, minimal, and scoped to approved targets.
+- Treat collected telemetry as sensitive security data; store and retain it according to policy.
+- Require human approval for high-impact actions (blocking, quarantine, active response).
+
+## Next Implementation Steps
+
+- [ ] Add a centralized configuration file (`config.example.yaml`) with safe defaults and local-only bindings.
+- [ ] Add unit tests for `qbyte_engine.py` scoring signals and confidence calculations.
+- [ ] Add integration tests for `modules/api_server.py` endpoints using sample fixtures.
+- [ ] Add structured JSON logging with request/scan IDs for auditability.
+- [ ] Add role-based access controls and API auth middleware for multi-user deployments.
+- [ ] Add CI pipeline checks (format, lint, compile, import smoke tests).
+- [ ] Add threat-intel feed stubbing/mocking for deterministic offline tests.
 
 ## License
 
