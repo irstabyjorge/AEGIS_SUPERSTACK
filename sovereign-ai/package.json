@@ -1,0 +1,18 @@
+{
+  "name": "aegis-sovereign-ai",
+  "version": "1.0.0",
+  "description": "AEGIS Sovereign AI — Multi-layer autonomous security system",
+  "main": "core/system.js",
+  "scripts": {
+    "start": "node core/system.js",
+    "status": "node -e \"const {AegisSovereignSystem}=require('./core/system');console.log(JSON.stringify(new AegisSovereignSystem().status(),null,2))\"",
+    "test": "node -e \"const m=require('./vector/memory');const a=require('./matrix/agents');const e=require('./economic/economic');const {AegisSovereignSystem}=require('./core/system');console.log('All layers OK')\""
+  },
+  "keywords": ["aegis", "security", "sovereign-ai", "cybersecurity"],
+  "author": "Jorge Francisco Paredes (irstabyjorge)",
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^12.9.0",
+    "events": "^3.3.0"
+  }
+}
