@@ -1,0 +1,11 @@
+name: SaltSignal Runner Test
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo RUNNER_OK
