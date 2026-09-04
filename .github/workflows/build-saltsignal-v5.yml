@@ -1,0 +1,72 @@
+name: Build SaltSignalRecorder v5 MAX APK
+
+on:
+  push:
+    branches:
+      - saltsignal-v5-apk-build-20260904
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Gradle 8.9
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Reconstruct exact v5 source
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat saltsignal-v5-build/part00.b64 saltsignal-v5-build/part01.b64 saltsignal-v5-build/part02.b64 saltsignal-v5-build/part03.b64 saltsignal-v5-build/part04.b64 saltsignal-v5-build/part05.b64 saltsignal-v5-build/part06.b64 > /tmp/saltsignal.b64
+          base64 -d /tmp/saltsignal.b64 > /tmp/SaltSignalRecorder-v5-MAX-source.zip
+          echo 'd518308bfa024cb58a4d9b72daafa5f0ed345feb3ef39784fbee27d7e643a883  /tmp/SaltSignalRecorder-v5-MAX-source.zip' | sha256sum -c -
+          unzip -q /tmp/SaltSignalRecorder-v5-MAX-source.zip -d buildsrc
+          test -f buildsrc/SaltSignalRecorder/app/src/main/AndroidManifest.xml
+          if grep -q 'android.permission.INTERNET' buildsrc/SaltSignalRecorder/app/src/main/AndroidManifest.xml; then exit 1; fi
+          if grep -Eq '\.writeCharacteristic\s*\(|\.writeDescriptor\s*\(' buildsrc/SaltSignalRecorder/app/src/main/java/com/jefeaguila/saltsignal/MainActivity.java; then exit 1; fi
+
+      - name: Ensure Android SDK 35
+        shell: bash
+        run: |
+          set -euo pipefail
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+
+      - name: Compile APK
+        shell: bash
+        working-directory: buildsrc/SaltSignalRecorder
+        run: gradle --no-daemon --stacktrace :app:assembleDebug
+
+      - name: Prepare deliverables
+        shell: bash
+        run: |
+          set -euo pipefail
+          APK='buildsrc/SaltSignalRecorder/app/build/outputs/apk/debug/app-debug.apk'
+          test -s "$APK"
+          cp "$APK" SaltSignalRecorder-v5-MAX-installable.apk
+          sha256sum SaltSignalRecorder-v5-MAX-installable.apk > SaltSignalRecorder-v5-MAX-installable.apk.sha256
+          printf '%s\n' 'SaltSignalRecorder v5 MAX build PASS' 'Source SHA-256: d518308bfa024cb58a4d9b72daafa5f0ed345feb3ef39784fbee27d7e643a883' 'No INTERNET permission' 'No GATT characteristic/descriptor writes' > BUILD_VALIDATION.txt
+          cat SaltSignalRecorder-v5-MAX-installable.apk.sha256 >> BUILD_VALIDATION.txt
+
+      - name: Upload installable APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: SaltSignalRecorder-v5-MAX-installable
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            SaltSignalRecorder-v5-MAX-installable.apk
+            SaltSignalRecorder-v5-MAX-installable.apk.sha256
+            BUILD_VALIDATION.txt
