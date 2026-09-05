@@ -1,0 +1,3 @@
+SaltSignalRecorder v9 FUTURE MAX Android build retry marker.
+Source package: SaltSignalRecorder-v9-FUTURE-MAX-source.zip
+Purpose: trigger isolated Android APK build workflow without modifying production code.
