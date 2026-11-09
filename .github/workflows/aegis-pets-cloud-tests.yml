@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  python-test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -28,5 +28,24 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Compile control plane
         run: python -m py_compile cloud_control_plane.py
-      - name: Run isolated control-plane tests
+      - name: Run isolated control-plane and registry tests
         run: python -m unittest discover -s tests -v
+
+  node-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Sovereign AI dependencies
+        working-directory: sovereign-ai
+        run: npm install --no-audit --no-fund
+      - name: Test Sacred Atom and Divinity–Earth Circle integration
+        working-directory: sovereign-ai
+        run: npm test
+      - name: Safe boot status
+        working-directory: sovereign-ai
+        run: npm start
