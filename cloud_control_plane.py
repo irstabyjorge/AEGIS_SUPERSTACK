@@ -78,7 +78,7 @@ def create_app(token: str | None = None):
             "/api/v1/pets/status": {
                 "service": "AEGIS/PETS Cloud Control Plane",
                 "mode": "read_only",
-                "production_deployment": True,
+                "production_deployment": False,
                 "state_changes_enabled": False,
             },
             "/api/v1/pets/evidence-policy": PETS_POLICY,
