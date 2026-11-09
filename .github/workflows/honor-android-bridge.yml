@@ -1,0 +1,37 @@
+name: AEGIS Android and Recovery CI
+on:
+  pull_request:
+    paths:
+      - "android/honor-local-bridge/**"
+      - "recovery/unified-knowledge-v5_1_1/**"
+      - ".github/workflows/honor-android-bridge.yml"
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.9"
+      - name: Unit tests and debug APK
+        run: gradle -p android/honor-local-bridge testDebugUnitTest assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: aegis-honor-local-bridge-debug-apk
+          path: android/honor-local-bridge/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+
+  recovered-knowledge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test portable verification
+        run: python -m unittest discover -s recovery/unified-knowledge-v5_1_1 -p "test_*.py" -v
