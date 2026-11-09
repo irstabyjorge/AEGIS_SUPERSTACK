@@ -41,7 +41,9 @@ Previously reported lab results:
 - AEG-001 and AEG-003 were marked TESTED_PARTIAL; 25 improvements remained in backlog.
 - Floot integration, Android installation, and end-to-end integration were not verified.
 
-These figures are historical conversation reports. They have not been reproduced against the current cloud repository or its database in this pass. The source code for the prior Unified Knowledge and Guarded Evolution packages was not present in this repository checkout, so this commit records their interfaces and provenance rather than falsely marking those engines installed.
+The historical full-library counts above remain historical and were not recomputed against the full Library corpus. The original Unified Knowledge v5.0.0 and Guarded Evolution v1.0.0 source files have now been recovered from the Library, SHA-256 verified, and installed under knowledge/engines/. Exact upstream copies are preserved under knowledge/engines/upstream/. The active copies add narrow hardening for FTS5 punctuation, symlink/path handling, loopback-only search binding, and response headers.
+
+A separate curated index was built from 13 AEGIS/PETS project artifacts: 13/13 content hashes verified; FTS5 search with punctuation passed; the static Guarded Evolution pass classified 8 knowledge documents/configurations as admit-knowledge, 2 source files as manual-review, and 3 opaque/quarantine fixtures or files as quarantine. No candidate code was executed. The full Library archive was inspected by listing only; DICOM inventories, incident reports, and evidence material remain outside the cloud index.
 
 ### 2026-11-08: Fused AEGIS/PETS architecture
 Previously reported design:
@@ -57,6 +59,7 @@ These are preserved as historical status claims, not as proof those assets are c
 - PETS cloud control plane provides authenticated, read-only status and evidence-policy endpoints.
 - Production deployment remains unapproved and is not performed.
 - Legacy scanners, host forensics, blocking, honeypot listeners, and daemon actions remain isolated and inactive pending separate review.
+- Unified Knowledge v5.0.0 and Guarded Evolution v1.0.0 are now installed as source engines with a curated 13-file index; no full-library or personal-evidence corpus was copied.
 
 ### Additional recovered branches
 - **Human-Control Contract:** the human owns purpose, selection, rejection, and stop authority; the system reports evidence, uncertainty, alternatives, and risks.
