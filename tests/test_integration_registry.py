@@ -15,10 +15,12 @@ class IntegrationRegistryTests(unittest.TestCase):
         self.assertEqual(modules["DIVINITY_EARTH_CIRCLE"]["state"], "integrated_knowledge")
         self.assertEqual(modules["TAUROS_100K"]["state"], "conceptual_only")
 
-    def test_unrecovered_engines_are_not_marked_installed(self):
+    def test_recovered_engines_are_installed_and_unverified_modules_stay_inactive(self):
         modules = {item["id"]: item for item in self.registry["modules"]}
-        self.assertEqual(modules["AG_UNIFIED_KNOWLEDGE_V5"]["state"], "recovered_spec_only")
-        self.assertEqual(modules["AEGIS_GUARDED_EVOLUTION"]["state"], "recovered_spec_only")
+        self.assertEqual(modules["AG_UNIFIED_KNOWLEDGE_V5"]["state"], "installed_tested")
+        self.assertEqual(modules["AEGIS_GUARDED_EVOLUTION"]["state"], "installed_tested")
+        self.assertEqual(modules["SPECIALIST_HANDLERS_22"]["state"], "historically_reported")
+        self.assertEqual(modules["ANDROID_TERMUX_BRIDGE"]["state"], "not_verified")
 
     def test_global_safety_invariants_remain_fail_closed(self):
         policy = self.registry["global_invariants"]
