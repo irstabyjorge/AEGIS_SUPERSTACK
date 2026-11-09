@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "project": "PETS–AEGIS",
+  "registry_name": "PETS–AEGIS Personal Device Registry",
+  "owner_label": "PETS AEGIS project owner",
+  "owner_identity_verification": "NOT_PERFORMED",
+  "source_policy": "Previous ChatGPT conversation records only",
+  "devices": [
+    {
+      "record_id": "HIST-0001",
+      "model": "Samsung Galaxy S8",
+      "platform": "Android",
+      "classification": "HISTORICAL",
+      "verified": false,
+      "source": "Previous ChatGPT conversations",
+      "source_detail": "Device model previously mentioned by the user",
+      "identifiers_collected": false,
+      "notes": "No IMEI, serial number, MAC address, advertising ID, or certificate recorded."
+    },
+    {
+      "record_id": "HIST-0002",
+      "model": "Samsung Galaxy A24",
+      "platform": "Android",
+      "classification": "HISTORICAL",
+      "verified": false,
+      "source": "Previous ChatGPT conversations",
+      "source_detail": "Device model previously mentioned by the user",
+      "identifiers_collected": false,
+      "notes": "No unique hardware identifiers recorded."
+    },
+    {
+      "record_id": "HIST-0003",
+      "model": "OPPO A60",
+      "platform": "Android",
+      "classification": "HISTORICAL",
+      "verified": false,
+      "source": "Previous ChatGPT conversations",
+      "source_detail": "Device model previously mentioned by the user",
+      "identifiers_collected": false,
+      "notes": "No unique hardware identifiers recorded."
+    },
+    {
+      "record_id": "HIST-0004",
+      "model": "REDMAGIC 7S Pro",
+      "platform": "Android",
+      "classification": "HISTORICAL",
+      "verified": false,
+      "source": "Previous ChatGPT conversations",
+      "source_detail": "Device model previously mentioned by the user",
+      "identifiers_collected": false,
+      "notes": "No unique hardware identifiers recorded."
+    },
+    {
+      "record_id": "HIST-0005",
+      "model": "HONOR LLY-LX3",
+      "platform": "Android",
+      "classification": "HISTORICAL",
+      "verified": false,
+      "source": "Previous ChatGPT conversations",
+      "source_detail": "Device model previously mentioned by the user",
+      "identifiers_collected": false,
+      "notes": "No unique hardware identifiers recorded."
+    },
+    {
+      "record_id": "HIST-0006",
+      "model": "Samsung S25 Ultra",
+      "platform": "Android",
+      "classification": "HISTORICAL",
+      "verified": false,
+      "source": "Previous ChatGPT conversations",
+      "source_detail": "Device model previously mentioned by the user",
+      "identifiers_collected": false,
+      "notes": "No unique hardware identifiers recorded."
+    },
+    {
+      "record_id": "HIST-0007",
+      "model": "Dell Latitude 7410",
+      "platform": "Windows / PC",
+      "classification": "HISTORICAL",
+      "verified": false,
+      "source": "Previous ChatGPT conversations",
+      "source_detail": "Device model previously mentioned by the user",
+      "identifiers_collected": false,
+      "notes": "No unique hardware identifiers recorded."
+    },
+    {
+      "record_id": "HIST-0008",
+      "model": "Dell Precision 7560",
+      "platform": "Windows 11 Pro for Workstations",
+      "classification": "HISTORICAL",
+      "verified": false,
+      "source": "Previous ChatGPT conversations",
+      "source_detail": "Device model previously mentioned by the user",
+      "identifiers_collected": false,
+      "notes": "No unique hardware identifiers recorded."
+    }
+  ]
+}
