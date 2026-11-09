@@ -21,9 +21,9 @@ jobs:
         python-version: ["3.10", "3.11", "3.12"]
     steps:
       - name: Check out source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
       - name: Compile control plane
@@ -39,14 +39,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: "22"
+          node-version: "24"
       - name: Install Sovereign AI dependencies
         working-directory: sovereign-ai
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
       - name: Test Sacred Atom and Divinity–Earth Circle integration
         working-directory: sovereign-ai
         run: npm test
