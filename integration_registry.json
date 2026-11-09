@@ -1,0 +1,152 @@
+{
+  "schema": "AEGIS_PETS_INTEGRATION_REGISTRY",
+  "version": "1.0.0",
+  "updated": "2026-11-09",
+  "target": "irstabyjorge/AEGIS_SUPERSTACK",
+  "branch": "aegis-pets-cloud-integration",
+  "lifecycle": [
+    "discovered",
+    "available",
+    "connected",
+    "configured",
+    "tested",
+    "validated",
+    "pinned"
+  ],
+  "modules": [
+    {
+      "id": "PETS_CLOUD_CONTROL_PLANE",
+      "state": "tested_partial",
+      "mode": "authenticated_read_only",
+      "evidence": "10 authenticated control-plane tests plus 3 integration-registry tests passed"
+    },
+    {
+      "id": "SOVEREIGN_AI",
+      "state": "tested_partial",
+      "mode": "private_sandbox",
+      "evidence": "Node dependency install, SQLite round-trip, and package smoke test passed in Node 22 sandbox"
+    },
+    {
+      "id": "SACRED_ATOM",
+      "state": "tested",
+      "mode": "knowledge_only",
+      "evidence": "4 Sacred Atom and 2 Divinity–Earth Circle Node tests passed; Sovereign status wiring verified in Node 22 sandbox"
+    },
+    {
+      "id": "DIVINITY_EARTH_CIRCLE",
+      "state": "integrated_knowledge",
+      "mode": "philosophical_systems_framework"
+    },
+    {
+      "id": "TORUS_OF_LIFE",
+      "state": "configured",
+      "mode": "recursive_feedback_model"
+    },
+    {
+      "id": "FLOWER_OF_LIFE",
+      "state": "configured",
+      "mode": "knowledge_relationship_graph"
+    },
+    {
+      "id": "METATRONS_CUBE",
+      "state": "configured",
+      "mode": "dependency_relationship_mesh"
+    },
+    {
+      "id": "TAUROS_100K",
+      "state": "conceptual_only",
+      "mode": "simulation_design",
+      "target_faces": 100000,
+      "validation_passes_target": 33,
+      "validation_passes_executed": 0
+    },
+    {
+      "id": "AG_UNIFIED_KNOWLEDGE_V5",
+      "state": "recovered_spec_only",
+      "mode": "not_installed",
+      "note": "Prior conversation reported lab metrics; source engine not present in this repository checkout"
+    },
+    {
+      "id": "AEGIS_GUARDED_EVOLUTION",
+      "state": "recovered_spec_only",
+      "mode": "not_installed",
+      "note": "Prior conversation reported classification metrics; source engine not present in this repository checkout"
+    },
+    {
+      "id": "SPECIALIST_HANDLERS_22",
+      "state": "historically_reported",
+      "mode": "not_present_in_current_checkout",
+      "note": "22 handlers were reported in a previous release summary; they are not asserted to be running here"
+    },
+    {
+      "id": "ANDROID_TERMUX_BRIDGE",
+      "state": "not_verified",
+      "mode": "not_installed_on_device"
+    },
+    {
+      "id": "DESKTOP_COMMANDER",
+      "state": "not_connected",
+      "mode": "inactive"
+    },
+    {
+      "id": "FLOOT_INTEGRATION",
+      "state": "not_verified",
+      "mode": "inactive"
+    },
+    {
+      "id": "PETS_CIRCLE_COMPANION_BRIDGE",
+      "state": "design_spec_only",
+      "mode": "presentation_only",
+      "limits": [
+        "no_credentials",
+        "no_external_authority",
+        "no_third_party_sharing"
+      ]
+    },
+    {
+      "id": "OWNER_ONLY_DIVINITY_PRESET",
+      "state": "design_spec_only",
+      "mode": "owner_private_local_first"
+    },
+    {
+      "id": "CHILD_PROTECTION_AGGREGATE_RESEARCH",
+      "state": "design_spec_only",
+      "mode": "aggregate_public_statistics_only",
+      "scope": "Tijuana_2020_2026",
+      "limits": [
+        "no_individual_minor_identification",
+        "no_person_level_profiles",
+        "no_target_localization"
+      ]
+    },
+    {
+      "id": "HUMAN_CONTROL_CONTRACT",
+      "state": "integrated_policy",
+      "mode": "human_sets_purpose_and_controls_writes"
+    },
+    {
+      "id": "AEGIS_OMEGA_INFINITY",
+      "state": "historically_referenced",
+      "mode": "not_installed_as_separate_runtime"
+    },
+    {
+      "id": "MR_WALLS",
+      "state": "design_contract_only",
+      "mode": "authorization_and_policy_gate"
+    }
+  ],
+  "global_invariants": {
+    "default_deny": true,
+    "read_only_default": true,
+    "owner_approval_for_writes": true,
+    "original_sources_preserved": true,
+    "production_deploy": false,
+    "generated_code_auto_execution": false,
+    "autonomous_self_modification": false,
+    "external_network_actions_by_default": false,
+    "unvalidated_capabilities_active": false,
+    "verified_inference_and_speculation_separated": true,
+    "provenance_required": true,
+    "append_only_evidence_preferred": true
+  }
+}
