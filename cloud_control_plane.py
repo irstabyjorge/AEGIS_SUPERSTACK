@@ -9,6 +9,7 @@ from __future__ import annotations
 import hmac
 import json
 import os
+from pathlib import Path
 from typing import Callable, Iterable
 
 
@@ -36,6 +37,15 @@ PETS_POLICY = {
         "public_forensics": False,
     },
 }
+
+
+def _load_integration_registry() -> dict:
+    registry_path = Path(__file__).with_name("integration_registry.json")
+    try:
+        with registry_path.open("r", encoding="utf-8") as source:
+            return json.load(source)
+    except (OSError, json.JSONDecodeError):
+        return {"state": "unavailable", "reason": "registry_unavailable"}
 
 
 def _response(start_response: Callable, status: str, payload: dict):
@@ -72,6 +82,7 @@ def create_app(token: str | None = None):
                 "state_changes_enabled": False,
             },
             "/api/v1/pets/evidence-policy": PETS_POLICY,
+            "/api/v1/pets/frameworks": _load_integration_registry(),
         }
         if path not in routes:
             return _response(start_response, "404 Not Found", {"error": "not_found"})
