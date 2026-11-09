@@ -32,3 +32,5 @@ jobs:
         run: python -m compileall -q modules/pets
       - name: Run PETS foundation tests
         run: python -m unittest discover -s tests -p "test_pets_*.py" -v
+      - name: Run Sacred Atom engine tests
+        run: python -m unittest discover -s tests -p "test_sacred_atom_engine.py" -v
