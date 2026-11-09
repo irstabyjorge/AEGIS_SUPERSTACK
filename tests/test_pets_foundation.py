@@ -1,5 +1,6 @@
 import tempfile
 import unittest
+from contextlib import closing
 from pathlib import Path
 
 from modules.pets.adapters import AdapterRegistry, FixtureAdapter
@@ -24,13 +25,16 @@ class EvidenceStoreTests(unittest.TestCase):
     def test_update_and_delete_are_rejected(self):
         record = self.store.append(source="fixture", collected_by="test",
                                    payload={}, consent_basis="synthetic_test")
-        with self.store._connect() as db:
-            with self.assertRaises(Exception):
-                db.execute("UPDATE evidence SET source='changed' WHERE record_id=?",
-                           (record["record_id"],))
-            with self.assertRaises(Exception):
-                db.execute("DELETE FROM evidence WHERE record_id=?",
-                           (record["record_id"],))
+        # Explicitly close the test connection; Connection context managers
+        # handle transactions but do not close the underlying file handle.
+        with closing(self.store._connect()) as db:
+            with db:
+                with self.assertRaises(Exception):
+                    db.execute("UPDATE evidence SET source='changed' WHERE record_id=?",
+                               (record["record_id"],))
+                with self.assertRaises(Exception):
+                    db.execute("DELETE FROM evidence WHERE record_id=?",
+                               (record["record_id"],))
 
     def test_invalid_payload_rejected(self):
         with self.assertRaises(ValueError):
