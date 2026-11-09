@@ -135,6 +135,37 @@
       "id": "MR_WALLS",
       "state": "design_contract_only",
       "mode": "authorization_and_policy_gate"
+    },
+    {
+      "id": "NEURAL_INTERFACE_RESEARCH_CATALOG",
+      "state": "research_only",
+      "mode": "educational_reference_only",
+      "limits": [
+        "no_device_targeting",
+        "no_rf_interception",
+        "no_jamming",
+        "no_medical_inference"
+      ]
+    },
+    {
+      "id": "DEVICE_FORENSIC_EVIDENCE",
+      "state": "local_private_evidence_only",
+      "mode": "provenance_and_integrity_only",
+      "limits": [
+        "no_bulk_cloud_transfer",
+        "no_third_party_data",
+        "no_unbounded_collection"
+      ]
+    },
+    {
+      "id": "LGDNNA_ART5_GOVERNANCE",
+      "state": "reference_only",
+      "mode": "public_legal_sources_only"
+    },
+    {
+      "id": "SPECULATIVE_ENGINEERING_ARCHIVE",
+      "state": "conceptual_only",
+      "mode": "unvalidated_concept_catalog"
     }
   ],
   "global_invariants": {
