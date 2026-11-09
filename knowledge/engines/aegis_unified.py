@@ -265,7 +265,7 @@ def build(package_root: Path, db_path: Path) -> dict[str, object]:
 
 def safe_fts_query(query: str) -> str:
     """Convert user text to quoted FTS5 tokens; punctuation cannot alter FTS syntax."""
-    tokens = re.findall(r"[\\w]+", query, flags=re.UNICODE)
+    tokens = re.findall(r"[\w]+", query, flags=re.UNICODE)
     return " AND ".join(f'"{token}"' for token in tokens)
 
 
