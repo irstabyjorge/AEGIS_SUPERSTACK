@@ -7,6 +7,7 @@ For production, place the database on encrypted storage and restrict OS access.
 from __future__ import annotations
 
 import hashlib
+import hmac
 import json
 import os
 import sqlite3
@@ -136,7 +137,7 @@ class EvidenceStore:
                 "classification", "consent_basis", "payload_json", "previous_hash"
             )}
             expected_hash = hashlib.sha256(_canonical(body).encode("utf-8")).hexdigest()
-            if not hashlib.compare_digest(expected_hash, item["record_hash"]):
+            if not hmac.compare_digest(expected_hash, item["record_hash"]):
                 return {"valid": False, "records_checked": expected_sequence,
                         "reason": "record_hash_mismatch"}
             previous_hash = item["record_hash"]
