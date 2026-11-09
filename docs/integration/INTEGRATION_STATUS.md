@@ -39,3 +39,9 @@ These components remain isolated and are not enabled as unattended cloud service
 
 ## Deployment
 No production deployment. No change to main. No public listener has been exposed.
+
+## Research and evidence lanes
+- Neural-interface methods: reference-only educational catalog; no device targeting, interception, or jamming.
+- Child protection: public aggregate statistics and official legal sources only; no individual-minor profiles or localization.
+- Device forensics: private/local evidence provenance only; no bulk cloud transfer.
+- Speculative engineering: concept catalog separated from verified implementation.
