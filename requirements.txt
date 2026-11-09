@@ -16,3 +16,4 @@ pydantic
 tiktoken
 safetensors
 huggingface-hub
+nats-py
