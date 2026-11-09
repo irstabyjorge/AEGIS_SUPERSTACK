@@ -226,6 +226,24 @@
       "state": "static_preview_implemented",
       "mode": "self_contained_local_html",
       "evidence": "ui/sacred-atom/index.html; not connected to live authenticated API"
+    },
+    {
+      "id": "QBYTE_FORMAT_SCANNER",
+      "state": "implemented_plan_only",
+      "mode": "bounded_header_recognition",
+      "evidence": "modules/pets/qbyte_format_scanner.py; reads at most 64 KiB from one selected regular file; PE/ELF/Mach-O/WASM/ZIP/script signatures; no extraction or execution"
+    },
+    {
+      "id": "PETS_UNIVERSAL_IR",
+      "state": "implemented_plan_only",
+      "mode": "validated_json_task_contract",
+      "evidence": "modules/pets/universal_ir.py; allowlisted structured text/audio/file/report operations; type and payload-size validation; execution_mode=plan_only"
+    },
+    {
+      "id": "AEGIS_COMPATIBILITY_SWITCH",
+      "state": "implemented_plan_only",
+      "mode": "verified_runtime_route_selection",
+      "evidence": "modules/pets/compatibility_switch.py; explicit runtime registry; requires verified and sandboxed descriptor; native routes are candidates only; no launch/install/translation"
     }
   ],
   "global_invariants": {
