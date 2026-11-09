@@ -18,19 +18,19 @@
       "id": "PETS_CLOUD_CONTROL_PLANE",
       "state": "tested_partial",
       "mode": "authenticated_read_only",
-      "evidence": "10 authenticated control-plane tests plus 3 integration-registry tests passed"
+      "evidence": "10 control-plane tests + 3 registry tests + 5 knowledge-engine tests passed"
     },
     {
       "id": "SOVEREIGN_AI",
       "state": "tested_partial",
       "mode": "private_sandbox",
-      "evidence": "Node dependency install, SQLite round-trip, and package smoke test passed in Node 22 sandbox"
+      "evidence": "Node 22 dependency install; better-sqlite3 12.11.1 SQLite round-trip; 6 Node tests passed; safe boot status verified"
     },
     {
       "id": "SACRED_ATOM",
       "state": "tested",
       "mode": "knowledge_only",
-      "evidence": "4 Sacred Atom and 2 Divinity–Earth Circle Node tests passed; Sovereign status wiring verified in Node 22 sandbox"
+      "evidence": "4 Sacred Atom + 2 Divinity–Earth Circle Node tests passed; Sovereign status wiring verified"
     },
     {
       "id": "DIVINITY_EARTH_CIRCLE",
@@ -62,15 +62,17 @@
     },
     {
       "id": "AG_UNIFIED_KNOWLEDGE_V5",
-      "state": "recovered_spec_only",
-      "mode": "not_installed",
-      "note": "Prior conversation reported lab metrics; source engine not present in this repository checkout"
+      "state": "installed_tested",
+      "mode": "curated_local_read_only_index",
+      "note": "Prior conversation reported lab metrics; source engine not present in this repository checkout",
+      "evidence": "Original v5.0.0 source hash-verified; hardened integration; 13 project files indexed; 13/13 integrity verification; FTS5 punctuation tests passed; full Library corpus not imported"
     },
     {
       "id": "AEGIS_GUARDED_EVOLUTION",
-      "state": "recovered_spec_only",
-      "mode": "not_installed",
-      "note": "Prior conversation reported classification metrics; source engine not present in this repository checkout"
+      "state": "installed_tested",
+      "mode": "static_triage_only",
+      "note": "Prior conversation reported classification metrics; source engine not present in this repository checkout",
+      "evidence": "Original v1.0.0 source hash-verified; hardened integration; 5 knowledge-engine tests passed; curated scan 8 admit-knowledge, 2 manual-review, 3 quarantine; no candidate execution"
     },
     {
       "id": "SPECIALIST_HANDLERS_22",
