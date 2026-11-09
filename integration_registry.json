@@ -181,5 +181,103 @@
     "verified_inference_and_speculation_separated": true,
     "provenance_required": true,
     "append_only_evidence_preferred": true
+  },
+  "capability_integrations": [
+    {
+      "id": "WEB_RESEARCH",
+      "provider": "ChatGPT web research",
+      "state": "host_available",
+      "scope": "public_web_search_and_source_review",
+      "repo_runtime_adapter": false,
+      "write_access": false
+    },
+    {
+      "id": "GITHUB_REPOSITORY",
+      "provider": "GitHub connector",
+      "state": "connected_read_verified",
+      "scope": "repository_search_branch_read_and_authorized_branch_writes",
+      "repo_runtime_adapter": false,
+      "verified_target": "irstabyjorge/AEGIS_SUPERSTACK",
+      "verified_branch": "aegis-pets-cloud-integration",
+      "protected_target": "main"
+    },
+    {
+      "id": "PROJECT_LIBRARY",
+      "provider": "ChatGPT Files",
+      "state": "connected_read_verified",
+      "scope": "project_archive_search_and_read",
+      "repo_runtime_adapter": false,
+      "verified_artifact": "PETS_AEGIS_SCHEMA_INTEGRATION_MANIFEST_2026-09-29.json"
+    },
+    {
+      "id": "SCHOLARLY_RESEARCH",
+      "provider": [
+        "Consensus",
+        "PubMed",
+        "ClinicalTrials.gov",
+        "Scite",
+        "CoChat"
+      ],
+      "state": "host_tools_listed",
+      "scope": "literature_trial_and_citation_discovery",
+      "repo_runtime_adapter": false,
+      "restrictions": [
+        "source_verification_required",
+        "no_person_level_targeting"
+      ]
+    },
+    {
+      "id": "HUGGING_FACE_DISCOVERY",
+      "provider": "Hugging Face",
+      "state": "host_tools_listed",
+      "scope": "public_model_dataset_space_and_paper_discovery",
+      "repo_runtime_adapter": false,
+      "restrictions": [
+        "no_model_deployment_claim_without_test",
+        "no_credential_export"
+      ]
+    },
+    {
+      "id": "DOCUMENT_PROCESSING",
+      "provider": [
+        "Adobe Acrobat",
+        "ChatGPT Files"
+      ],
+      "state": "host_tools_listed",
+      "scope": "document_read_conversion_ocr_and_integrity_workflows",
+      "repo_runtime_adapter": false,
+      "restrictions": [
+        "preserve_originals",
+        "redact_sensitive_data_before_sharing"
+      ]
+    },
+    {
+      "id": "LOCAL_DEVICE_RUNTIME",
+      "provider": [
+        "Android",
+        "Termux",
+        "Windows",
+        "Linux"
+      ],
+      "state": "not_connected",
+      "scope": "local_installation_and_device_execution",
+      "repo_runtime_adapter": false,
+      "restrictions": [
+        "explicit_device_access_required",
+        "no_hidden_persistence",
+        "no_unbounded_collection"
+      ]
+    }
+  ],
+  "integration_contract": {
+    "default_mode": "read_only",
+    "connector_discovery_is_not_connection": true,
+    "host_tool_availability_is_not_repo_runtime_integration": true,
+    "no_secrets_in_registry": true,
+    "human_approval_for_external_writes": true,
+    "production_deployment": false,
+    "preserve_main_branch": true,
+    "evidence_provenance_required": true,
+    "distinguish_verified_inferred_and_conceptual": true
   }
 }
