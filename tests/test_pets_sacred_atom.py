@@ -27,5 +27,16 @@ class SacredAtomTests(unittest.TestCase):
     def test_untrusted_component_blocked(self):
         plan = AssemblyPlanner([Component("unknown", "0", trusted=False)]).plan(["unknown"])
         self.assertIn("unknown", plan["blocked"])
+    def test_dependency_cycle_blocks_entire_chain(self):
+        planner = AssemblyPlanner([
+            Component("a", "1", ("b",), trusted=True, tests_passed=True),
+            Component("b", "1", ("a",), trusted=True, tests_passed=True),
+            Component("top", "1", ("a",), trusted=True, tests_passed=True),
+        ])
+        plan = planner.plan(["top"])
+        self.assertEqual(plan["approved_order"], [])
+        self.assertIn("a", plan["blocked"])
+        self.assertIn("b", plan["blocked"])
+        self.assertIn("top", plan["blocked"])
 
 if __name__ == "__main__": unittest.main()
