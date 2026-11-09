@@ -11,7 +11,11 @@ class IntegrationRegistryTests(unittest.TestCase):
 
     def test_core_frameworks_are_registered(self):
         modules = {item["id"]: item for item in self.registry["modules"]}
-        self.assertEqual(modules["SACRED_ATOM"]["state"], "tested")
+        sacred_atom = modules["SACRED_ATOM"]
+        # CI status is deliberately not promoted to "tested" until all
+        # configured platform jobs have passed. The registry may lag CI by
+        # one commit, so accept the explicit pending/partial states only.
+        self.assertIn(sacred_atom["state"], {"implemented_ci_pending", "tested_partial"})
         self.assertEqual(modules["DIVINITY_EARTH_CIRCLE"]["state"], "integrated_knowledge")
         self.assertEqual(modules["TAUROS_100K"]["state"], "conceptual_only")
 
