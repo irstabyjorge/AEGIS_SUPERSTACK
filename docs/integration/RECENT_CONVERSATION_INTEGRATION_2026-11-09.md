@@ -66,3 +66,14 @@ These are preserved as historical status claims, not as proof those assets are c
 - **PETS Circle Companion Bridge:** presentation and explanation only; no credential access, external authority, or third-party sharing.
 - **Sacred Atom Child Protection research concept:** aggregate public statistics only, with Tijuana 2020–2026 as the historical research scope; no individual-minor identification, person-level profiles, or target localization.
 - **Owner-only Divinity preset:** local-first/default-deny design contract; not a platform-level account control or a deployed runtime.
+
+
+## Additional recent research and governance threads (2026-11-05 to 2026-11-07)
+These topics are preserved as reference/catalog lanes, not activated runtime capabilities:
+
+- **LGDNNA Article 5 and child-protection discussion:** legal/governance reference only. The child-protection research lane uses public aggregate statistics and official sources; it does not identify, profile, or locate individual minors.
+- **Neural-interface and human-communication methods:** educational research catalog only. No device targeting, radio-frequency interception, jamming, or medical inference is enabled.
+- **PCAPdroid/APK and device-evidence review:** provenance, integrity, and local review are preserved as the evidence workflow. Raw packet captures, APKs, and private device records are not copied into the cloud index.
+- **Speculative engineering concepts:** space systems, advanced food systems, energy infrastructure, and bioengineering ideas remain in a clearly separated conceptual lane. They are not represented as built, scientifically validated, or operational capabilities.
+
+The curated index includes only the project documents and framework source listed by knowledge/build_curated_index.py. It does not import private device captures, medical records, child-related personal data, or the complete Library archive.
