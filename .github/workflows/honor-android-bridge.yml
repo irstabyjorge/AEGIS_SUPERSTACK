@@ -1,10 +1,5 @@
 name: AEGIS Android and Recovery CI
 on:
-  push:
-    paths:
-      - "android/honor-local-bridge/**"
-      - "recovery/unified-knowledge-v5_1_1/**"
-      - ".github/workflows/honor-android-bridge.yml"
   pull_request:
     paths:
       - "android/honor-local-bridge/**"
