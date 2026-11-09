@@ -28,9 +28,9 @@
     },
     {
       "id": "SACRED_ATOM",
-      "state": "tested",
-      "mode": "knowledge_only",
-      "evidence": "4 Sacred Atom + 2 Divinity–Earth Circle Node tests passed; Sovereign status wiring verified"
+      "state": "implemented_ci_pending",
+      "mode": "validated_geometry_allowlisted_assembly_cpu_gpu_fallback_gui_state",
+      "evidence": "modules/pets/sacred_atom_engine.py; DAG geometry, trusted component assembly planning, UI-neutral GUI state, CPU backend and optional injected GPU fallback; unit tests added; GPU hardware and native GUI not verified"
     },
     {
       "id": "DIVINITY_EARTH_CIRCLE",
@@ -196,6 +196,12 @@
       "state": "implemented_ci_pending",
       "mode": "runtime_profile_and_explicit_adapter_registry",
       "evidence": "modules/pets/platforms.py and tests/test_pets_platforms.py; target matrix documented; Linux/Windows/macOS CI matrix configured; native mobile/IoT bridges not implemented"
+    },
+    {
+      "id": "SACRED_ATOM_ENGINE",
+      "state": "implemented_ci_pending",
+      "mode": "bounded_orchestration_and_compute_abstraction",
+      "evidence": "geometry validation, allowlisted dependency planner, UI-neutral GUI state, CPU fallback, optional injected GPU backend; tests/test_sacred_atom_engine.py"
     }
   ],
   "global_invariants": {
