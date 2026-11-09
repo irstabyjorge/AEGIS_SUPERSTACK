@@ -21,6 +21,10 @@ class IntegrationRegistryTests(unittest.TestCase):
         self.assertEqual(modules["AEGIS_GUARDED_EVOLUTION"]["state"], "installed_tested")
         self.assertEqual(modules["SPECIALIST_HANDLERS_22"]["state"], "historically_reported")
         self.assertEqual(modules["ANDROID_TERMUX_BRIDGE"]["state"], "not_verified")
+        self.assertEqual(modules["NEURAL_INTERFACE_RESEARCH_CATALOG"]["state"], "research_only")
+        self.assertIn("no_rf_interception", modules["NEURAL_INTERFACE_RESEARCH_CATALOG"]["limits"])
+        self.assertEqual(modules["DEVICE_FORENSIC_EVIDENCE"]["state"], "local_private_evidence_only")
+        self.assertEqual(modules["SPECULATIVE_ENGINEERING_ARCHIVE"]["state"], "conceptual_only")
 
     def test_global_safety_invariants_remain_fail_closed(self):
         policy = self.registry["global_invariants"]
