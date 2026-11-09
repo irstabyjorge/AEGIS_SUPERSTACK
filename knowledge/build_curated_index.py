@@ -7,11 +7,13 @@ import json
 import mimetypes
 import shutil
 from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 
 from knowledge.engines.aegis_unified import build
 from knowledge.engines.aegis_guarded_evolution import audit
-
-ROOT = Path(__file__).resolve().parents[1]
 PACKAGE = ROOT / "knowledge" / "index_package"
 SOURCE = PACKAGE / "library_source"
 CSV_PATH = PACKAGE / "knowledge" / "CHATGPT_LIBRARY_MASTER_INDEX.csv"
