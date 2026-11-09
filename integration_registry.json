@@ -202,6 +202,30 @@
       "state": "implemented_ci_pending",
       "mode": "bounded_orchestration_and_compute_abstraction",
       "evidence": "geometry validation, allowlisted dependency planner, UI-neutral GUI state, CPU fallback, optional injected GPU backend; tests/test_sacred_atom_engine.py"
+    },
+    {
+      "id": "SACRED_ATOM_GEOMETRY_ENGINE",
+      "state": "implemented_ci_pending",
+      "mode": "deterministic_19_node_knowledge_graph",
+      "evidence": "modules/pets/sacred_atom.py; structural validation and unit tests added"
+    },
+    {
+      "id": "PETS_COMPUTE_ENGINE",
+      "state": "implemented_cpu_baseline_gpu_adapter_pending",
+      "mode": "explicit_backend_registry_with_cpu_fallback",
+      "evidence": "modules/pets/compute_engine.py; optional GPU package metadata only; no GPU hardware validation"
+    },
+    {
+      "id": "PETS_AUTO_ASSEMBLY_PLANNER",
+      "state": "implemented_plan_only",
+      "mode": "dependency_resolution_trust_and_test_gates",
+      "evidence": "modules/pets/auto_assembly.py; no automatic download/import/execution"
+    },
+    {
+      "id": "SACRED_ATOM_GUI",
+      "state": "static_preview_implemented",
+      "mode": "self_contained_local_html",
+      "evidence": "ui/sacred-atom/index.html; not connected to live authenticated API"
     }
   ],
   "global_invariants": {
