@@ -244,6 +244,12 @@
       "state": "implemented_plan_only",
       "mode": "verified_runtime_route_selection",
       "evidence": "modules/pets/compatibility_switch.py; explicit runtime registry; requires verified and sandboxed descriptor; native routes are candidates only; no launch/install/translation"
+    },
+    {
+      "id": "PETS_AUDIO_LANGUAGE_CONTRACTS",
+      "state": "implemented_plan_only",
+      "mode": "normalized_transcription_translation_metadata",
+      "evidence": "modules/pets/audio_contracts.py; BCP-47-style language tags, timestamped transcript segments, optional speaker labels, explicit verified provider capability registry; no audio I/O or API credentials"
     }
   ],
   "global_invariants": {
