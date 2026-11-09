@@ -190,6 +190,12 @@
       "state": "implemented_ci_pending",
       "mode": "unittest_and_github_actions",
       "evidence": "tests/test_pets_foundation.py and .github/workflows/pets-foundation.yml; execution result not yet available"
+    },
+    {
+      "id": "PETS_CROSS_PLATFORM_RUNTIME",
+      "state": "implemented_ci_pending",
+      "mode": "runtime_profile_and_explicit_adapter_registry",
+      "evidence": "modules/pets/platforms.py and tests/test_pets_platforms.py; target matrix documented; Linux/Windows/macOS CI matrix configured; native mobile/IoT bridges not implemented"
     }
   ],
   "global_invariants": {
@@ -290,6 +296,29 @@
         "explicit_device_access_required",
         "no_hidden_persistence",
         "no_unbounded_collection"
+      ]
+    },
+    {
+      "id": "CROSS_PLATFORM_TARGETS",
+      "provider": [
+        "Linux",
+        "Windows",
+        "macOS",
+        "Android",
+        "iOS/iPadOS",
+        "ARM",
+        "RISC-V",
+        "IoT"
+      ],
+      "state": "architecture_defined_native_validation_pending",
+      "scope": "portable Python core with explicit per-platform and hardware adapters",
+      "repo_runtime_adapter": true,
+      "restrictions": [
+        "no_automatic_device_discovery",
+        "read_only_default",
+        "explicit_os_permissions",
+        "no_firmware_flashing",
+        "no_radio_interception_or_jamming"
       ]
     }
   ],
