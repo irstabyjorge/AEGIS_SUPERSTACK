@@ -46,7 +46,7 @@ jobs:
           node-version: "24"
       - name: Install Sovereign AI dependencies
         working-directory: sovereign-ai
-        run: npm ci --no-audit --no-fund
+        run: npm install --no-audit --no-fund
       - name: Test Sacred Atom and Divinity–Earth Circle integration
         working-directory: sovereign-ai
         run: npm test
