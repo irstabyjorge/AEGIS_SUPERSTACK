@@ -1,10 +1,18 @@
 name: AEGIS Android and Recovery CI
 on:
+  push:
+    branches:
+      - aegis-pets-cloud-integration
+    paths:
+      - "android/honor-local-bridge/**"
+      - "recovery/unified-knowledge-v5_1_1/**"
+      - ".github/workflows/honor-android-bridge.yml"
   pull_request:
     paths:
       - "android/honor-local-bridge/**"
       - "recovery/unified-knowledge-v5_1_1/**"
       - ".github/workflows/honor-android-bridge.yml"
+  workflow_dispatch:
 
 jobs:
   android:
@@ -18,12 +26,39 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.9"
+      - name: Unpack Honor bridge source
+        id: bridge
+        run: |
+          python3 - <<'PY'
+          import base64, os, pathlib, zipfile
+          root = pathlib.Path(os.environ["RUNNER_TEMP"]) / "aegis-honor-bridge"
+          root.mkdir(parents=True, exist_ok=True)
+          encoded = pathlib.Path("android/honor-local-bridge/bridge-source.zip.b64").read_text().strip()
+          archive = root / "bridge.zip"
+          archive.write_bytes(base64.b64decode(encoded, validate=True))
+          with zipfile.ZipFile(archive) as z:
+              bad = z.testzip()
+              if bad:
+                  raise SystemExit(f"Corrupt archive member: {bad}")
+              z.extractall(root)
+          bridge = root / "AEGIS_HONOR_LOCAL_BRIDGE"
+          if not (bridge / "android/honor-local-bridge/app/src/main/AndroidManifest.xml").is_file():
+              raise SystemExit("Android bridge source missing from archive")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              out.write(f"bridge_dir={bridge}\n")
+          PY
+      - name: Enforce local-only permissions
+        env:
+          BRIDGE_DIR: ${{ steps.bridge.outputs.bridge_dir }}
+        run: python3 "$BRIDGE_DIR/tools/verify_local_only.py"
       - name: Unit tests and debug APK
-        run: gradle -p android/honor-local-bridge testDebugUnitTest assembleDebug
+        env:
+          BRIDGE_DIR: ${{ steps.bridge.outputs.bridge_dir }}
+        run: gradle -p "$BRIDGE_DIR/android/honor-local-bridge" testDebugUnitTest assembleDebug
       - uses: actions/upload-artifact@v4
         with:
           name: aegis-honor-local-bridge-debug-apk
-          path: android/honor-local-bridge/app/build/outputs/apk/debug/app-debug.apk
+          path: ${{ steps.bridge.outputs.bridge_dir }}/android/honor-local-bridge/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
 
   recovered-knowledge:
@@ -33,5 +68,5 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Test portable verification
-        run: python -m unittest discover -s recovery/unified-knowledge-v5_1_1 -p "test_*.py" -v
+      - name: Test recovered knowledge engine
+        run: python -m unittest discover -s tests -p "test_knowledge_engines.py" -v
