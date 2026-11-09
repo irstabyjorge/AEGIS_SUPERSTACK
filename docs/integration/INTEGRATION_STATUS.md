@@ -3,25 +3,30 @@
 ## Verified in isolated sandboxes
 - Sovereign AI package dependencies installed in the Node 22 sandbox.
 - better-sqlite3@12.11.1 loaded and passed an in-memory SQLite create/insert/read round-trip.
-- Sovereign AI original smoke test passed.
-- Sacred Atom and Divinity–Earth Circle modules integrated into Sovereign AI status.
-- Six Node tests cover framework status, provenance validation, and conceptual-only TAUROS metadata.
-- Python cloud-control-plane and integration-registry tests pass in the Python 3.14 environment.
-- Python dependency consistency check reports no broken requirements.
+- Six Node tests pass for Sacred Atom and Divinity–Earth Circle; Sovereign AI status wiring and safe boot pass.
+- Python test suite: 18/18 tests pass (10 control-plane, 3 registry, 5 knowledge-engine tests).
+- Python dependency consistency check reports no broken requirements in the Python 3.14 environment.
+- Unified Knowledge v5.0.0 builds a curated index of 13 AEGIS/PETS files; 13/13 content hashes verify.
+- FTS5 search with punctuation passes; the search service rejects non-loopback bind addresses.
+- Guarded Evolution v1.0.0 static pass: 8 admit-knowledge, 2 manual-review, 3 quarantine; no candidate code executed.
+- Sacred Atom and Divinity–Earth Circle are integrated into Sovereign AI status.
 
-## Configured, not activated as external services
+## Installed and configured
 - Sacred Atom knowledge-only orchestration model.
 - Divinity–Earth Circle knowledge framework.
-- Read-only framework registry endpoint.
-- Integration lifecycle and provenance metadata.
+- Unified Knowledge v5.0.0 and Guarded Evolution v1.0.0 source engines, with exact upstream copies preserved.
+- Curated local index builder and read-only search server.
+- Authenticated read-only PETS framework-registry endpoint.
+- Integration lifecycle and source provenance metadata.
 
-## Recovered but not installed as executable engines
-- AG Unified Knowledge v5 and AEGIS Guarded Evolution from prior conversation summaries.
-- TAUROS-100K physical/geometric mesh.
-- 22 specialist handlers from the prior release 0.3.0 conversation report.
-- Android/Termux package and Desktop Commander bridge.
+## Recovered but not installed as executable runtimes
+- The 22 specialist handlers previously reported in release 0.3.0 are not present in this checkout.
+- Android/Termux bridge and Desktop Commander connection are not installed/verified.
+- Floot integration is not verified.
+- TAUROS-100K remains a conceptual geometric simulation specification; no 100,000-face mesh or 33 completed validation passes are claimed.
 
-The prior source artifacts for these components were not present in the current checkout. Their interfaces, lifecycle, constraints, and historical status are recorded in `RECENT_CONVERSATION_INTEGRATION_2026-11-09.md`.
+## Data isolation
+The original 8.39 MB Library archive contains 408 entries (about 51.7 MB uncompressed), including DICOM inventories and incident/evidence records. Only the AEGIS/PETS project subset is indexed in the cloud sandbox. Personal medical/evidence material is not bulk-copied into the repository or search index.
 
 ## Intentionally inactive
 - Host/network scanners and vulnerability scanners.
@@ -30,7 +35,7 @@ The prior source artifacts for these components were not present in the current 
 - Arbitrary scheduler task execution.
 - External plugin actions, remote device control, and automatic deployment.
 
-These components are not enabled as unattended cloud services. Their original source remains preserved.
+These components remain isolated and are not enabled as unattended cloud services.
 
 ## Deployment
-No production deployment. No change to `main`. No public listener has been exposed.
+No production deployment. No change to main. No public listener has been exposed.
