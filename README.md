@@ -1,3 +1,5 @@
+> **PETS–AEGIS canonical integration:** The maintained device-identity module and unified architecture now live in the private `irstabyjorge/AEGISWALLS-GODMODE` repository at `modules/PETS_AEGIS_DEVICE_IDENTITY/`. This repository remains a preserved source/legacy module repository; avoid making divergent changes to its copy of the device registry.
+
 # AEGIS SUPERSTACK
 
 **Master AI Sovereign Stack — Enterprise Security & Intelligence Platform**
