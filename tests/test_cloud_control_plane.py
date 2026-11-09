@@ -52,8 +52,7 @@ class CloudControlPlaneTests(unittest.TestCase):
 
     def test_evidence_policy_disables_collection_and_remote_actions(self):
         result = request(
-            self.app,
-            "/api/v1/pets/evidence-policy",
+            self.app, "/api/v1/pets/evidence-policy",
             authorization=f"Bearer {TOKEN}",
         )
         policy = result["body"]
@@ -81,6 +80,20 @@ class CloudControlPlaneTests(unittest.TestCase):
         result = request(self.app, "/healthz")
         self.assertEqual(result["headers"]["Cache-Control"], "no-store")
         self.assertEqual(result["headers"]["X-Content-Type-Options"], "nosniff")
+
+    def test_framework_registry_requires_auth_and_returns_registry(self):
+        result = request(
+            self.app, "/api/v1/pets/frameworks",
+            authorization=f"Bearer {TOKEN}",
+        )
+        self.assertEqual(result["status"], "200 OK")
+        ids = {module["id"] for module in result["body"]["modules"]}
+        self.assertIn("SACRED_ATOM", ids)
+        self.assertIn("DIVINITY_EARTH_CIRCLE", ids)
+
+    def test_framework_registry_fails_closed_without_auth(self):
+        result = request(self.app, "/api/v1/pets/frameworks")
+        self.assertEqual(result["status"], "401 Unauthorized")
 
 
 if __name__ == "__main__":
