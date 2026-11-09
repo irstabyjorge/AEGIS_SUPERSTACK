@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 MODULE_DIR = Path(__file__).resolve().parent
-REGISTRY_PATH = MODULE_DIR / "registry" / "historical_devices.json"
+REGISTRY_PATH = MODULE_DIR / "data" / "historical_devices.json"
 VALID_CLASSES = {"HISTORICAL", "USER_CONFIRMED", "INDEPENDENTLY_VERIFIED"}
 
 
