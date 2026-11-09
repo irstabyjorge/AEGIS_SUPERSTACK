@@ -17,3 +17,8 @@ node_modules/
 .env
 .env.*
 !.env.example
+
+# Generated private knowledge-index data
+knowledge/index_package/library_source/
+knowledge/index_package/reports/
+knowledge/index_package/knowledge/
