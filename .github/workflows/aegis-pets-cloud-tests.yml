@@ -30,6 +30,10 @@ jobs:
         run: python -m py_compile cloud_control_plane.py
       - name: Run isolated control-plane and registry tests
         run: python -m unittest discover -s tests -v
+      - name: Build curated AEGIS/PETS knowledge index
+        run: python knowledge/build_curated_index.py
+      - name: Verify curated knowledge index integrity
+        run: python knowledge/engines/aegis_unified.py --package-root knowledge/index_package verify
 
   node-test:
     runs-on: ubuntu-latest
