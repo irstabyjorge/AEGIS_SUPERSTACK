@@ -12,6 +12,7 @@ import json
 import os
 import sqlite3
 import uuid
+from contextlib import closing
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -43,32 +44,35 @@ class EvidenceStore:
         return connection
 
     def _initialize(self) -> None:
-        with self._connect() as db:
-            db.execute("PRAGMA journal_mode=WAL")
-            db.execute("""
-                CREATE TABLE IF NOT EXISTS evidence (
-                    sequence INTEGER PRIMARY KEY AUTOINCREMENT,
-                    record_id TEXT NOT NULL UNIQUE,
-                    source TEXT NOT NULL,
-                    observed_at TEXT NOT NULL,
-                    collected_by TEXT NOT NULL,
-                    classification TEXT NOT NULL,
-                    consent_basis TEXT NOT NULL,
-                    payload_json TEXT NOT NULL,
-                    previous_hash TEXT NOT NULL,
-                    record_hash TEXT NOT NULL UNIQUE
-                )
-            """)
-            db.execute("""
-                CREATE TRIGGER IF NOT EXISTS evidence_no_update
-                BEFORE UPDATE ON evidence
-                BEGIN SELECT RAISE(ABORT, 'append_only'); END
-            """)
-            db.execute("""
-                CREATE TRIGGER IF NOT EXISTS evidence_no_delete
-                BEFORE DELETE ON evidence
-                BEGIN SELECT RAISE(ABORT, 'append_only'); END
-            """)
+        # sqlite3.Connection.__exit__ commits/rolls back but does not close.
+        # closing() ensures file handles are released on Windows as well.
+        with closing(self._connect()) as db:
+            with db:
+                db.execute("PRAGMA journal_mode=WAL")
+                db.execute("""
+                    CREATE TABLE IF NOT EXISTS evidence (
+                        sequence INTEGER PRIMARY KEY AUTOINCREMENT,
+                        record_id TEXT NOT NULL UNIQUE,
+                        source TEXT NOT NULL,
+                        observed_at TEXT NOT NULL,
+                        collected_by TEXT NOT NULL,
+                        classification TEXT NOT NULL,
+                        consent_basis TEXT NOT NULL,
+                        payload_json TEXT NOT NULL,
+                        previous_hash TEXT NOT NULL,
+                        record_hash TEXT NOT NULL UNIQUE
+                    )
+                """)
+                db.execute("""
+                    CREATE TRIGGER IF NOT EXISTS evidence_no_update
+                    BEFORE UPDATE ON evidence
+                    BEGIN SELECT RAISE(ABORT, 'append_only'); END
+                """)
+                db.execute("""
+                    CREATE TRIGGER IF NOT EXISTS evidence_no_delete
+                    BEFORE DELETE ON evidence
+                    BEGIN SELECT RAISE(ABORT, 'append_only'); END
+                """)
 
     def append(self, *, source: str, collected_by: str, payload: dict,
                classification: str = "private", consent_basis: str,
@@ -90,39 +94,42 @@ class EvidenceStore:
         timestamp = observed_at or datetime.now(timezone.utc).isoformat()
         record_id = str(uuid.uuid4())
 
-        with self._connect() as db:
-            db.execute("BEGIN IMMEDIATE")
-            previous = db.execute(
-                "SELECT record_hash FROM evidence ORDER BY sequence DESC LIMIT 1"
-            ).fetchone()
-            previous_hash = previous["record_hash"] if previous else GENESIS
-            body = {
-                "record_id": record_id, **fields,
-                "observed_at": timestamp, "payload_json": payload_json,
-                "previous_hash": previous_hash,
-            }
-            record_hash = hashlib.sha256(_canonical(body).encode("utf-8")).hexdigest()
-            db.execute("""
-                INSERT INTO evidence
-                (record_id, source, observed_at, collected_by, classification,
-                 consent_basis, payload_json, previous_hash, record_hash)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """, (record_id, source, timestamp, collected_by, classification,
-                  consent_basis, payload_json, previous_hash, record_hash))
+        with closing(self._connect()) as db:
+            with db:
+                db.execute("BEGIN IMMEDIATE")
+                previous = db.execute(
+                    "SELECT record_hash FROM evidence ORDER BY sequence DESC LIMIT 1"
+                ).fetchone()
+                previous_hash = previous["record_hash"] if previous else GENESIS
+                body = {
+                    "record_id": record_id, **fields,
+                    "observed_at": timestamp, "payload_json": payload_json,
+                    "previous_hash": previous_hash,
+                }
+                record_hash = hashlib.sha256(_canonical(body).encode("utf-8")).hexdigest()
+                db.execute("""
+                    INSERT INTO evidence
+                    (record_id, source, observed_at, collected_by, classification,
+                     consent_basis, payload_json, previous_hash, record_hash)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (record_id, source, timestamp, collected_by, classification,
+                      consent_basis, payload_json, previous_hash, record_hash))
         return {**body, "record_hash": record_hash}
 
     def list_records(self, limit: int = 100) -> list[dict]:
         if not isinstance(limit, int) or not 1 <= limit <= 1000:
             raise ValueError("limit_out_of_range")
-        with self._connect() as db:
-            rows = db.execute(
-                "SELECT * FROM evidence ORDER BY sequence DESC LIMIT ?", (limit,)
-            ).fetchall()
+        with closing(self._connect()) as db:
+            with db:
+                rows = db.execute(
+                    "SELECT * FROM evidence ORDER BY sequence DESC LIMIT ?", (limit,)
+                ).fetchall()
         return [dict(row) for row in rows]
 
     def verify_chain(self) -> dict:
-        with self._connect() as db:
-            rows = db.execute("SELECT * FROM evidence ORDER BY sequence ASC").fetchall()
+        with closing(self._connect()) as db:
+            with db:
+                rows = db.execute("SELECT * FROM evidence ORDER BY sequence ASC").fetchall()
         previous_hash = GENESIS
         for expected_sequence, row in enumerate(rows, start=1):
             item = dict(row)
