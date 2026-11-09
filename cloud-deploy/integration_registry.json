@@ -181,5 +181,13 @@
     "verified_inference_and_speculation_separated": true,
     "provenance_required": true,
     "append_only_evidence_preferred": true
+  },
+  "deployment_record": {
+    "environment": "production",
+    "status": "ready",
+    "scope": "authenticated_read_only_control_plane",
+    "deployment_id": "dpl_9dKSeaVFkN6DNuLhdJRgSX2KUYxo",
+    "authorization": "explicit_owner_approval",
+    "legacy_modules_public": false
   }
 }
