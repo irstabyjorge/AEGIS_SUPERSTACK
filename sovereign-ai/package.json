@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node core/system.js",
     "status": "node -e \"const {AegisSovereignSystem}=require('./core/system');console.log(JSON.stringify(new AegisSovereignSystem().status(),null,2))\"",
-    "test": "node -e \"const m=require('./vector/memory');const a=require('./matrix/agents');const e=require('./economic/economic');const {AegisSovereignSystem}=require('./core/system');console.log('All layers OK')\""
+    "test": "node --test test/*.test.js && node -e \"const {AegisSovereignSystem}=require('./core/system');const s=new AegisSovereignSystem().status();if(s.frameworks.sacred_atom.id!=='SACRED_ATOM'||s.frameworks.divinity_earth_circle.id!=='DIVINITY_EARTH_CIRCLE')process.exit(1);console.log('Sovereign AI + Sacred Atom + Divinity–Earth Circle OK')\""
   },
   "keywords": ["aegis", "security", "sovereign-ai", "cybersecurity"],
   "author": "Jorge Francisco Paredes (irstabyjorge)",
