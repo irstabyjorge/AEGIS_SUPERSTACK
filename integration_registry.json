@@ -166,6 +166,30 @@
       "id": "SPECULATIVE_ENGINEERING_ARCHIVE",
       "state": "conceptual_only",
       "mode": "unvalidated_concept_catalog"
+    },
+    {
+      "id": "PETS_EVIDENCE_LEDGER",
+      "state": "implemented_not_ci_verified",
+      "mode": "local_sqlite_append_only_hash_chain",
+      "evidence": "modules/pets/evidence_store.py; SHA-256 chained records; update/delete triggers; unit tests added; CI pending"
+    },
+    {
+      "id": "PETS_RBAC_POLICY",
+      "state": "implemented_not_ci_verified",
+      "mode": "deny_by_default_role_permission_policy",
+      "evidence": "modules/pets/permissions.py; owner/admin/analyst/auditor/reader roles; trusted identity binding not implemented"
+    },
+    {
+      "id": "PETS_READ_ONLY_ADAPTER_CONTRACT",
+      "state": "implemented_fixture_only",
+      "mode": "provider_protocol_and_fixture_adapter",
+      "evidence": "modules/pets/adapters.py; no live provider API credentials or remote calls"
+    },
+    {
+      "id": "PETS_FOUNDATION_TESTS",
+      "state": "implemented_ci_pending",
+      "mode": "unittest_and_github_actions",
+      "evidence": "tests/test_pets_foundation.py and .github/workflows/pets-foundation.yml; execution result not yet available"
     }
   ],
   "global_invariants": {
@@ -260,7 +284,7 @@
         "Linux"
       ],
       "state": "not_connected",
-      "scope": "local_installation_and_device_execution",
+      "scope": "Android bridge source exists in PR #8; no APK build or physical install verified",
       "repo_runtime_adapter": false,
       "restrictions": [
         "explicit_device_access_required",
