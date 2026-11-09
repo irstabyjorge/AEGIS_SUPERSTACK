@@ -53,7 +53,14 @@ The scanner reads at most 64 KiB from one explicitly selected regular file. It d
 
 The compatibility switch selects a registered runtime only if the descriptor is explicitly verified and sandboxed and matches the host platform and architecture. Native-loader matches are candidates, not launches. Unknown or incompatible files remain blocked.
 
-The IR is a task contract, not a replacement for CPU instructions, OS APIs, ABIs, libraries or executable formats. The user's Spanish request is a natural-language input; the IR is the normalized contract; a platform adapter is still required to map the contract to a supported runtime/API.
+The IR is a task contract, not a replacement for CPU instructions, OS APIs, ABIs, libraries or executable formats.
+
+### 5. Recording and language contracts
+
+- Added `modules/pets/audio_contracts.py` with normalized BCP-47-style tags, timestamped transcript segments, optional speaker labels, confidence bounds, source digests and separate transcription/translation result types.
+- Added an explicit audio-provider capability registry. It selects only providers marked verified and matching the declared task, exact language tag and optional streaming/diarization requirements.
+- Added tests and `docs/PETS_AUDIO_LANGUAGE_PIPELINE.md`.
+- This is a metadata contract only: no audio provider, upload, recording, playback, voice cloning or credential integration is connected. The user's Spanish request is a natural-language input; the IR is the normalized contract; a platform adapter is still required to map the contract to a supported runtime/API.
 
 ## CI evidence observed
 
@@ -99,7 +106,7 @@ The existing `docs/LEGACY_MODULES_SECURITY_MATRIX.md` already documents importan
 | Apple iOS/iPadOS | No native bridge implemented |
 | IoT / firmware | No device-control adapter; no firmware operations |
 | Vercel | No production deployment claimed |
-| Recordings | IR operations are defined; no repository-side audio provider adapter is connected |
+| Recordings | Timestamped transcript/translation contracts and provider-capability registry implemented; no repository-side audio provider adapter is connected |
 | Languages | Language tags can be carried in IR; actual model/provider language coverage must be checked per operation |
 
 ## Recording and language pipeline
@@ -117,7 +124,7 @@ Current OpenAI documentation distinguishes file transcription (`gpt-transcribe`)
 
 1. Obtain a valid Android source tree in ordinary reviewable source files; do not rely on the current corrupt Base64 archive.
 2. Finish the full Linux/Windows/macOS and Python-version CI matrix and investigate the PR checks that returned incomplete job data.
-3. Add explicit language-tag validation and provider capability declarations without claiming unsupported languages.
+3. Add provider adapters for transcription/translation only after explicit user consent, privacy review, exact language capability tests and scoped credentials; no provider is currently connected.
 4. Add a WASI Component Model adapter only after a runtime version, imports, filesystem/network grants, resource ceilings and sandbox tests are recorded.
 5. Keep LLVM as an optional source/IR compiler toolchain; do not treat it as an opaque-binary translator.
 6. Add SBOM generation, dependency review, immutable action SHA pinning and artifact attestations before release.
