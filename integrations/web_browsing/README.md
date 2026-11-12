@@ -160,52 +160,39 @@ The hosted web-search tool may open pages as part of a search workflow when supp
 - Responses API create reference: https://developers.openai.com/api/reference/resources/responses/methods/create
 
 
-## Browser companion extension (Chromium and Firefox)
+## Cross-browser ChatGPT conversation launcher
 
-A minimal WebExtension is provided under `integrations/web_browsing/extension/`.
+Browser-specific WebExtensions are in:
+- `extension/chromium/` — Chrome and Microsoft Edge (Manifest V3).
+- `extension/firefox/` — Firefox (Manifest V3).
 
-- `chromium/manifest.json`: Chrome and Microsoft Edge (Manifest V3 service worker).
-- `firefox/manifest.json`: Firefox (Manifest V3 background scripts).
-- Shared `popup.html`, `popup.js`, and `background.js`.
+### Conversation behavior
 
-### What it does
+- Paste a full `https://chatgpt.com/c/<conversation-id>` URL into the toolbar popup and choose **Open in this browser**.
+- When the active tab is already a ChatGPT conversation, the popup pre-fills its URL.
+- Right-click a ChatGPT conversation link and choose **Open ChatGPT conversation**.
+- The extension opens the exact conversation URL in a new tab. It does not export, copy, scrape, or transfer conversation content.
+- To see the same history, sign into the same ChatGPT account in each browser. Each browser keeps its own login session; this extension does not copy cookies or credentials between profiles.
 
-- Toolbar popup opens ChatGPT with a prompt containing the active tab's title and URL.
-- Context menu can send selected text or an HTTP(S) link to ChatGPT for user-directed research.
-- It does not read full page contents, inject scripts, collect browsing history, access cookies, or communicate with a private AEGIS server.
-- The user sees and can review the prompt in ChatGPT before submitting it.
-- No API key or host-wide website permission is required.
+### Install for local testing
 
-### Local installation for testing
+**Chrome**
+1. Clone/download this repository and extract it.
+2. Visit `chrome://extensions`.
+3. Enable **Developer mode**.
+4. Select **Load unpacked** and choose the `integrations/web_browsing/extension/chromium/` folder.
 
-**Chrome / Edge**
-1. Download or clone this repository.
-2. Open `chrome://extensions` in Chrome or `edge://extensions` in Edge.
-3. Enable Developer mode.
-4. Choose **Load unpacked** and select `integrations/web_browsing/extension` only after copying the contents of the `chromium` manifest folder into a clean package folder alongside the three shared files. (Do not select the repository root.)
+**Microsoft Edge**
+1. Visit `edge://extensions`.
+2. Enable **Developer mode**.
+3. Select **Load unpacked** and choose the same `extension/chromium/` folder.
 
 **Firefox**
-1. Open `about:debugging#/runtime/this-firefox`.
-2. Choose **Load Temporary Add-on**.
-3. Select `integrations/web_browsing/extension/firefox/manifest.json`. If the browser requires a self-contained package, copy that manifest beside the shared files first.
+1. Visit `about:debugging#/runtime/this-firefox`.
+2. Select **This Firefox** → **Load Temporary Add-on**.
+3. Choose `integrations/web_browsing/extension/firefox/manifest.json`.
+4. Firefox temporary add-ons may need to be loaded again after a browser restart. Signed distribution is required for ordinary persistent installation.
 
-### Status
+### Security and status
 
-Source files are committed to the feature branch, but the extension has not been installed in the user's browsers or tested in live Chrome, Edge, or Firefox sessions. Temporary Firefox installation may need to be repeated after the browser restarts. Production distribution requires browser-specific packaging and review.
-
-
-## Cross-browser ChatGPT conversation bridge
-
-The extension packages are self-contained:
-
-- Chrome: load the folder `integrations/web_browsing/extension/chromium/` at `chrome://extensions` with Developer mode enabled.
-- Microsoft Edge: load the same Chromium folder at `edge://extensions` with Developer mode enabled.
-- Firefox: open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, and select `integrations/web_browsing/extension/firefox/manifest.json`. Temporary add-ons may need to be reloaded after Firefox restarts.
-
-The toolbar popup accepts a ChatGPT conversation URL or shared-chat URL copied from another browser and opens it in a new tab. It also opens a fresh ChatGPT chat. Context-menu actions can send selected text or a link URL to a new ChatGPT tab.
-
-**Conversation portability boundary:** this moves a conversation link between browsers; it does not transfer conversation data, copy browser cookies, import another browser's profile, or bypass sign-in/permissions. Private conversation links still require an account/session authorized to view them. Shared links work only while the share remains available.
-
-**Privacy:** the extension has no host-wide page access, cookie permission, history permission, or content-script injection. Selected text is sent only after the user explicitly chooses the context-menu action, and the text is inserted into a ChatGPT URL for the user to review.
-
-**Verification status:** source files are committed on the feature branch. They have not been installed or tested in live Chrome, Edge, or Firefox sessions. Treat this as a test build, not a published store extension.
+The extension requests only active-tab and context-menu permissions. It does not request access to all websites, cookies, browsing history, or page contents. It has not been installed or tested in the user's browser profiles; the repository source is a local-test build, not a deployed browser extension. No browser can be remotely modified by this repository integration.
