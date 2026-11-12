@@ -39,6 +39,11 @@ jobs:
                   for info in z.infolist():
                       name = info.filename
                       rel = pathlib.PurePosixPath(name)
+                      # The source bundle contains its own GitHub workflow templates.
+                      # They are not required to build the Android app and can collide
+                      # with platform-specific metadata on extraction, so omit them.
+                      if rel.parts and rel.parts[0] == "AEGIS_HONOR_LOCAL_BRIDGE" and len(rel.parts) > 1 and rel.parts[1] == ".github":
+                          continue
                       if rel.is_absolute() or ".." in rel.parts or any(ord(c) < 32 for c in name):
                           raise ValueError(f"unsafe archive member path: {name!r}")
                       target = (root / pathlib.Path(*rel.parts)).resolve()
