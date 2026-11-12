@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "AEGIS ChatGPT Bridge",
+  "version": "0.1.0",
+  "description": "Open ChatGPT research prompts and conversations from Firefox.",
+  "permissions": ["activeTab", "contextMenus"],
+  "background": { "scripts": ["background.js"] },
+  "browser_specific_settings": { "gecko": { "id": "aegis-chatgpt-bridge@jefeaguila.local", "strict_min_version": "128.0" } },
+  "action": { "default_title": "AEGIS ChatGPT Bridge", "default_popup": "popup.html" }
+}
