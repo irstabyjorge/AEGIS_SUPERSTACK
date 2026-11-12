@@ -26,16 +26,12 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
-      - uses: gradle/actions/setup-gradle@v6
-        with:
-          gradle-version: "8.9"
-          cache-provider: basic
       - name: Unpack Honor bridge source
         id: bridge
         run: |
           python3 - <<'PY'
           import base64, os, pathlib, zipfile
-          root = pathlib.Path(os.environ["RUNNER_TEMP"]) / "aegis-honor-bridge"
+          root = pathlib.Path(os.environ["GITHUB_WORKSPACE"]) / ".ci-aegis-honor-bridge"
           root.mkdir(parents=True, exist_ok=True)
           encoded = pathlib.Path("android/honor-local-bridge/bridge-source.zip.b64").read_text().strip()
           archive = root / "bridge.zip"
@@ -57,6 +53,11 @@ jobs:
           with open(os.environ["GITHUB_OUTPUT"], "a") as out:
               out.write(f"bridge_dir={bridge}\n")
           PY
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          gradle-version: "8.9"
+          cache-provider: basic
       - name: Enforce local-only permissions
         env:
           BRIDGE_DIR: ${{ steps.bridge.outputs.bridge_dir }}
