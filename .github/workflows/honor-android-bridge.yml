@@ -27,7 +27,7 @@ jobs:
         id: bridge
         run: |
           python3 - <<'PY'
-          import base64, os, pathlib, zipfile
+          import base64, os, pathlib, shutil, zipfile
           root = pathlib.Path(os.environ["GITHUB_WORKSPACE"]) / ".aegis-honor-bridge"
           root.mkdir(parents=True, exist_ok=True)
           encoded = pathlib.Path("android/honor-local-bridge/bridge-source.zip.b64").read_text().strip()
@@ -38,11 +38,28 @@ jobs:
                   bad = z.testzip()
                   if bad:
                       raise ValueError(f"corrupt member: {bad}")
-                  z.extractall(root)
+                  base = root.resolve()
+                  for info in z.infolist():
+                      name = info.filename
+                      rel = pathlib.PurePosixPath(name)
+                      if rel.is_absolute() or ".." in rel.parts or any(ord(c) < 32 for c in name):
+                          raise ValueError(f"unsafe archive member path: {name!r}")
+                      target = (root / pathlib.Path(*rel.parts)).resolve()
+                      if not target.is_relative_to(base):
+                          raise ValueError(f"archive member escapes extraction root: {name!r}")
+                      if info.is_dir():
+                          target.mkdir(parents=True, exist_ok=True)
+                          continue
+                      target.parent.mkdir(parents=True, exist_ok=True)
+                      try:
+                          with z.open(info) as source, target.open("wb") as destination:
+                              shutil.copyfileobj(source, destination)
+                      except OSError as exc:
+                          raise OSError(f"could not extract member {name!r}: {exc}") from exc
           except (ValueError, OSError, zipfile.BadZipFile, EOFError) as exc:
               raise SystemExit(
-                  "Honor source bundle is invalid or truncated. Rebuild it from the "
-                  f"reviewed source tree before attempting Android compilation: {exc}"
+                  "Honor source bundle could not be safely extracted. "
+                  f"Diagnostic: {type(exc).__name__}: {exc}"
               )
           bridge = root / "AEGIS_HONOR_LOCAL_BRIDGE"
           project = bridge / "android/honor-local-bridge"
