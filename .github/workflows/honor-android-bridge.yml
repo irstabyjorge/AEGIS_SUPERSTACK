@@ -35,9 +35,6 @@ jobs:
           try:
               archive.write_bytes(base64.b64decode(encoded, validate=True))
               with zipfile.ZipFile(archive) as z:
-                  bad = z.testzip()
-                  if bad:
-                      raise ValueError(f"corrupt member: {bad}")
                   base = root.resolve()
                   for info in z.infolist():
                       name = info.filename
