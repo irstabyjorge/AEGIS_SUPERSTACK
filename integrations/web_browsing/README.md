@@ -192,3 +192,20 @@ A minimal WebExtension is provided under `integrations/web_browsing/extension/`.
 ### Status
 
 Source files are committed to the feature branch, but the extension has not been installed in the user's browsers or tested in live Chrome, Edge, or Firefox sessions. Temporary Firefox installation may need to be repeated after the browser restarts. Production distribution requires browser-specific packaging and review.
+
+
+## Cross-browser ChatGPT conversation bridge
+
+The extension packages are self-contained:
+
+- Chrome: load the folder `integrations/web_browsing/extension/chromium/` at `chrome://extensions` with Developer mode enabled.
+- Microsoft Edge: load the same Chromium folder at `edge://extensions` with Developer mode enabled.
+- Firefox: open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, and select `integrations/web_browsing/extension/firefox/manifest.json`. Temporary add-ons may need to be reloaded after Firefox restarts.
+
+The toolbar popup accepts a ChatGPT conversation URL or shared-chat URL copied from another browser and opens it in a new tab. It also opens a fresh ChatGPT chat. Context-menu actions can send selected text or a link URL to a new ChatGPT tab.
+
+**Conversation portability boundary:** this moves a conversation link between browsers; it does not transfer conversation data, copy browser cookies, import another browser's profile, or bypass sign-in/permissions. Private conversation links still require an account/session authorized to view them. Shared links work only while the share remains available.
+
+**Privacy:** the extension has no host-wide page access, cookie permission, history permission, or content-script injection. Selected text is sent only after the user explicitly chooses the context-menu action, and the text is inserted into a ChatGPT URL for the user to review.
+
+**Verification status:** source files are committed on the feature branch. They have not been installed or tested in live Chrome, Edge, or Firefox sessions. Treat this as a test build, not a published store extension.
