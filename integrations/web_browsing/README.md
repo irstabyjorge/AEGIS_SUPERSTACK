@@ -158,3 +158,37 @@ The hosted web-search tool may open pages as part of a search workflow when supp
 
 - OpenAI web search guide: https://developers.openai.com/api/docs/guides/tools-web-search
 - Responses API create reference: https://developers.openai.com/api/reference/resources/responses/methods/create
+
+
+## Browser companion extension (Chromium and Firefox)
+
+A minimal WebExtension is provided under `integrations/web_browsing/extension/`.
+
+- `chromium/manifest.json`: Chrome and Microsoft Edge (Manifest V3 service worker).
+- `firefox/manifest.json`: Firefox (Manifest V3 background scripts).
+- Shared `popup.html`, `popup.js`, and `background.js`.
+
+### What it does
+
+- Toolbar popup opens ChatGPT with a prompt containing the active tab's title and URL.
+- Context menu can send selected text or an HTTP(S) link to ChatGPT for user-directed research.
+- It does not read full page contents, inject scripts, collect browsing history, access cookies, or communicate with a private AEGIS server.
+- The user sees and can review the prompt in ChatGPT before submitting it.
+- No API key or host-wide website permission is required.
+
+### Local installation for testing
+
+**Chrome / Edge**
+1. Download or clone this repository.
+2. Open `chrome://extensions` in Chrome or `edge://extensions` in Edge.
+3. Enable Developer mode.
+4. Choose **Load unpacked** and select `integrations/web_browsing/extension` only after copying the contents of the `chromium` manifest folder into a clean package folder alongside the three shared files. (Do not select the repository root.)
+
+**Firefox**
+1. Open `about:debugging#/runtime/this-firefox`.
+2. Choose **Load Temporary Add-on**.
+3. Select `integrations/web_browsing/extension/firefox/manifest.json`. If the browser requires a self-contained package, copy that manifest beside the shared files first.
+
+### Status
+
+Source files are committed to the feature branch, but the extension has not been installed in the user's browsers or tested in live Chrome, Edge, or Firefox sessions. Temporary Firefox installation may need to be repeated after the browser restarts. Production distribution requires browser-specific packaging and review.
