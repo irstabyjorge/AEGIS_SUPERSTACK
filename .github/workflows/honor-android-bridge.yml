@@ -21,17 +21,14 @@ jobs:
   android:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-java@v6
-        with:
-          distribution: temurin
-          java-version: "17"
+      - uses: actions/checkout@v4
+
       - name: Unpack Honor bridge source
         id: bridge
         run: |
           python3 - <<'PY'
           import base64, os, pathlib, zipfile
-          root = pathlib.Path(os.environ["GITHUB_WORKSPACE"]) / ".ci-aegis-honor-bridge"
+          root = pathlib.Path(os.environ["GITHUB_WORKSPACE"]) / ".aegis-honor-bridge"
           root.mkdir(parents=True, exist_ok=True)
           encoded = pathlib.Path("android/honor-local-bridge/bridge-source.zip.b64").read_text().strip()
           archive = root / "bridge.zip"
@@ -48,25 +45,38 @@ jobs:
                   f"reviewed source tree before attempting Android compilation: {exc}"
               )
           bridge = root / "AEGIS_HONOR_LOCAL_BRIDGE"
-          if not (bridge / "android/honor-local-bridge/app/src/main/AndroidManifest.xml").is_file():
+          project = bridge / "android/honor-local-bridge"
+          if not (project / "app/src/main/AndroidManifest.xml").is_file():
               raise SystemExit("Android bridge source missing from archive")
+          if not any(project.glob("*.gradle*")) and not (project / "gradle/wrapper/gradle-wrapper.properties").is_file():
+              raise SystemExit("Android Gradle project files missing from archive")
           with open(os.environ["GITHUB_OUTPUT"], "a") as out:
               out.write(f"bridge_dir={bridge}\n")
           PY
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v6
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      # Run after extraction into GITHUB_WORKSPACE so setup-gradle can detect
+      # the actual Gradle project and compute a valid cache key.
+      - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.9"
           cache-provider: basic
+
       - name: Enforce local-only permissions
         env:
           BRIDGE_DIR: ${{ steps.bridge.outputs.bridge_dir }}
         run: python3 "$BRIDGE_DIR/tools/verify_local_only.py"
+
       - name: Unit tests and debug APK
         env:
           BRIDGE_DIR: ${{ steps.bridge.outputs.bridge_dir }}
         run: gradle -p "$BRIDGE_DIR/android/honor-local-bridge" testDebugUnitTest assembleDebug
-      - uses: actions/upload-artifact@v7
+
+      - uses: actions/upload-artifact@v4
         with:
           name: aegis-honor-local-bridge-debug-apk
           path: ${{ steps.bridge.outputs.bridge_dir }}/android/honor-local-bridge/app/build/outputs/apk/debug/app-debug.apk
@@ -75,8 +85,8 @@ jobs:
   recovered-knowledge:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
       - name: Test recovered knowledge engine
