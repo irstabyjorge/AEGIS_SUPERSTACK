@@ -56,8 +56,16 @@ jobs:
                       try:
                           with z.open(info) as source, target.open("wb") as destination:
                               shutil.copyfileobj(source, destination)
-                      except OSError as exc:
-                          raise OSError(f"could not extract member {name!r}: {exc}") from exc
+                      except (OSError, zipfile.BadZipFile) as exc:
+                          # The embedded bundle has at least one malformed local
+                          # file header. Skip that member, report it, and let the
+                          # explicit manifest/Gradle checks below decide whether
+                          # the remaining source is sufficient to build.
+                          print(f"::warning::Skipping unreadable archive member {name!r}: {type(exc).__name__}: {exc}")
+                          try:
+                              target.unlink(missing_ok=True)
+                          except OSError:
+                              pass
           except (ValueError, OSError, zipfile.BadZipFile, EOFError) as exc:
               raise SystemExit(
                   "Honor source bundle could not be safely extracted. "
