@@ -79,8 +79,12 @@ class DurableTaskQueue:
                 WHERE status = 'queued' OR (status = 'leased' AND lease_until <= ?)
                 ORDER BY created_at, task_id LIMIT ?
             """, (now, limit * 2)).fetchall()
+            selected_ids = set(engine.tasks)
             for row in rows:
-                if row["task_id"] in engine.tasks:
+                if row["task_id"] in selected_ids:
+                    continue
+                dependencies = json.loads(row["depends_on"])
+                if any(dep not in selected_ids for dep in dependencies):
                     continue
                 changed = db.execute("""
                     UPDATE work_items SET status='leased', lease_until=?, updated_at=?
@@ -92,10 +96,11 @@ class DurableTaskQueue:
                     task_id=row["task_id"],
                     handler=row["handler"],
                     action=row["action"],
-                    depends_on=json.loads(row["depends_on"]),
+                    depends_on=dependencies,
                     payload=json.loads(row["payload"]),
                     max_attempts=row["max_attempts"],
                 ))
+                selected_ids.add(row["task_id"])
                 if len(discovered) >= limit:
                     break
         return discovered
