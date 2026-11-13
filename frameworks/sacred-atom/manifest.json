@@ -1,0 +1,49 @@
+{
+  "name": "SACRED_ATOM",
+  "version": "1.0.0",
+  "integration_state": "configured_and_unit_tested",
+  "execution_mode": "knowledge_only",
+  "layers": ["discovery", "reasoning", "learning", "neuroplasticity", "memory", "validation", "expansion"],
+  "learning_policy": "propose_evaluate_validate_request_approval_then_adopt_or_rollback",
+  "design_lineage": {
+    "sacred_atom": "input -> authorized transformation -> output -> validation",
+    "torus_of_life": "recursive feedback and correction",
+    "flower_of_life": "knowledge graph and relationship discovery",
+    "metatrons_cube": "dependency and module relationship map",
+    "divinity_earth_circle": "conscious center and multidirectional growth field",
+    "tauros_100k": {
+      "target_faces": 100000,
+      "status": "conceptual_simulation_only",
+      "validation_passes_target": 33,
+      "validation_passes_executed": 0
+    }
+  },
+  "capabilities": [
+    "bounded_reasoning_pipeline_description",
+    "provenance_envelope_validation",
+    "knowledge_relationship_metadata",
+    "dependency_relationship_metadata",
+    "feedback_cycle_description"
+  ],
+  "interfaces": {
+    "pets_circle_companion_bridge": {
+      "state": "design_contract_only",
+      "limits": ["presentation_only", "no_credentials", "no_external_authority", "no_third_party_sharing"]
+    }
+  },
+  "disabled_by_design": [
+    "source_code_execution",
+    "network_scanning",
+    "surveillance_or_interception",
+    "automatic_blocking",
+    "unrestricted_external_actions",
+    "autonomous_self_modification",
+    "unreviewed_memory_writes"
+  ],
+  "provenance": [
+    "DIVINITY_EARTH_CIRCLE_FRAMEWORK.md",
+    "JEFEAGUILA_DIVINITY_CIRCLE_RECOVERY_MASTER.md",
+    "PETS_AEGIS_SCHEMA_INTEGRATION_MANIFEST_2026-09-29.json",
+    "recent_conversation_context_2026-11-08_to_2026-11-09"
+  ]
+}

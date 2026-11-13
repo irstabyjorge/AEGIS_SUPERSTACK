@@ -1,0 +1,390 @@
+{
+  "schema": "AEGIS_PETS_INTEGRATION_REGISTRY",
+  "version": "1.0.0",
+  "updated": "2026-11-09",
+  "target": "irstabyjorge/AEGIS_SUPERSTACK",
+  "branch": "aegis-pets-cloud-integration",
+  "lifecycle": [
+    "discovered",
+    "available",
+    "connected",
+    "configured",
+    "tested",
+    "validated",
+    "pinned"
+  ],
+  "modules": [
+    {
+      "id": "PETS_CLOUD_CONTROL_PLANE",
+      "state": "tested_partial",
+      "mode": "authenticated_read_only",
+      "evidence": "10 control-plane tests + 3 registry tests + 5 knowledge-engine tests passed"
+    },
+    {
+      "id": "SOVEREIGN_AI",
+      "state": "tested_partial",
+      "mode": "private_sandbox",
+      "evidence": "Node 22 dependency install; better-sqlite3 12.11.1 SQLite round-trip; 6 Node tests passed; safe boot status verified"
+    },
+    {
+      "id": "SACRED_ATOM",
+      "state": "implemented_ci_pending",
+      "mode": "validated_geometry_allowlisted_assembly_cpu_gpu_fallback_gui_state",
+      "evidence": "modules/pets/sacred_atom_engine.py; DAG geometry, trusted component assembly planning, UI-neutral GUI state, CPU backend and optional injected GPU fallback; unit tests added; GPU hardware and native GUI not verified"
+    },
+    {
+      "id": "DIVINITY_EARTH_CIRCLE",
+      "state": "integrated_knowledge",
+      "mode": "philosophical_systems_framework"
+    },
+    {
+      "id": "TORUS_OF_LIFE",
+      "state": "configured",
+      "mode": "recursive_feedback_model"
+    },
+    {
+      "id": "FLOWER_OF_LIFE",
+      "state": "configured",
+      "mode": "knowledge_relationship_graph"
+    },
+    {
+      "id": "METATRONS_CUBE",
+      "state": "configured",
+      "mode": "dependency_relationship_mesh"
+    },
+    {
+      "id": "TAUROS_100K",
+      "state": "conceptual_only",
+      "mode": "simulation_design",
+      "target_faces": 100000,
+      "validation_passes_target": 33,
+      "validation_passes_executed": 0
+    },
+    {
+      "id": "AG_UNIFIED_KNOWLEDGE_V5",
+      "state": "installed_tested",
+      "mode": "curated_local_read_only_index",
+      "note": "Prior conversation reported lab metrics; source engine not present in this repository checkout",
+      "evidence": "Original v5.0.0 source hash-verified; hardened integration; 13 project files indexed; 13/13 integrity verification; FTS5 punctuation tests passed; full Library corpus not imported"
+    },
+    {
+      "id": "AEGIS_GUARDED_EVOLUTION",
+      "state": "installed_tested",
+      "mode": "static_triage_only",
+      "note": "Prior conversation reported classification metrics; source engine not present in this repository checkout",
+      "evidence": "Original v1.0.0 source hash-verified; hardened integration; 5 knowledge-engine tests passed; curated scan 8 admit-knowledge, 2 manual-review, 3 quarantine; no candidate execution"
+    },
+    {
+      "id": "SPECIALIST_HANDLERS_22",
+      "state": "historically_reported",
+      "mode": "not_present_in_current_checkout",
+      "note": "22 handlers were reported in a previous release summary; they are not asserted to be running here"
+    },
+    {
+      "id": "ANDROID_TERMUX_BRIDGE",
+      "state": "not_verified",
+      "mode": "not_installed_on_device"
+    },
+    {
+      "id": "DESKTOP_COMMANDER",
+      "state": "not_connected",
+      "mode": "inactive"
+    },
+    {
+      "id": "FLOOT_INTEGRATION",
+      "state": "not_verified",
+      "mode": "inactive"
+    },
+    {
+      "id": "PETS_CIRCLE_COMPANION_BRIDGE",
+      "state": "design_spec_only",
+      "mode": "presentation_only",
+      "limits": [
+        "no_credentials",
+        "no_external_authority",
+        "no_third_party_sharing"
+      ]
+    },
+    {
+      "id": "OWNER_ONLY_DIVINITY_PRESET",
+      "state": "design_spec_only",
+      "mode": "owner_private_local_first"
+    },
+    {
+      "id": "CHILD_PROTECTION_AGGREGATE_RESEARCH",
+      "state": "design_spec_only",
+      "mode": "aggregate_public_statistics_only",
+      "scope": "Tijuana_2020_2026",
+      "limits": [
+        "no_individual_minor_identification",
+        "no_person_level_profiles",
+        "no_target_localization"
+      ]
+    },
+    {
+      "id": "HUMAN_CONTROL_CONTRACT",
+      "state": "integrated_policy",
+      "mode": "human_sets_purpose_and_controls_writes"
+    },
+    {
+      "id": "AEGIS_OMEGA_INFINITY",
+      "state": "historically_referenced",
+      "mode": "not_installed_as_separate_runtime"
+    },
+    {
+      "id": "MR_WALLS",
+      "state": "design_contract_only",
+      "mode": "authorization_and_policy_gate"
+    },
+    {
+      "id": "NEURAL_INTERFACE_RESEARCH_CATALOG",
+      "state": "research_only",
+      "mode": "educational_reference_only",
+      "limits": [
+        "no_device_targeting",
+        "no_rf_interception",
+        "no_jamming",
+        "no_medical_inference"
+      ]
+    },
+    {
+      "id": "DEVICE_FORENSIC_EVIDENCE",
+      "state": "local_private_evidence_only",
+      "mode": "provenance_and_integrity_only",
+      "limits": [
+        "no_bulk_cloud_transfer",
+        "no_third_party_data",
+        "no_unbounded_collection"
+      ]
+    },
+    {
+      "id": "LGDNNA_ART5_GOVERNANCE",
+      "state": "reference_only",
+      "mode": "public_legal_sources_only"
+    },
+    {
+      "id": "SPECULATIVE_ENGINEERING_ARCHIVE",
+      "state": "conceptual_only",
+      "mode": "unvalidated_concept_catalog"
+    },
+    {
+      "id": "PETS_EVIDENCE_LEDGER",
+      "state": "implemented_not_ci_verified",
+      "mode": "local_sqlite_append_only_hash_chain",
+      "evidence": "modules/pets/evidence_store.py; SHA-256 chained records; update/delete triggers; unit tests added; CI pending"
+    },
+    {
+      "id": "PETS_RBAC_POLICY",
+      "state": "implemented_not_ci_verified",
+      "mode": "deny_by_default_role_permission_policy",
+      "evidence": "modules/pets/permissions.py; owner/admin/analyst/auditor/reader roles; trusted identity binding not implemented"
+    },
+    {
+      "id": "PETS_READ_ONLY_ADAPTER_CONTRACT",
+      "state": "implemented_fixture_only",
+      "mode": "provider_protocol_and_fixture_adapter",
+      "evidence": "modules/pets/adapters.py; no live provider API credentials or remote calls"
+    },
+    {
+      "id": "PETS_FOUNDATION_TESTS",
+      "state": "implemented_ci_pending",
+      "mode": "unittest_and_github_actions",
+      "evidence": "tests/test_pets_foundation.py and .github/workflows/pets-foundation.yml; execution result not yet available"
+    },
+    {
+      "id": "PETS_CROSS_PLATFORM_RUNTIME",
+      "state": "implemented_ci_pending",
+      "mode": "runtime_profile_and_explicit_adapter_registry",
+      "evidence": "modules/pets/platforms.py and tests/test_pets_platforms.py; target matrix documented; Linux/Windows/macOS CI matrix configured; native mobile/IoT bridges not implemented"
+    },
+    {
+      "id": "SACRED_ATOM_ENGINE",
+      "state": "implemented_ci_pending",
+      "mode": "bounded_orchestration_and_compute_abstraction",
+      "evidence": "geometry validation, allowlisted dependency planner, UI-neutral GUI state, CPU fallback, optional injected GPU backend; tests/test_sacred_atom_engine.py"
+    },
+    {
+      "id": "SACRED_ATOM_GEOMETRY_ENGINE",
+      "state": "implemented_ci_pending",
+      "mode": "deterministic_19_node_knowledge_graph",
+      "evidence": "modules/pets/sacred_atom.py; structural validation and unit tests added"
+    },
+    {
+      "id": "PETS_COMPUTE_ENGINE",
+      "state": "implemented_cpu_baseline_gpu_adapter_pending",
+      "mode": "explicit_backend_registry_with_cpu_fallback",
+      "evidence": "modules/pets/compute_engine.py; optional GPU package metadata only; no GPU hardware validation"
+    },
+    {
+      "id": "PETS_AUTO_ASSEMBLY_PLANNER",
+      "state": "implemented_plan_only",
+      "mode": "dependency_resolution_trust_and_test_gates",
+      "evidence": "modules/pets/auto_assembly.py; no automatic download/import/execution"
+    },
+    {
+      "id": "SACRED_ATOM_GUI",
+      "state": "static_preview_implemented",
+      "mode": "self_contained_local_html",
+      "evidence": "ui/sacred-atom/index.html; not connected to live authenticated API"
+    },
+    {
+      "id": "QBYTE_FORMAT_SCANNER",
+      "state": "implemented_plan_only",
+      "mode": "bounded_header_recognition",
+      "evidence": "modules/pets/qbyte_format_scanner.py; reads at most 64 KiB from one selected regular file; PE/ELF/Mach-O/WASM/ZIP/script signatures; no extraction or execution"
+    },
+    {
+      "id": "PETS_UNIVERSAL_IR",
+      "state": "implemented_plan_only",
+      "mode": "validated_json_task_contract",
+      "evidence": "modules/pets/universal_ir.py; allowlisted structured text/audio/file/report operations; type and payload-size validation; execution_mode=plan_only"
+    },
+    {
+      "id": "AEGIS_COMPATIBILITY_SWITCH",
+      "state": "implemented_plan_only",
+      "mode": "verified_runtime_route_selection",
+      "evidence": "modules/pets/compatibility_switch.py; explicit runtime registry; requires verified and sandboxed descriptor; native routes are candidates only; no launch/install/translation"
+    },
+    {
+      "id": "PETS_AUDIO_LANGUAGE_CONTRACTS",
+      "state": "implemented_plan_only",
+      "mode": "normalized_transcription_translation_metadata",
+      "evidence": "modules/pets/audio_contracts.py; BCP-47-style language tags, timestamped transcript segments, optional speaker labels, explicit verified provider capability registry; no audio I/O or API credentials"
+    }
+  ],
+  "global_invariants": {
+    "default_deny": true,
+    "read_only_default": true,
+    "owner_approval_for_writes": true,
+    "original_sources_preserved": true,
+    "production_deploy": false,
+    "generated_code_auto_execution": false,
+    "autonomous_self_modification": false,
+    "external_network_actions_by_default": false,
+    "unvalidated_capabilities_active": false,
+    "verified_inference_and_speculation_separated": true,
+    "provenance_required": true,
+    "append_only_evidence_preferred": true
+  },
+  "capability_integrations": [
+    {
+      "id": "WEB_RESEARCH",
+      "provider": "ChatGPT web research",
+      "state": "host_available",
+      "scope": "public_web_search_and_source_review",
+      "repo_runtime_adapter": false,
+      "write_access": false
+    },
+    {
+      "id": "GITHUB_REPOSITORY",
+      "provider": "GitHub connector",
+      "state": "connected_read_verified",
+      "scope": "repository_search_branch_read_and_authorized_branch_writes",
+      "repo_runtime_adapter": false,
+      "verified_target": "irstabyjorge/AEGIS_SUPERSTACK",
+      "verified_branch": "aegis-pets-cloud-integration",
+      "protected_target": "main"
+    },
+    {
+      "id": "PROJECT_LIBRARY",
+      "provider": "ChatGPT Files",
+      "state": "connected_read_verified",
+      "scope": "project_archive_search_and_read",
+      "repo_runtime_adapter": false,
+      "verified_artifact": "PETS_AEGIS_SCHEMA_INTEGRATION_MANIFEST_2026-09-29.json"
+    },
+    {
+      "id": "SCHOLARLY_RESEARCH",
+      "provider": [
+        "Consensus",
+        "PubMed",
+        "ClinicalTrials.gov",
+        "Scite",
+        "CoChat"
+      ],
+      "state": "host_tools_listed",
+      "scope": "literature_trial_and_citation_discovery",
+      "repo_runtime_adapter": false,
+      "restrictions": [
+        "source_verification_required",
+        "no_person_level_targeting"
+      ]
+    },
+    {
+      "id": "HUGGING_FACE_DISCOVERY",
+      "provider": "Hugging Face",
+      "state": "host_tools_listed",
+      "scope": "public_model_dataset_space_and_paper_discovery",
+      "repo_runtime_adapter": false,
+      "restrictions": [
+        "no_model_deployment_claim_without_test",
+        "no_credential_export"
+      ]
+    },
+    {
+      "id": "DOCUMENT_PROCESSING",
+      "provider": [
+        "Adobe Acrobat",
+        "ChatGPT Files"
+      ],
+      "state": "host_tools_listed",
+      "scope": "document_read_conversion_ocr_and_integrity_workflows",
+      "repo_runtime_adapter": false,
+      "restrictions": [
+        "preserve_originals",
+        "redact_sensitive_data_before_sharing"
+      ]
+    },
+    {
+      "id": "LOCAL_DEVICE_RUNTIME",
+      "provider": [
+        "Android",
+        "Termux",
+        "Windows",
+        "Linux"
+      ],
+      "state": "not_connected",
+      "scope": "Android bridge source exists in PR #8; no APK build or physical install verified",
+      "repo_runtime_adapter": false,
+      "restrictions": [
+        "explicit_device_access_required",
+        "no_hidden_persistence",
+        "no_unbounded_collection"
+      ]
+    },
+    {
+      "id": "CROSS_PLATFORM_TARGETS",
+      "provider": [
+        "Linux",
+        "Windows",
+        "macOS",
+        "Android",
+        "iOS/iPadOS",
+        "ARM",
+        "RISC-V",
+        "IoT"
+      ],
+      "state": "architecture_defined_native_validation_pending",
+      "scope": "portable Python core with explicit per-platform and hardware adapters",
+      "repo_runtime_adapter": true,
+      "restrictions": [
+        "no_automatic_device_discovery",
+        "read_only_default",
+        "explicit_os_permissions",
+        "no_firmware_flashing",
+        "no_radio_interception_or_jamming"
+      ]
+    }
+  ],
+  "integration_contract": {
+    "default_mode": "read_only",
+    "connector_discovery_is_not_connection": true,
+    "host_tool_availability_is_not_repo_runtime_integration": true,
+    "no_secrets_in_registry": true,
+    "human_approval_for_external_writes": true,
+    "production_deployment": false,
+    "preserve_main_branch": true,
+    "evidence_provenance_required": true,
+    "distinguish_verified_inferred_and_conceptual": true
+  }
+}

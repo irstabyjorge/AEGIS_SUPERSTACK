@@ -1,0 +1,24 @@
+{
+  "name": "AEGIS INVICTUS OMEGA Unified Knowledge",
+  "version": "5.1.0",
+  "execution_model": "local, read-only indexing and search",
+  "capabilities": [
+    "complete ChatGPT Library metadata inventory",
+    "source and configuration classification",
+    "full-text search over retrieved source files",
+    "SHA-256 integrity verification",
+    "duplicate detection through content hashes",
+    "local HTTP search interface",
+    "JSON command-line reports",
+    "stable Library identity traceability",
+    "guarded static admission with allowlist, review queue, and quarantine manifest"
+  ],
+  "safety_boundaries": [
+    "never execute indexed code",
+    "never install Library binaries",
+    "never alter original Library files",
+    "isolate executables and archives",
+    "bind the optional server to localhost by default",
+    "treat unknown or unverified software as unsafe for execution"
+  ]
+}

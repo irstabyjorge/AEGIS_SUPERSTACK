@@ -1,0 +1,17 @@
+{
+  "schema": "aegis-guarded-evolution/v1",
+  "source_library_file_id": "libfile_942118b21cfc81919edb8cae8c28fb6d",
+  "source_file_id": "file_00000000c46081f58779b5e6bbcb87fd",
+  "summary": {
+    "admit-knowledge": 92,
+    "manual-review": 198,
+    "metadata-only": 19,
+    "quarantine": 71
+  },
+  "policy": {
+    "execution_performed": false,
+    "admit_knowledge_does_not_authorize_execution": true,
+    "unknown_is_not_safe": true
+  },
+  "status": "historical_library_audit_not_recomputed_against_current_checkout"
+}

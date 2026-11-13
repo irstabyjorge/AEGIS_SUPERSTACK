@@ -1,0 +1,55 @@
+name: AEGIS PETS Cloud Control Plane Tests
+
+on:
+  push:
+    branches:
+      - aegis-pets-cloud-integration
+  pull_request:
+    branches:
+      - main
+      - aegis-pets-cloud-integration
+
+permissions:
+  contents: read
+
+jobs:
+  python-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Compile control plane
+        run: python -m py_compile cloud_control_plane.py
+      - name: Run isolated control-plane and registry tests
+        run: python -m unittest discover -s tests -v
+      - name: Build curated AEGIS/PETS knowledge index
+        run: python knowledge/build_curated_index.py
+      - name: Verify curated knowledge index integrity
+        run: python knowledge/engines/aegis_unified.py --package-root knowledge/index_package verify
+
+  node-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+      - name: Install Sovereign AI dependencies
+        working-directory: sovereign-ai
+        run: npm install --no-audit --no-fund
+      - name: Test Sacred Atom and Divinity–Earth Circle integration
+        working-directory: sovereign-ai
+        run: npm test
+      - name: Safe boot status
+        working-directory: sovereign-ai
+        run: npm start

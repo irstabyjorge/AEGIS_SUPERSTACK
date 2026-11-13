@@ -1,0 +1,8 @@
+# Minimal dependencies for the read-only AEGIS/PETS cloud control plane.
+# Full legacy/ML requirements remain listed separately in requirements.txt.
+fastapi
+uvicorn
+httpx
+pydantic
+cryptography
+nats-py

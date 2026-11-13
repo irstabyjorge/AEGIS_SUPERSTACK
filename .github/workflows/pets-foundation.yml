@@ -1,0 +1,36 @@
+name: PETS Foundation Tests
+
+on:
+  push:
+    branches:
+      - aegis-pets-cloud-integration
+  pull_request:
+    branches:
+      - main
+      - aegis-pets-cloud-integration
+
+permissions:
+  contents: read
+
+jobs:
+  pets-foundation:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.11"]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Compile PETS modules
+        run: python -m compileall -q modules/pets
+      - name: Run PETS foundation tests
+        run: python -m unittest discover -s tests -p "test_pets_*.py" -v
+      - name: Run Sacred Atom engine tests
+        run: python -m unittest discover -s tests -p "test_sacred_atom_engine.py" -v

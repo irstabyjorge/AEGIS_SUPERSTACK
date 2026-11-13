@@ -1,0 +1,66 @@
+{
+  "schema": "AEGIS_LIBRARY_SOURCE_PROVENANCE/v1",
+  "package": "AEGIS INVICTUS OMEGA — Unified Knowledge v5.1",
+  "source_archive": {
+    "name": "AEGIS_UNIFIED_KNOWLEDGE_V5_1.zip",
+    "library_file_id": "libfile_f7e0bcfacfe881918c264cbaedeb37e7",
+    "file_id": "file_00000000252881f8aea6323e4b1b5e96",
+    "size_bytes": 8394140,
+    "entries": 408,
+    "uncompressed_bytes": 51650725,
+    "handling": "archive listing inspected; not bulk-extracted into cloud runtime"
+  },
+  "sources": [
+    {
+      "name": "aegis_unified.py",
+      "version": "5.0.0",
+      "library_file_id": "libfile_d02a4b06d44081919f23e304338e77b3",
+      "file_id": "file_00000000909481f88890ceccff3c1fa4",
+      "size_bytes": 17715,
+      "sha256": "553e85d9da7a6bbabcf1d2d4df92c8504a02454778708bc878212a4115c415f1"
+    },
+    {
+      "name": "aegis_guarded_evolution.py",
+      "version": "1.0.0",
+      "library_file_id": "libfile_6ef968f9eb688191a64099736f03e62d",
+      "file_id": "file_0000000001e481f597146b70703ff607",
+      "size_bytes": 6347,
+      "sha256": "8caab20325e29f8589456f1480a12e21ed637d20eb15440cf19b4d5ee57ff5a0"
+    },
+    {
+      "name": "capabilities.json",
+      "library_file_id": "libfile_40bdde39b8e0819180ca5225d2ca2a0c",
+      "file_id": "file_00000000203881f8b7df0f38443e57e6",
+      "size_bytes": 905,
+      "sha256": "2477ff73c69881350ed42414151140b2507ed1e0e41f1360edc848e9c4da3bb6"
+    },
+    {
+      "name": "FUSION_POLICY.md",
+      "library_file_id": "libfile_1f1b41e7cb808191813ba0b5ab0f3180",
+      "file_id": "file_00000000e57881f8bceaf575ce6d2599",
+      "size_bytes": 1489,
+      "sha256": "d9674b142eef68e288c5c18dd7fbaa0e3010ce2af58c045d3ce72d14cc849261"
+    },
+    {
+      "name": "README.md",
+      "library_file_id": "libfile_058be1a2789881919af4b6a1dddc3fb4",
+      "file_id": "file_0000000084bc81fd9e12726889745f28",
+      "size_bytes": 1989,
+      "sha256": "efa65c97bbe72f446454b3aca4167f7cbd3f6eb59dc2330a4c452536b6c934d2"
+    },
+    {
+      "name": "GUARDED_EVOLUTION_AUDIT.json",
+      "library_file_id": "libfile_942118b21cfc81919edb8cae8c28fb6d",
+      "file_id": "file_00000000c46081f58779b5e6bbcb87fd",
+      "size_bytes": 168640,
+      "handling": "summary retained; full report remains in Library"
+    }
+  ],
+  "local_integration_patches": [
+    "Unified Knowledge: quote/tokenize FTS5 user queries and bound result limits",
+    "Unified Knowledge: skip symlinks and exclude VCS/venv/node_modules caches",
+    "Unified Knowledge: enforce loopback-only HTTP binding and add response security headers",
+    "Guarded Evolution: skip symlinks and excluded runtime directories; never follow targets"
+  ],
+  "isolation_note": "The original archive contains DICOM inventories, evidence and incident-report records. Those contents were not bulk-copied into the cloud repository or index."
+}
