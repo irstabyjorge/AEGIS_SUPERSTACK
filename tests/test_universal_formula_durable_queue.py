@@ -40,6 +40,19 @@ class DurableQueueTests(unittest.TestCase):
             engine.add_tasks([Task("q1", "ok")])
             self.assertEqual(queue.discover(engine), [])
 
+
+    def test_dependency_batch_is_preserved(self):
+        with tempfile.TemporaryDirectory() as directory:
+            queue = DurableTaskQueue(Path(directory) / "queue.sqlite")
+            queue.enqueue(Task("02_child", "ok", depends_on=["01_parent"]))
+            queue.enqueue(Task("01_parent", "ok"))
+            engine = ExecutionEngine({"ok": lambda payload: {"ok": True}})
+            first = queue.discover(engine)
+            self.assertEqual([task.task_id for task in first], ["01_parent"])
+            engine.add_tasks(first)
+            second = queue.discover(engine)
+            self.assertEqual([task.task_id for task in second], ["02_child"])
+
     def test_non_json_payload_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             queue = DurableTaskQueue(Path(directory) / "queue.sqlite")
