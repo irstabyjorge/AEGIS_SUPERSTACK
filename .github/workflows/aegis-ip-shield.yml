@@ -27,6 +27,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Run IP SHIELD unit tests
+        run: python3 -m unittest discover -s tests -v
+
       - name: Generate repository provenance snapshot
         run: python3 tools/ip_shield_github.py --output "$RUNNER_TEMP/ip-shield-report.json"
 
