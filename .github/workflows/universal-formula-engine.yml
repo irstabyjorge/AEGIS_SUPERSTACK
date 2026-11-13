@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - "modules/pets/universal_formula/**"
-      - "tests/test_*worker_pool.py"
+      - "tests/test_*worker_pool.py"\n      - "tests/test_universal_formula_objective.py"
       - ".github/workflows/universal-formula-engine.yml"
   push:
     branches: [feat/universal-formula-25-worker-engine]
@@ -32,4 +32,4 @@ jobs:
       - name: Compile Universal Formula modules
         run: python -m py_compile modules/pets/universal_formula/*.py
       - name: Run Universal Formula tests
-        run: python -m unittest tests.test_universal_formula_engine tests.test_sacred_atom_worker_pool -v
+        run: python -m unittest tests.test_universal_formula_engine tests.test_sacred_atom_worker_pool tests.test_universal_formula_objective -v
