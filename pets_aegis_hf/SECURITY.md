@@ -24,3 +24,15 @@ Git blob IDs use SHA-1 and are not SHA-256. LFS SHA-256 values are reported as H
 
 ## Safe defaults
 Read-only inventory is the only automated Hub operation. Publishing requires a separate explicit local command and a write-scoped token. Existing manifest paths are skipped; this release does not overwrite them.
+
+
+## Additive-only evidence preservation
+- Every inventory execution is written to a unique `run-<UTC timestamp>` directory.
+- Existing evidence files are never replaced. The JSON writer fails if its destination already exists.
+- Each run reports `complete` only when every discovered repository was inventoried; otherwise it reports `partial`.
+- Audit and publish require every manifest to verify and the index digest to be anchored in a valid hash-chained ledger.
+- A missing, malformed, or unanchored index fails closed.
+- See `docs/PETS_AEGIS_IP_SHIELD_COVERAGE_CHARTER.md` for coverage, exceptions, omissions, attribution, and claim-handling policy.
+
+## Bond-like coverage meaning
+"Coverage" means technical recording and integrity monitoring of declared project assets. It is not an insurance policy, surety bond, indemnity, copyright registration, or guarantee against copying, platform loss, or infringement. Rights and license questions require qualified human/legal review.
