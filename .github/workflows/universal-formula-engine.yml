@@ -5,13 +5,17 @@ on:
     branches: [main]
     paths:
       - "modules/pets/universal_formula/**"
-      - "tests/test_*worker_pool.py"\n      - "tests/test_universal_formula_objective.py"
+      - "tests/test_universal_formula_engine.py"
+      - "tests/test_sacred_atom_worker_pool.py"
+      - "tests/test_universal_formula_objective.py"
       - ".github/workflows/universal-formula-engine.yml"
   push:
     branches: [feat/universal-formula-25-worker-engine]
     paths:
       - "modules/pets/universal_formula/**"
       - "tests/test_universal_formula_engine.py"
+      - "tests/test_sacred_atom_worker_pool.py"
+      - "tests/test_universal_formula_objective.py"
       - ".github/workflows/universal-formula-engine.yml"
 
 permissions:
