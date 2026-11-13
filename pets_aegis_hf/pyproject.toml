@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pets-aegis-hf"
+version = "2.1.0"
+description = "PETS/AEGIS Hugging Face repository inventory and integrity manifests"
+requires-python = ">=3.10"
+dependencies = ["huggingface_hub>=0.24"]
+
+[project.scripts]
+pets-aegis-hf = "pets_aegis_hf.cli:main"
