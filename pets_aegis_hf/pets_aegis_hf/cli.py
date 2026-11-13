@@ -144,7 +144,7 @@ def publish(args):
                 api.create_commit(repo_id=item["repo_id"], repo_type=item["repo_type"], operations=[CommitOperationAdd(path_in_repo=TARGET, path_or_fileobj=source)], commit_message="Add PETS/AEGIS IP Shield manifest")
                 status = "committed"
         except Exception as exc:
-            status = "error: " + str(exc)
+            status = "error_type: " + type(exc).__name__
         outcomes.append({"repo_id":item["repo_id"],"status":status})
     write_json(root/"PUBLISH.json", {"outcomes":outcomes})
     append_ledger(root/"audit-ledger.jsonl", {"action":"publish","outcomes":outcomes})
