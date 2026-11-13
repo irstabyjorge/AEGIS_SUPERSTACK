@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PETS/AEGIS Sacred Atom — Agent Map</title>
 <style>
-:root{color-scheme:dark;--bg:#101722;--panel:#192536;--line:#71849c;--text:#edf3fa;--muted:#b8c5d4;--accent:#b7d8ff}
+:root{color-scheme:dark;--bg:#101722;--panel:#192536;--line:#71849c;--text:#edf3fa;--muted:#b8c5d4}
 *{box-sizing:border-box}body{margin:0;padding:24px;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,sans-serif}
 main{max-width:1200px;margin:auto}h1{font-size:1.6rem;margin:0 0 6px}.sub{color:var(--muted);margin:0 0 18px}
 figure{margin:0;background:var(--panel);border:1px solid #34445a;border-radius:16px;padding:12px;overflow:auto}
@@ -18,15 +18,14 @@ svg{display:block;width:100%;min-width:760px;height:auto}
 </head>
 <body><main>
 <h1>SACRED ATOM — PETS/AEGIS Agent Map</h1>
-<p class="sub">Twelve bounded specialist agents · one human-defined center · shared evidence and validation contracts</p>
-<figure aria-label="Static architecture graph showing a central governor connected to eleven specialist agents">
+<p class="sub">11 specialist agents · one human-defined center · one explicit research-intake boundary</p>
+<figure aria-label="Static architecture graph showing a central governor connected to eleven specialist agents and a research adapter boundary">
 <svg viewBox="0 0 1000 680" role="img" aria-labelledby="title desc">
 <title id="title">Sacred Atom multi-agent architecture</title>
-<desc id="desc">Center Governor at the center, surrounded by eleven specialist agents. Lines represent coordination and shared policy, not autonomous authority.</desc>
+<desc id="desc">Center Governor connects to eleven specialist agents. Research Intake is an adapter boundary, not an agent. Lines represent coordination and shared policy, not autonomous authority.</desc>
 <defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="none" stroke="#71849c"/></marker></defs>
 <g class="edge" marker-end="url(#arrow)">
-<path d="M500 325 L500 112"/><path d="M500 325 L760 150"/><path d="M500 325 L870 325"/><path d="M500 325 L760 520"/><path d="M500 325 L500 590"/><path d="M500 325 L240 520"/><path d="M500 325 L130 325"/><path d="M500 325 L240 150"/><path d="M500 325 L390 100"/><path d="M500 325 L610 100"/><path d="M500 325 L390 570"/><path d="M500 325 L610 570"/>
-</g>
+<path d="M500 325 L500 112"/><path d="M500 325 L760 150"/><path d="M500 325 L870 325"/><path d="M500 325 L760 520"/><path d="M500 325 L500 590"/><path d="M500 325 L240 520"/><path d="M500 325 L130 325"/><path d="M500 325 L240 150"/><path d="M500 325 L390 100"/><path d="M500 325 L610 100"/><path d="M500 325 L390 570"/><path d="M500 325 L610 570"/></g>
 <g class="node center"><rect x="385" y="275" width="230" height="100" rx="18"/><text x="500" y="310">CENTER GOVERNOR</text><text class="role" x="500" y="333">Objective · policy · approval boundary</text><text class="role" x="500" y="350">No self-granted permissions</text></g>
 <g class="node"><rect x="405" y="42" width="190" height="68" rx="12"/><text x="500" y="70">ATOM CORE</text><text class="role" x="500" y="90">Task decomposition</text></g>
 <g class="node"><rect x="665" y="112" width="190" height="68" rx="12"/><text x="760" y="140">FLOWER MAP</text><text class="role" x="760" y="160">Knowledge relationships</text></g>
@@ -39,9 +38,9 @@ svg{display:block;width:100%;min-width:760px;height:auto}
 <g class="node"><rect x="295" y="66" width="190" height="68" rx="12"/><text x="390" y="94">VESICA BRIDGE</text><text class="role" x="390" y="114">Cross-domain hypotheses</text></g>
 <g class="node"><rect x="515" y="66" width="190" height="68" rx="12"/><text x="610" y="94">PLATONIC VALIDATORS</text><text class="role" x="610" y="114">Evidence and policy checks</text></g>
 <g class="node"><rect x="295" y="550" width="190" height="68" rx="12"/><text x="390" y="578">ORBITAL SCHEDULER</text><text class="role" x="390" y="598">Proposal queue only</text></g>
-<g class="node"><rect x="515" y="550" width="190" height="68" rx="12"/><text x="610" y="578">RESEARCH INTAKE</text><text class="role" x="610" y="598">Explicit source retrieval only</text></g>
+<g class="node"><rect x="515" y="550" width="190" height="68" rx="12" stroke-dasharray="5 3"/><text x="610" y="578">RESEARCH INTAKE</text><text class="role" x="610" y="598">Adapter boundary · not an agent</text></g>
 </svg>
 </figure>
-<div class="legend"><span>Center = human-defined objective and governance</span><span>Outer nodes = independent specialist functions</span></div>
-<p class="note">Static conceptual map. It is not a biological brain map, a live telemetry view, or evidence of subjective machine consciousness. The current library does not start background research, network access, persistent memory writes, or external actions.</p>
+<div class="legend"><span>Center = human-defined objective and governance</span><span>Outer nodes = specialist functions</span><span>Dashed node = explicit retrieval adapter boundary</span></div>
+<p class="note">Static conceptual map. It is not a biological brain map, live telemetry, or evidence of subjective machine consciousness. This package does not start background research, network access, persistent memory writes, or external actions.</p>
 </main></body></html>
