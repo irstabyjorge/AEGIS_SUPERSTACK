@@ -63,10 +63,10 @@ class ValueLedger:
 
     def summary(self):
         with self._connect() as db:
-            rows = db.execute("SELECT monetization_status, COUNT(*) AS count,
+            rows = db.execute("""SELECT monetization_status, COUNT(*) AS count,
                 SUM(COALESCE(estimated_value,0)) AS estimated,
                 SUM(COALESCE(actual_revenue,0)) AS realized
-                FROM value_records GROUP BY monetization_status").fetchall()
+                FROM value_records GROUP BY monetization_status""").fetchall()
         return {row["monetization_status"]: {
             "records": row["count"], "estimated_value_total": row["estimated"],
             "actual_revenue_total": row["realized"]
