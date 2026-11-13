@@ -1,0 +1,65 @@
+name: AEGIS GitHub IP SHIELD
+
+on:
+  push:
+    branches-ignore:
+      - ip-shield-ledger
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 9 * * 1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aegis-ip-shield-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  provenance:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out complete Git history
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Run IP SHIELD unit tests
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Generate repository provenance snapshot
+        run: python3 tools/ip_shield_github.py --output "$RUNNER_TEMP/ip-shield-report.json"
+
+      - name: Upload report and checksum
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: aegis-ip-shield-${{ github.run_id }}-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/ip-shield-report.json
+            ${{ runner.temp }}/ip-shield-report.json.sha256
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Preserve snapshot in versioned ledger branch
+        if: github.event_name != 'pull_request' && github.ref != 'refs/heads/ip-shield-ledger'
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin ip-shield-ledger || true
+          if git show-ref --verify --quiet refs/remotes/origin/ip-shield-ledger; then
+            git switch --force-create ip-shield-ledger origin/ip-shield-ledger
+          else
+            git switch --orphan ip-shield-ledger
+            git rm -rf . >/dev/null 2>&1 || true
+          fi
+          mkdir -p ledger
+          name="${GITHUB_RUN_ID}-${GITHUB_SHA}.json"
+          cp "$RUNNER_TEMP/ip-shield-report.json" "ledger/$name"
+          cp "$RUNNER_TEMP/ip-shield-report.json.sha256" "ledger/$name.sha256"
+          git add "ledger/$name" "ledger/$name.sha256"
+          git commit -m "Record IP provenance snapshot ${GITHUB_SHA}"
+          git push origin HEAD:refs/heads/ip-shield-ledger
