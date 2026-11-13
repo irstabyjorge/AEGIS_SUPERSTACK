@@ -135,7 +135,11 @@ class ExecutionEngine:
             task.status = TaskStatus.RUNNING.value
             task.attempts += 1
         try:
-            result = self.handlers[task.handler](dict(task.payload))
+            payload = dict(task.payload)
+            payload["_dependency_results"] = {
+                dep: self.tasks[dep].result for dep in task.depends_on
+            }
+            result = self.handlers[task.handler](payload)
             if not isinstance(result, dict):
                 raise TypeError("worker handlers must return a dict")
             task.result = result
