@@ -11,15 +11,12 @@ def build_objective_tasks(objective, evidence=None, domains=None, options=None):
     objective = str(objective or "").strip()
     if not objective:
         raise ValueError("objective is required")
-    shared = {"objective": objective}
     evidence = list(evidence or [])
     domains = list(domains or [])
     options = list(options or [])
 
-    # The core decomposition establishes the work packages first. The remaining
-    # specialists receive only the inputs relevant to their declared function.
     return [
-        Task("01_scope", "ATOM_CORE", payload=shared),
+        Task("01_scope", "ATOM_CORE", payload={"objective": objective}),
         Task("02_map", "FLOWER_MAP", depends_on=["01_scope"],
              payload={"evidence": evidence}),
         Task("03_dependencies", "METATRON_GRID", depends_on=["01_scope"],
@@ -34,8 +31,7 @@ def build_objective_tasks(objective, evidence=None, domains=None, options=None):
              payload={"evidence": evidence}),
         Task("08_coordinate", "DODECA_COORDINATOR",
              depends_on=["03_dependencies", "04_scenarios", "05_cross_domain",
-                         "06_alternatives", "07_validate"],
-             payload={"results": []}),
+                         "06_alternatives", "07_validate"]),
         Task("09_report", "TORUS_FEEDBACK", depends_on=["08_coordinate"],
              payload={"feedback": [], "prior_output": None}),
     ]
