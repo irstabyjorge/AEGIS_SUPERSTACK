@@ -14,11 +14,12 @@ class RuntimeSupervisor:
     """Repeat objective discovery and execution within explicit resource bounds."""
 
     def __init__(self, engine, task_source=None, idle_wait_seconds=0.0,
-                 wait_fn=None, clock=None):
+                 wait_fn=None, clock=None, after_cycle=None):
         if idle_wait_seconds < 0:
             raise ValueError("idle_wait_seconds cannot be negative")
         self.engine = engine
         self.task_source = task_source
+        self.after_cycle = after_cycle
         self.idle_wait_seconds = float(idle_wait_seconds)
         self._wait = wait_fn or time.sleep
         self._clock = clock or time.monotonic
@@ -43,6 +44,8 @@ class RuntimeSupervisor:
         if discovered:
             self.engine.add_tasks(discovered)
         self._last_snapshot = self.engine.run_until_blocked()
+        if self.after_cycle is not None:
+            self.after_cycle(self._last_snapshot)
         self.cycle_count += 1
         return self.health_snapshot()
 
