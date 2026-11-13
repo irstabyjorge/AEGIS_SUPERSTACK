@@ -1,0 +1,40 @@
+name: PETS Universal Formula Engine Tests
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "modules/pets/universal_formula/**"
+      - "tests/test_universal_formula_engine.py"
+      - "tests/test_sacred_atom_worker_pool.py"
+      - "tests/test_universal_formula_objective.py"
+      - "tests/test_universal_formula_runtime.py"
+      - ".github/workflows/universal-formula-engine.yml"
+  push:
+    branches: [feat/universal-formula-25-worker-engine]
+    paths:
+      - "modules/pets/universal_formula/**"
+      - "tests/test_universal_formula_engine.py"
+      - "tests/test_sacred_atom_worker_pool.py"
+      - "tests/test_universal_formula_objective.py"
+      - ".github/workflows/universal-formula-engine.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Compile Universal Formula modules
+        run: python -m py_compile modules/pets/universal_formula/*.py
+      - name: Run Universal Formula tests
+        run: python -m unittest tests.test_universal_formula_engine tests.test_sacred_atom_worker_pool tests.test_universal_formula_objective tests.test_universal_formula_runtime -v
