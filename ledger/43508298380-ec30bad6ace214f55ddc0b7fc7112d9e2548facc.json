@@ -1,0 +1,1670 @@
+{
+  "generated_at_utc_runner_clock": "2026-11-13T21:10:36.528292+00:00",
+  "history": {
+    "commit_count_recorded": 144,
+    "commit_count_total": 144,
+    "commits": [
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T13:10:28-08:00",
+        "sha": "ec30bad6ace214f55ddc0b7fc7112d9e2548facc",
+        "subject": "Add SQLite durable task queue with expiring leases"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T13:07:46-08:00",
+        "sha": "e74b59ee3fbc7f958cc9a9f835ab38945f6766bb",
+        "subject": "Include review-hardening regression tests in CI"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T13:07:43-08:00",
+        "sha": "2f1fcdba44477d518f0db1e4c17fa7aa1ddbe4bb",
+        "subject": "Add regression tests for Universal Formula review findings"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T13:07:32-08:00",
+        "sha": "01bd899dfd6c8062171f5ed973c4bf59d553e345",
+        "subject": "Harden task state, scheduler concurrency, and checkpoint recovery"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T13:06:32-08:00",
+        "sha": "dba6648e852d030bcac191101e1450791519f078",
+        "subject": "Merge pull request #21 from irstabyjorge/feat/universal-formula-25-worker-engine"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T13:03:56-08:00",
+        "sha": "a67704dd0ee7c9f19c7dbf6ca11d5d6e9a56e8f9",
+        "subject": "Test supervisor cycle budget with continuing work"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T13:03:48-08:00",
+        "sha": "e279ca18856d38f171268039d8d93c4e6cf71435",
+        "subject": "Run runtime supervisor tests in CI"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T13:03:46-08:00",
+        "sha": "91a86b64ba44377a185a943c8323ece7bd748c08",
+        "subject": "Export bounded runtime supervisor"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T13:03:34-08:00",
+        "sha": "9bd63c914c64a4a62702c14a021598ee0cf5d824",
+        "subject": "Document bounded Universal Formula runtime loop"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T13:03:32-08:00",
+        "sha": "f9ffad9c2a341fe6e36be14eb1874f2a1a43b587",
+        "subject": "Test bounded Universal Formula runtime supervisor"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T13:03:29-08:00",
+        "sha": "f411ad39acfa8401730fba7b5615e103c5adde76",
+        "subject": "Add bounded Universal Formula runtime supervisor"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:58:13-08:00",
+        "sha": "c9b1f5c14152c554add2401204fc8081785a11c6",
+        "subject": "Repair CI path filters and validate all orchestration tests"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:57:48-08:00",
+        "sha": "882c0c0abaeaacea8d2fd75820aad02899cbe560",
+        "subject": "Document objective orchestration and precise runtime limits"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:57:45-08:00",
+        "sha": "cb445dc8d09025700ea62a039861773561f1f421",
+        "subject": "Export Universal Formula objective orchestration API"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:57:15-08:00",
+        "sha": "1ee0f609908efdae38a4b62ee0caf4dbe4a01760",
+        "subject": "Include objective orchestration tests in CI"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:57:10-08:00",
+        "sha": "342b92c4599a4c4c6dfdef2696f4ef7d3869d696",
+        "subject": "Test end-to-end deterministic objective orchestration"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:57:03-08:00",
+        "sha": "0789bae16928e3eb16cdfa9182c6e4eb89b7752b",
+        "subject": "Use real upstream specialist outputs in objective plan"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:56:46-08:00",
+        "sha": "5c84a54aa1435476bd2f5bdfbc99f8081f319577",
+        "subject": "Aggregate dependency outputs in Sacred Atom coordinator"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:56:38-08:00",
+        "sha": "eea9bba3ecfc3b5daf7c16272d120049df3d2556",
+        "subject": "Pass completed dependency outputs to downstream workers"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:56:25-08:00",
+        "sha": "ae52a7c4dcd47477187ed82322a9ff39f98139be",
+        "subject": "Add deterministic Universal Formula objective planner"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:51:25-08:00",
+        "sha": "6296296b254ad44639309805025a51608829923d",
+        "subject": "Include Sacred Atom adapter tests in CI"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:51:15-08:00",
+        "sha": "9284464681eb95931216275a6c12c98b99d658b2",
+        "subject": "Test Sacred Atom worker-pool adapter"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:51:13-08:00",
+        "sha": "9537ccb5f92dfeaa248fb9cccfd5d1c1ddc61589",
+        "subject": "Connect Sacred Atom specialists to bounded worker pool"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:51:04-08:00",
+        "sha": "8b4b2ef2aeb10a0fc00dcc9fb80c8a7d69a289df",
+        "subject": "Add dedicated Universal Formula CI matrix"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:51:01-08:00",
+        "sha": "23c0cd1c2c27ef4f173c3b455a59b8aaa8369d62",
+        "subject": "Test checkpoint restoration and atomic task registration"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:50:51-08:00",
+        "sha": "7e8071f85f84acc8327852f912088ea63838d73f",
+        "subject": "Add validated checkpoint restoration and atomic task registration"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:49:45-08:00",
+        "sha": "be7de8139ae2ef4658e8b5713f0219d38edfa761",
+        "subject": "Document continuous execution architecture and authorization boundaries"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:49:43-08:00",
+        "sha": "d9938e1bb8ed0912fd6c18883c98d463ebf448f5",
+        "subject": "Test worker concurrency, dependency graph, checkpoint and policy"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:49:41-08:00",
+        "sha": "445d224ae4a3bab084c4f4dc2e1190838268914b",
+        "subject": "Implement bounded 25-worker execution engine"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:49:38-08:00",
+        "sha": "f92f890ba65537425e0b90eafdbc965a550bd63d",
+        "subject": "Add default-deny execution policy gate"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:49:36-08:00",
+        "sha": "f65c725ebd057980ef9bd11c5adfb222ad9b8997",
+        "subject": "Add Universal Formula package exports"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:45:47-08:00",
+        "sha": "6d81d09fe2b2412fb1d6acb8091d7aed774a4bca",
+        "subject": "Add Sacred Atom geometry-to-agent compatibility adapter (#20)"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:42:57-08:00",
+        "sha": "3c4698127a4c038579c0a80246329a809242ee62",
+        "subject": "Merge pull request #19 from irstabyjorge/feat/sacred-atom-multi-agent-engine"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:42:02-08:00",
+        "sha": "c45337a058960d9c647586e2bf3bd6b5766b2f11",
+        "subject": "Add focused Python CI for Sacred Atom agents"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:40:29-08:00",
+        "sha": "ecb29a75ae17a82687a84dc82864b23059667b92",
+        "subject": "Clarify specialist count and research adapter boundary"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:40:05-08:00",
+        "sha": "3f7d83b883f16b2b512d7c68750a5f9dc30f2e16",
+        "subject": "Add static Sacred Atom multi-agent architecture map"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:39:38-08:00",
+        "sha": "e01d1e2d2fd5cc66f8a0519b8b93ef0f8612a037",
+        "subject": "Document Sacred Atom multi-agent engine"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:39:35-08:00",
+        "sha": "fabda9004ad692c4d57ebd1fa8e7958c899702e4",
+        "subject": "Test Sacred Atom multi-agent orchestration"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:39:33-08:00",
+        "sha": "e048231fd9ac9b4c772db6b37013aaa5da750f6c",
+        "subject": "Add bounded Sacred Atom specialist agents"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T12:06:49-08:00",
+        "sha": "9116a824dbbc87e9fde2fd8d37fbaff141f21c8b",
+        "subject": "docs: add PETS AEGIS connector integration registry"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:50:59-08:00",
+        "sha": "199d8a01635a30b521619112aabc6c287a0eb708",
+        "subject": "Merge PETS AEGIS Hugging Face protection"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:50:45-08:00",
+        "sha": "ff04618a7b2f79dd306aed9c6e35d382087b2e27",
+        "subject": "Add empty-ledger baseline regression test"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:50:39-08:00",
+        "sha": "36885520c37a0a967e4859afc47400c1c71e6788",
+        "subject": "Document additive evidence preservation and IP coverage limits"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:50:30-08:00",
+        "sha": "fb19c2f5820b3b0806e96c05e697df277ae815f2",
+        "subject": "Preserve prior inventories and anchor index integrity in audit ledger"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:50:19-08:00",
+        "sha": "92f54f264327367b4ab403d135494cc351579e0a",
+        "subject": "Add additive-only IP Shield coverage charter and errors omissions policy"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:49:42-08:00",
+        "sha": "6eaa8053c8418888933883eeb39098e0f9703e98",
+        "subject": "Avoid storing raw remote exception messages in evidence"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:49:26-08:00",
+        "sha": "55b28d3961a26a6d99554d84e740402d6aea4f2d",
+        "subject": "Normalize evidence output and sanitize exception records"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:49:19-08:00",
+        "sha": "e36f37f73b55a80cc50873047ee4fa33cee31d55",
+        "subject": "Require verified evidence before audit or publication"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:49:04-08:00",
+        "sha": "eb5e5eec9b13b6394dd65f63222477080421edd4",
+        "subject": "Expand regression coverage for tamper detection and safe ledger writes"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:48:57-08:00",
+        "sha": "5c47d3d90f4e3578ec0e72f32a919b3605e3fcdd",
+        "subject": "Harden manifest verification and refuse corrupt ledger appends"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:48:23-08:00",
+        "sha": "4ff70b29f196ff2e0d6fccfb4027f69f2624ce6e",
+        "subject": "Run PETS AEGIS protection validation on pull requests"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:48:12-08:00",
+        "sha": "043a7393e6dfad2096a9922e57596833d784b03e",
+        "subject": "Add integrity and audit-ledger regression tests"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:47:55-08:00",
+        "sha": "d977655916e542eb5beb40feb7fd8e87e11dc46a",
+        "subject": "Harden PETS AEGIS Hugging Face protection pipeline"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:47:53-08:00",
+        "sha": "6a1abfe00b15d7c90ceb2dcb3635665626906d61",
+        "subject": "Harden PETS AEGIS Hugging Face protection pipeline"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:47:51-08:00",
+        "sha": "42a007d62b4fd25d772262ae126031781d5e759d",
+        "subject": "Harden PETS AEGIS Hugging Face protection pipeline"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:47:49-08:00",
+        "sha": "e32a56821a80892676ed03b78458b57c34c2a40f",
+        "subject": "Harden PETS AEGIS Hugging Face protection pipeline"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:47:06-08:00",
+        "sha": "0ade30f2403283df47a0d7b2248a39e9846e7e71",
+        "subject": "Add PETS/AEGIS Hugging Face integration v2.1"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:47:04-08:00",
+        "sha": "6088fd7f188791e00abe73e6b5c35afb917bff90",
+        "subject": "Add PETS/AEGIS Hugging Face integration v2.1"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:47:01-08:00",
+        "sha": "800c9a271cb3cb8b377996ac36e4188ac5727699",
+        "subject": "Add PETS/AEGIS Hugging Face integration v2.1"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T11:46:59-08:00",
+        "sha": "e3f0e9d987b615a2c01ba4f945c69b8f9601ad45",
+        "subject": "Add PETS/AEGIS Hugging Face integration v2.1"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-13T10:43:27-08:00",
+        "sha": "e385e787aa8aa3e99e4fa735625a22f1f506eef0",
+        "subject": "Add AEGIS GitHub IP SHIELD provenance automation"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-08T22:28:37-08:00",
+        "sha": "1ecf9d5c9813d8bf56f31e64ea3d676037ff219c",
+        "subject": "Document PETS-AEGIS canonical repository ownership"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-08T22:26:37-08:00",
+        "sha": "b87e8a434bd6fafd6271d3d34d16086e7ab382ac",
+        "subject": "Move seed inventory to unambiguous data directory"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-08T22:26:32-08:00",
+        "sha": "c9eed1a4c0181f368142c3282d052824d4576fda",
+        "subject": "Fix registry data directory import collision"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-08T20:37:55-08:00",
+        "sha": "910462230eaaecb2585feb2c05198937fce1174d",
+        "subject": "Document Termux and Hugging Face integration for device registry"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-08T20:36:59-08:00",
+        "sha": "0687beb71607f88094b6006dcfa85ddf1c4c4ff5",
+        "subject": "Add read-only Hugging Face Space deployment scaffold"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-08T20:36:56-08:00",
+        "sha": "85a1e6db3accbfae924fb59d9ec72dd7e52aef50",
+        "subject": "Add read-only Hugging Face Space deployment scaffold"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-08T20:36:53-08:00",
+        "sha": "5cc56c025ea0cda3615c37587de71a6381d66a54",
+        "subject": "Add read-only Hugging Face Space deployment scaffold"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-08T20:36:50-08:00",
+        "sha": "53fe6dd81ddef222d401f09138266a6ff396e07f",
+        "subject": "Add read-only Hugging Face Space deployment scaffold"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-08T20:36:36-08:00",
+        "sha": "8575c8533d2ead5f65e50dadc256238726b57c37",
+        "subject": "Add PETS-AEGIS historical device identity registry"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-08T20:36:33-08:00",
+        "sha": "225078c405f176d987d1c5d63392879aca1c6ea5",
+        "subject": "Add PETS-AEGIS historical device identity registry"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-08T20:36:29-08:00",
+        "sha": "da930590f5b4b378e93634028bd4230b333b6f4c",
+        "subject": "Add PETS-AEGIS historical device identity registry"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-08T20:36:26-08:00",
+        "sha": "73c2f309f6c085a3ce80138dd991f2f6531282ee",
+        "subject": "Add PETS-AEGIS historical device identity registry"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-08T20:36:22-08:00",
+        "sha": "255dca3a6070348f0478dffcb813dbcdfc4001d8",
+        "subject": "Add PETS-AEGIS historical device identity registry"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-11-08T20:36:20-08:00",
+        "sha": "ef30bf3b59e16f940f49d86d8e45b967919dca6e",
+        "subject": "Add PETS-AEGIS historical device identity registry"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-09-04T13:18:29-07:00",
+        "sha": "4f5ae79b460c32b90822ecd0047561a440e164d2",
+        "subject": "Test GitHub Actions runner for SaltSignal APK build"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-07-28T18:39:43-07:00",
+        "sha": "85f8829636f7dbb138966db47b2e784b1bac6d2e",
+        "subject": "Merge pull request #3 from irstabyjorge/codex/create-unrestricted-ai-fusion-with-jefeaguila"
+      },
+      {
+        "author_email_sha256": "1b20a3bab8c9ee24be3bbc4b1dc1005cc9f36d83d91a23566f87c2e96a7341fb",
+        "author_name_declared": "IRSTAXBYJORGE",
+        "authored_at_declared": "2026-07-28T18:39:34-07:00",
+        "sha": "087d0d644d130bd25c8ea0b6988cec47c8b27286",
+        "subject": "Merge remote-tracking branch 'origin/main' into origin/codex/create-unrestricted-ai-fusion-with-jefeaguila"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-07-28T18:39:12-07:00",
+        "sha": "4c421e8a8aaaa1621172f1578d2cec98820a7539",
+        "subject": "Merge pull request #2 from irstabyjorge/codex/create-program-to-scan-chatgpt-conversations"
+      },
+      {
+        "author_email_sha256": "1b20a3bab8c9ee24be3bbc4b1dc1005cc9f36d83d91a23566f87c2e96a7341fb",
+        "author_name_declared": "IRSTAXBYJORGE",
+        "authored_at_declared": "2026-07-28T18:39:04-07:00",
+        "sha": "bc83b4f8a536d0c945717ef51c88b61d34574db5",
+        "subject": "Merge remote-tracking branch 'origin/main' into origin/codex/create-program-to-scan-chatgpt-conversations"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-07-28T18:38:31-07:00",
+        "sha": "1cdb5023ac411f38f4de76304d2c8f06124dabb1",
+        "subject": "Merge pull request #4 from irstabyjorge/codex/create-unrestricted-ai-fusion-with-jefeaguila-nfgdmq"
+      },
+      {
+        "author_email_sha256": "1b20a3bab8c9ee24be3bbc4b1dc1005cc9f36d83d91a23566f87c2e96a7341fb",
+        "author_name_declared": "IRSTAXBYJORGE",
+        "authored_at_declared": "2026-07-28T18:38:03-07:00",
+        "sha": "c8eaabc295e70b07621614d2898b9eb091595501",
+        "subject": "Merge remote-tracking branch 'origin/main' into origin/codex/create-unrestricted-ai-fusion-with-jefeaguila-nfgdmq"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-07-28T18:37:37-07:00",
+        "sha": "08074c9172deb4f8b84ae8ec4b17ee99f780dd81",
+        "subject": "Merge pull request #5 from irstabyjorge/codex/locate-user-conversation-for-evidence-collection"
+      },
+      {
+        "author_email_sha256": "1b20a3bab8c9ee24be3bbc4b1dc1005cc9f36d83d91a23566f87c2e96a7341fb",
+        "author_name_declared": "IRSTAXBYJORGE",
+        "authored_at_declared": "2026-07-28T18:37:19-07:00",
+        "sha": "bc502c8fee7a9337ebed272179649956e57aae44",
+        "subject": "Merge remote-tracking branch 'origin/main' into origin/codex/locate-user-conversation-for-evidence-collection"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-05-29T11:36:50-07:00",
+        "sha": "cb74706cd2a28a681f1da852c9f98030ab59ff40",
+        "subject": "Add transcript evidence scanning utility"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-05-25T23:03:43-07:00",
+        "sha": "8dbcbce84bff0c44f38686461f795e1225c9679f",
+        "subject": "docs: complete AEGIS superstack README and safe implementation map"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-05-25T23:03:24-07:00",
+        "sha": "7e9680da2e75969131d0036e6649e096f55d43d0",
+        "subject": "docs: add external design reference link"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-05-25T20:56:46-07:00",
+        "sha": "4c955582323918944f88b861c28c3501d6f54b61",
+        "subject": "docs: add repository file map for AEGIS components"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-05-25T20:55:51-07:00",
+        "sha": "db6bf84f4704a83ed7a84f45ea24a599939d491a",
+        "subject": "docs: clarify license ownership and MIT-style terms"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-05-25T20:53:46-07:00",
+        "sha": "5192d694f5f0ae82f40e1f2151a2ca71f79c6ae0",
+        "subject": "docs: refine MCP compatibility mapping and extension example"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-30T01:23:48-07:00",
+        "sha": "59b8677d8c73cce4f31b350f8ce68f246f8db598",
+        "subject": "Add Sovereign AI: package.json"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-30T01:23:47-07:00",
+        "sha": "0a60247394349462342570a1c6e3f4a9fef40693",
+        "subject": "Add Sovereign AI: core/system.js"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-30T01:23:45-07:00",
+        "sha": "83f9538379d5c21170b946592b490a959016b865",
+        "subject": "Add Sovereign AI: economic/economic.js"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-30T01:23:44-07:00",
+        "sha": "c5e7dd7ca07b69aa82a5899557f7e66f64772ede",
+        "subject": "Add Sovereign AI: matrix/agents.js"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-30T01:23:42-07:00",
+        "sha": "44d56198b89c37c63f8753f1cf8b7289258f197f",
+        "subject": "Add Sovereign AI: vector/memory.js"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-30T01:08:19-07:00",
+        "sha": "df0aab5dae43ec846abe3510769343d5e1c7df60",
+        "subject": "Update requirements — add AI/ML stack"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-30T01:07:58-07:00",
+        "sha": "5290291aa73991ea0924cdaf08013a291f81de1c",
+        "subject": "Update install_service.sh — AEGIS AI v2.0"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-30T01:07:56-07:00",
+        "sha": "e0e1945b514042341e40feb14eee6d98b42a31b6",
+        "subject": "Update aegis_icon.svg — AEGIS AI v2.0"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-30T01:07:54-07:00",
+        "sha": "91fa0bdd767368f0022ecf17142ae882c3a7d836",
+        "subject": "Update aegis_chat.py — AEGIS AI v2.0"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-30T01:07:53-07:00",
+        "sha": "e134a2749576f0a91f4dcc1d7606d42c9f6baaf5",
+        "subject": "Update aegis_daemon.py — AEGIS AI v2.0"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-30T01:07:51-07:00",
+        "sha": "b59f5e8b3ca63bd841ff5a54fcd5c497e39c93d1",
+        "subject": "Update aegis_brain.py — AEGIS AI v2.0"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-30T00:37:39-07:00",
+        "sha": "34faf039ec281949b32ee1d9b3613db5aeea5970",
+        "subject": "Full module integration"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-30T00:37:38-07:00",
+        "sha": "6c43150cf52e060d0852e812eb74fcaaa06d01d9",
+        "subject": "Full module integration"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-30T00:37:37-07:00",
+        "sha": "13f6bf39068b636cd1e96d52979a4b08c22e1b1c",
+        "subject": "Add AEGIS application icon"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-30T00:37:36-07:00",
+        "sha": "beed883544f5ae0400eb278761f2ec09c151fa74",
+        "subject": "Add AEGIS Chat — natural language security assistant"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-30T00:33:22-07:00",
+        "sha": "ef1c148409afe2454b1a2d34a53eddc060969a1b",
+        "subject": "Wire all 9 modules into CLI — full integration"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-30T00:33:21-07:00",
+        "sha": "e3d967c700985ccf5c90795102e728ddfa4906d1",
+        "subject": "Wire all 9 modules into CLI — full integration"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T03:39:35-07:00",
+        "sha": "02bf0c59b495c6b8314063ae8dccb0fe8a715cfe",
+        "subject": "Update README — document all 9 security modules and 18 API endpoints"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T03:25:07-07:00",
+        "sha": "e6afa401f1567a17a9d1fe8d6606ef038473a57a",
+        "subject": "Update API server with 6 new security endpoints (18 total)"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T03:24:39-07:00",
+        "sha": "77cbe6b84c9173eb65c04487a4ffaec2379b14d1",
+        "subject": "Add modules/payload_detector.py — AEGIS security module"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T03:24:38-07:00",
+        "sha": "52ddaba3ba7d3d5b546b73a3f8f8ed400f1eb476",
+        "subject": "Add modules/password_audit.py — AEGIS security module"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T03:24:37-07:00",
+        "sha": "25d7db76f1d07fbcd21d31058b64b4226c46c938",
+        "subject": "Add modules/forensics.py — AEGIS security module"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T03:24:35-07:00",
+        "sha": "36b5b010e7d1114274ec8d410bcc086970332075",
+        "subject": "Add modules/ioc_scanner.py — AEGIS security module"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T03:24:33-07:00",
+        "sha": "2f5dd476ccd0143e0f47974dbf8242e0396efacc",
+        "subject": "Add modules/honeypot.py — AEGIS security module"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T02:58:26-07:00",
+        "sha": "d5b5f6e7f7f7b842c97578ef9f56a2b8f32b4362",
+        "subject": "Update README with security modules documentation"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T02:57:12-07:00",
+        "sha": "7cdb67a60b540177bbd701e3eb1af02de7456a51",
+        "subject": "Add modules/vuln_scanner.py — AEGIS security module"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T02:57:12-07:00",
+        "sha": "fd701451f67581f27b57659bd5cf639b08cd5eb9",
+        "subject": "Add modules/uptime_monitor.py — AEGIS security module"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T02:57:11-07:00",
+        "sha": "490107f7c0d6c08ab78cf28379f341cb00771f13",
+        "subject": "Add modules/log_analyzer.py — AEGIS security module"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T02:57:10-07:00",
+        "sha": "5fed730a785602bc34280d08628a880ea4955ffa",
+        "subject": "Add modules/api_server.py — AEGIS security module"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T02:57:09-07:00",
+        "sha": "7ff3c30e987d50957dd1ce40ba7d88120bceeace",
+        "subject": "Add modules/__init__.py — AEGIS security module"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T02:47:54-07:00",
+        "sha": "28aade7e36b3439abaf6635b158d3b9e8b3b12f2",
+        "subject": "Update README with full platform documentation"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T02:47:25-07:00",
+        "sha": "2ff2dcd88e35e34f1b3485c2a43aa56078d97ceb",
+        "subject": "Add real system monitoring module"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T02:47:16-07:00",
+        "sha": "029bfc26204b9fa38901ad37645fff04ab6cf708",
+        "subject": "Add GPU performance benchmarking tool (PyTorch/TensorFlow)"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T02:47:14-07:00",
+        "sha": "96368841323ec9fb44cc42d41e53ded413e91a91",
+        "subject": "Add quantum security decision service"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T02:47:12-07:00",
+        "sha": "5369fbb525df061c820e6d5e1ffef8d72ee11e17",
+        "subject": "Add async GPU task worker with NATS integration"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T02:47:09-07:00",
+        "sha": "e2304e2eda76d7f6813595604ffd49bfe613a5c5",
+        "subject": "Add FastAPI task scheduler with NATS routing"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T02:46:12-07:00",
+        "sha": "50931b4afb6e81b217340c86ce11d8f0c29314c4",
+        "subject": "Update dependencies for full AEGIS platform"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T02:46:09-07:00",
+        "sha": "c876974bbd4c28ad91b8de77a63a6d5587c4c721",
+        "subject": "Add AEGIS OMNI-XEON v2.0 core engine"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T02:46:07-07:00",
+        "sha": "699a30e85e4dac9437765c1a15d28a9260391033",
+        "subject": "Add AEGIS Unified v2.0 — full security platform with QByte-22"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-28T02:46:04-07:00",
+        "sha": "b61ea4f971bcab1cedc90f04ad9bfd52fb7a2d5f",
+        "subject": "Add QByte-22 Quantum Security Engine — real IP threat scoring"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "Jorge Francisco Paredes",
+        "authored_at_declared": "2026-04-27T22:50:36-07:00",
+        "sha": "f91e19d463cf7ebcb3719e65e200a452a9e75606",
+        "subject": "Update COMMERCIAL_LICENSE.md, SECURITY.md, and CONTRIBUTING.md with full professional content"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-27T22:39:02-07:00",
+        "sha": "7fa15466d5221583b251d393c1a98bfa20672e99",
+        "subject": "test"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-27T22:38:08-07:00",
+        "sha": "663adb653983df03dd786a83b97daba5733985ce",
+        "subject": "Add COMMERCIAL_LICENSE.md"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-27T22:38:07-07:00",
+        "sha": "f0a1bd928f12f8877ee08472e8467cc4da65f31e",
+        "subject": "Add CONTRIBUTING.md"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-27T22:38:06-07:00",
+        "sha": "ea1297c25f8027e5f9b5afc19efab58544b92f30",
+        "subject": "Add SECURITY.md"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-27T22:34:36-07:00",
+        "sha": "c59f0f680751f2473aeb8cd427e9e4a2146f5a79",
+        "subject": "Update LICENSE - MIT Non-Commercial with commercial use restriction"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-27T22:33:37-07:00",
+        "sha": "7b5a6cb55822468d044767c4e274a470b4bf2c43",
+        "subject": "Add LICENSE"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2026-04-27T20:53:11-07:00",
+        "sha": "c17af4d84ce58d7716bda6e4f4d10a75b6fc22ba",
+        "subject": "Create FUNDING.yml for GitHub Sponsors"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2025-10-04T23:12:56-07:00",
+        "sha": "30fdaaf839cffbd2a92459e2ee69e4b0ff3fa011",
+        "subject": "Add ChatGPT conversation search utility"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2025-09-25T06:45:12-06:00",
+        "sha": "52a83d38fa329004a238ede6730e108daac2aafe",
+        "subject": "Merge pull request #1 from irstabyjorge/codex/build-playwright-script-for-truepeoplesearch-automation"
+      },
+      {
+        "author_email_sha256": "91719714052f6a4115d703e6daf013bf05ecdbea98bc9f3e48c30611f1be34a4",
+        "author_name_declared": "irstaxbyjorge",
+        "authored_at_declared": "2025-08-04T01:11:39-07:00",
+        "sha": "c7357bad326a0fae9f7dbfe2733de50ed7c70e56",
+        "subject": "Initial commit"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "JORGE FRANCISCO PAREDES",
+        "authored_at_declared": "2025-06-13T03:28:19-07:00",
+        "sha": "0be1b6f54ba3d4553974cd1cbf40cfc2c7efb679",
+        "subject": "Add Playwright script for TruePeopleSearch"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "irstaxbyjorge",
+        "authored_at_declared": "2025-06-05T13:00:02-07:00",
+        "sha": "a073c1afabd8d0f91536afe3d84b26033c4680c3",
+        "subject": "Initial commit for irstaxbyjorge"
+      },
+      {
+        "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+        "author_name_declared": "irstaxbyjorge",
+        "authored_at_declared": "2025-06-05T12:30:41-07:00",
+        "sha": "72620af8caffd1da11e0831cfbbde00e1f9b77db",
+        "subject": " Initial commit for AEGIS_SUPERSTACK"
+      }
+    ],
+    "truncated": false
+  },
+  "inventory": {
+    "files": [
+      {
+        "bytes": 0,
+        "git_blob_oid": "3d513c0a94e449509f5a240cbc940be01d2b1d2f",
+        "mode": "100644",
+        "path": ".github/FUNDING.yml",
+        "sha256": "2e7eed9234dd72bbbea467c494731855fb7480c753f6543681c51f9ce14530ca"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "c1c8527a58674992460a39e1d5f7b66721bf034c",
+        "mode": "100644",
+        "path": ".github/workflows/aegis-ip-shield.yml",
+        "sha256": "74d92e8c6b98b8a7df8a0ae237b09c206ce7c6a31e3a10261df778ce0425f809"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "ead7d0d17a6774015eb64cd0f1ba0131de7776ff",
+        "mode": "100644",
+        "path": ".github/workflows/pets-aegis-hf-protection.yml",
+        "sha256": "8ee4429c7a66c60a22904941aff46276432f807fa117d7255a4876f24f8b4af6"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "997087557428d7289967cecb763811ee71e4ee19",
+        "mode": "100644",
+        "path": ".github/workflows/sacred-atom-agents.yml",
+        "sha256": "4d4c234659fb84042eaad00fa219a6c5f1909fc1e7f721d9b0492cbe1d71d961"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "e460dd7d8f4a09e5a8c092573bb56ac4c37c843a",
+        "mode": "100644",
+        "path": ".github/workflows/saltsignal-runner-test.yml",
+        "sha256": "d8cae80986ba397c995203bc1d6ad05f0793ca6f95db45af1c333f5fe0e27d8a"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "b5fdf78c9e1a4c174302ef0d2e9ebe992a5612aa",
+        "mode": "100644",
+        "path": ".github/workflows/universal-formula-engine.yml",
+        "sha256": "e194cfd978ad9656233381474fe310b9427dd041ae77eb1b77eeaf02f25e1840"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "469fa425922ac92908e02b8e82260635f566b305",
+        "mode": "100644",
+        "path": "COMMERCIAL_LICENSE.md",
+        "sha256": "733dc41e3016827736b77a96c65bc236a66d89dd54db46ffffd89215188e0fd5"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "5c3b8c54ea6312d8e1d012d49866b968e83d5d6a",
+        "mode": "100644",
+        "path": "CONTRIBUTING.md",
+        "sha256": "3052b1e9f2d7e1de5aa27825554b1eabc0f519a73ed8da6afd60a2afc1ad2850"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "d56e845d57a3c9309b05fdc09605173471b25d54",
+        "mode": "100644",
+        "path": "LICENSE",
+        "sha256": "171c287e6a54fd2de0a036e4d2e3af968fe32b9ff8417e88359b6a2175c916eb"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "b1a2111776ddabda07e2e19f35275a7dc7ac2905",
+        "mode": "100644",
+        "path": "README.md",
+        "sha256": "23e68669c150c063513663bc82848ac84750239649902d6ca7a96639b348fb42"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "e5114270eca73e3e31b9f4008c34baaf8d014d2a",
+        "mode": "100644",
+        "path": "SECURITY.md",
+        "sha256": "9e1484cb8da1233e9189db8cfca1ec5e1419f2b25636075077edc50a3fe25291"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "8c7b198fe7785ccbb246208ea3abef264565f273",
+        "mode": "100644",
+        "path": "aegis_brain.py",
+        "sha256": "e0b12c2382c5644cd488c55fd924cbfcc78db8f67d564064f7cc3c0a0f6fe3af"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "bee25805b1b29f60e207f4bb187eb70c23d0f44e",
+        "mode": "100644",
+        "path": "aegis_chat.py",
+        "sha256": "7fbc0d1c688c7c21a3f0f7b71f7944f373c8adf64c4fee95b26d2181b235d5ef"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "2a85f94f5825491f43dffaf84d3464df69f6b788",
+        "mode": "100644",
+        "path": "aegis_daemon.py",
+        "sha256": "6ab356e74f3817fc78149e4081cc5c4b47309a7d46468e1d48d5d788b01640fd"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "ffdf0d0aee4e96074e8604cb3434f25d321a3cbc",
+        "mode": "100644",
+        "path": "aegis_icon.svg",
+        "sha256": "2e0d09713e382aa46cb646f5740938a5b2e8b74d70a77945f2171989e1509edc"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "93f537ed6e0cf7e5fa50d56f9789cd3a146bbb2a",
+        "mode": "100644",
+        "path": "aegis_omni.py",
+        "sha256": "4ff822f475686ab3afdcf214c904dad8dbbdca2b0698eb896f0266bbe7ddad57"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "aa92247ec02b28dbe92b15826e1eefe7a4fef34f",
+        "mode": "100644",
+        "path": "aegis_real.py",
+        "sha256": "b6763e134c3e8a48b3a04017e346455e3cb879601f76b8403e05f6e73ab5602d"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "c2f74dc09a6c56aca19df7b1430beb56afd7ca0f",
+        "mode": "100644",
+        "path": "aegis_unified.py",
+        "sha256": "14a103e9e8ad5636eafd104537d03e2bad813254e5659714f2a50708ae84774b"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "3bc982ad16e7c7c200ea94e2e74e539b90426e3b",
+        "mode": "100644",
+        "path": "chatgpt_search.py",
+        "sha256": "26ef0b483624becb632f563ac1e145cf2597ac9909b1f0c8dbb128cdce7c85da"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "124d267a1b576b9de386db48fcc17ff5f0ddaaed",
+        "mode": "100644",
+        "path": "conversation_evidence.py",
+        "sha256": "4e0a8daedf7e56e883cb0fd36ab2c96438976e4a827901f6985eed1a3064f811"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "9ee385b394b9b7d1ab44d433500ddd8b564834a7",
+        "mode": "100644",
+        "path": "docs/IP_SHIELD_GITHUB.md",
+        "sha256": "d4843e213bda867e1599ffcf62aef1224ec59c3e497100a71807c31494f2c843"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "bed707982e259afdba865aaffe4cd32bdeeca105",
+        "mode": "100644",
+        "path": "docs/PETS_AEGIS_CONNECTOR_INTEGRATION_REGISTRY.md",
+        "sha256": "65d228a331615aeafd64ddc19969c16de852f297cd23db67cc6e272181762732"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "4392ed91053b834b81af548062ead70ea0c3943b",
+        "mode": "100644",
+        "path": "docs/PETS_AEGIS_HF_PROTECTION.md",
+        "sha256": "71651fe9fcd470f4a42c0d98f5eafc98f140fe2c850957082b535cea60a7c85f"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "0c300a22d1d51f73241dbdb168e791a28c31f55c",
+        "mode": "100644",
+        "path": "docs/PETS_AEGIS_IP_SHIELD_COVERAGE_CHARTER.md",
+        "sha256": "eab980339afe68a1fdd2792c9bdc43b904da441a0ed2be4e1934396398532529"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "9225ae112b57d4c38c2ea017cbf55af40418ea35",
+        "mode": "100644",
+        "path": "docs/PETS_AEGIS_SACRED_ATOM_INTEGRATION.md",
+        "sha256": "97121954cb56886129894ad6751ece9d872dffe5bb6a6aadd1e3d8c2446f1af2"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "0cd630d68bd5d90b9386651fe399bdd64176dd47",
+        "mode": "100644",
+        "path": "docs/PETS_AEGIS_SACRED_ATOM_MULTI_AGENT_ENGINE.md",
+        "sha256": "dcd786414c2a7faef8d4e3a63b2698e1bf71342652dc0d73ee0b3e45a02eec7e"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "02c7d01c38e1149f0eb8632a24effc6e617f2a17",
+        "mode": "100644",
+        "path": "docs/PETS_UNIVERSAL_FORMULA_CONTINUOUS_EXECUTION.md",
+        "sha256": "79dcac62c103793ca0bc7fd82100dc2fc99c2246d909b3acffc6de361152cfca"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "6beb62f8d4222d6d11a6495316b87075d0b14ad7",
+        "mode": "100644",
+        "path": "docs/PETS_UNIVERSAL_FORMULA_RUNTIME_SUPERVISOR.md",
+        "sha256": "ef6b01e3e0015162933f8dcce4789b4c910c903762dda382f9628fbbd710183e"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "a69fb9ec6db02d08e7de3e6f65ed11d2e7b4b7f2",
+        "mode": "100644",
+        "path": "gpu_benchmark.py",
+        "sha256": "dace48d79e9134bcf87d3a98fbd07d8fa166a9a6dac8b2ab7acc46535a8e1aba"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "56321c0f53c102ca66f68bdb7d7e48f6cd795c78",
+        "mode": "100644",
+        "path": "gpu_worker.py",
+        "sha256": "e27448f184b8ac63aff6cde237c0fa7485d28c63b8058fd678b3fa2bc30460e6"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "d5facd1d85f849da3b457cb2064aa72bd2a44638",
+        "mode": "100644",
+        "path": "install_service.sh",
+        "sha256": "1c3646207a6de19329a4515f5453af09a644366eaeedf12bde986b81ac84f8c9"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "74472904495d723441012f1d837c7e2b249382a7",
+        "mode": "100644",
+        "path": "modules/__init__.py",
+        "sha256": "43a8d262ab094b628582a35b469cdfcc2d950682368d013ed574f915a38dc904"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "f77ee1b9568186d1eb80194f4d336f8516e7585d",
+        "mode": "100644",
+        "path": "modules/api_server.py",
+        "sha256": "0dbc7c2058f25c6461da5f026f034b5b206a942152e2fa5ba914dbdd5ac5ef9c"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "f566d2d0965499b83e10a27ab2ae247571404f48",
+        "mode": "100644",
+        "path": "modules/device_identity/INTEGRATION.md",
+        "sha256": "3da8d7b0e6e2cf08700a6ad2365d25b990aaece3f583a259a7317119bfde9399"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "987b5aea1c10211290d3daa548280cef29d1a5fa",
+        "mode": "100644",
+        "path": "modules/device_identity/README.md",
+        "sha256": "bc30e1764d2da13c62a83215fb54685c81b3d2f5cc567119f52d8095bcc9361c"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "cc51f4c74fae1d92f281bb1cfec318d22aa3c532",
+        "mode": "100644",
+        "path": "modules/device_identity/__init__.py",
+        "sha256": "460d3395a661b7975b66633fd50918909697bf4b5733fee456f41745a49cd164"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "26e4c5972658a3868e9d82be6273d8abc765cb7c",
+        "mode": "100644",
+        "path": "modules/device_identity/data/historical_devices.json",
+        "sha256": "d9691d3aaea94d9103caab3ea4fdb0421b1db633078a123c33ef6559b4c8ce08"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "c47a916c1fffc20d43d60648c6a0592bc1b9f3d4",
+        "mode": "100644",
+        "path": "modules/device_identity/huggingface/README.md",
+        "sha256": "a2f93e918f9a1f8313744e549b017d5f844cd22a7004648d8fb1e1eb22eb4d11"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "41667711be4c65e2441e42a83152fcfa6d321bf4",
+        "mode": "100644",
+        "path": "modules/device_identity/huggingface/app.py",
+        "sha256": "dfee21e42e70308639577480d9372d4ef42cc088c9e5997cfc43fc791ca12dc9"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "4f8235c45ec9f52f30b3b0c31020bcdb8a47da11",
+        "mode": "100644",
+        "path": "modules/device_identity/huggingface/historical_devices.json",
+        "sha256": "7f35421e65aace4404d58c984f1d108d0e2bccd17a50064811e2ff442706b3ae"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "692709f8c0877da43fa675ccc625b78ebf9069a3",
+        "mode": "100644",
+        "path": "modules/device_identity/huggingface/requirements.txt",
+        "sha256": "a3c4e37b85c31f9b8fb86a54c4a991111a4a3a2a6d392129816fd71d6feb12ce"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "29176e27984f2156764751831c5be48ed8227552",
+        "mode": "100644",
+        "path": "modules/device_identity/main.py",
+        "sha256": "863ac6a4e628244e6f071cbbc2b1ebc5ef1849f182e6f8de7b93cdd1dbfcdd85"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "29e433673d037acb78abeef38ddb2d8aab1dbde4",
+        "mode": "100644",
+        "path": "modules/device_identity/registry.py",
+        "sha256": "06562aaa5b16f45df495bb2055c95eadfbd9b597a7f860b32e6d638428610b0b"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "c426e9a03d576bbf6bc0f7fe8607b5e6f0d7ab5d",
+        "mode": "100644",
+        "path": "modules/device_identity/registry/historical_devices.json",
+        "sha256": "2bde1ef593b53bdc5ed9417a2b07b19274e01bdd5e6f96b90260f689da85fa01"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "e83be12d2a67922e2cb0068cc2b4cd9ea5882157",
+        "mode": "100644",
+        "path": "modules/device_identity/tests/test_registry.py",
+        "sha256": "7a74ff9e5ea144cd93a00409b3532569a1678807b0ff6b5a45f744699fb55a7c"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "68b7fbff7846f6df37cb4e7f1eae678dda7a6ea5",
+        "mode": "100644",
+        "path": "modules/forensics.py",
+        "sha256": "837f96982c6771526f15b43e3011c45acb5e1518aa10347748b297b8a9966acc"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "b32d29fef314acc355fde0fa5720cc0ee942d3b9",
+        "mode": "100644",
+        "path": "modules/honeypot.py",
+        "sha256": "8abb02d8427e4e45d0f9379cd7c6d7a682b91d9018ba03f38671f33ee9ebd405"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "174d1ae28dec418fbdb7ea47642029daeb2def68",
+        "mode": "100644",
+        "path": "modules/ioc_scanner.py",
+        "sha256": "9b7cef4a48878bb37a17ee3f18f0446586ec3c878b57899eedaada60c7499bd2"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "877f20c4098ae4177a629700d2a62022e0486a09",
+        "mode": "100644",
+        "path": "modules/log_analyzer.py",
+        "sha256": "847f3461e2ba9b01f82551b85e6d6874979e00c1d51b7dec5d4a61bdd824cbff"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "7eafea9dc68f3b62fb0130aece31dcbdf8cd92b7",
+        "mode": "100644",
+        "path": "modules/password_audit.py",
+        "sha256": "3d2bd48f3c0380afcab93663a840e9106e6e83199dc0c5e531cdf6858a83466c"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "17cba11df7b83cf577c8a81d11312b005f402a2a",
+        "mode": "100644",
+        "path": "modules/payload_detector.py",
+        "sha256": "750e04ccaf2e9b4405db1beba67381b2f1e41973cebbac925d31ab8c5374042f"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "09d6bbe60b085f106f85a204c7f3943654688b59",
+        "mode": "100644",
+        "path": "modules/pets/sacred_atom_agents.py",
+        "sha256": "d8f2864314c47ea1e996befee49e534589ca3ae33d6de30576f4e7060fc090b5"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "6861cfd6c4bac47d5cd5a8eddd8af7d8df5defdd",
+        "mode": "100644",
+        "path": "modules/pets/sacred_atom_geometry.py",
+        "sha256": "49475c00488ddff2cf41a4937efab6d446c783f5fd43b1d052cd985988f15f62"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "065e24d5bd186cbd9a98a6115bf29bb06f59b8bd",
+        "mode": "100644",
+        "path": "modules/pets/sacred_atom_integration.py",
+        "sha256": "6335c1c2f83e1315afd67728877048306bdf41527c60ed9b051f5a174292a53e"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "63ac5256e60da5e75f354a03571d26e03af0765d",
+        "mode": "100644",
+        "path": "modules/pets/universal_formula/__init__.py",
+        "sha256": "8d5eb32aa12b1b6c889693f47f2a6a51a5b5658a741678734df35b5bb5da0503"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "bbc53cc6b644ac913bfc12ff8ae297bc7680f8b9",
+        "mode": "100644",
+        "path": "modules/pets/universal_formula/durable_queue.py",
+        "sha256": "7a39be7e2e76d856448cdb0625bddf3894763ab6a29158121e00608deed22e96"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "20e0ad17ffd00be57c93d87df9f4dd2a8c1d9abd",
+        "mode": "100644",
+        "path": "modules/pets/universal_formula/engine.py",
+        "sha256": "3bcea9e2b996f232beae67e226f975f0003e15a1612c6b1c95b688fb99bc85fb"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "227d271c318d158c0c52f599c63346291639b3ba",
+        "mode": "100644",
+        "path": "modules/pets/universal_formula/objective.py",
+        "sha256": "93b609cfa6a7b197f19372020ff51207767c6547d452c61ade62b04b1b1270e9"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "6bd86e963f8aa4d341e6699a7427e3f61427f38d",
+        "mode": "100644",
+        "path": "modules/pets/universal_formula/policy.py",
+        "sha256": "cfbbe7bf27ccea53510f930b5365ef0b2046a481bc62e8488fbbd8c2616948b5"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "d3b235cb1718e4fde59d59aba721c71e78d606dc",
+        "mode": "100644",
+        "path": "modules/pets/universal_formula/runtime.py",
+        "sha256": "021e6486d9d618b811eeacd2a08d54a0a538219ff784a0935e6fbc11f12dba7a"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "879921f8e7b1e164e3005f223fa95b55fd390438",
+        "mode": "100644",
+        "path": "modules/pets/universal_formula/sacred_atom_pool.py",
+        "sha256": "82b89d58ed27eb75bcf94e99df613c3fcab9007db62579cbd137d7b969578b87"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "3102f50397fe42dc21cff9f9b35926d503851aa1",
+        "mode": "100644",
+        "path": "modules/uptime_monitor.py",
+        "sha256": "6eecf9cd45f3b628b5c4aadf9b039f527d5e5f53b5c840ba7d912593edce1e84"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "50d8ba98eee116d546e7136adfc5cad1b3c76fbc",
+        "mode": "100644",
+        "path": "modules/vuln_scanner.py",
+        "sha256": "a62efe8c5f7cd34bcab0b30d8bb10d3b8937bfaf719edac035cc5850d46280a5"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "c964448edbffb8ffb1ac2e90151bd59387274f36",
+        "mode": "100644",
+        "path": "pets_aegis_hf/.gitignore",
+        "sha256": "baaf23a32b6e88b53f633421a8e4a67f2b79c046e8826314e557531d69fb8cc9"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "f81ec3565b6f1576e9ae1e1ddf47f051b824a596",
+        "mode": "100644",
+        "path": "pets_aegis_hf/SECURITY.md",
+        "sha256": "1b4da7e21659d44bad975506abd8bef3199760978c5130a8d49a7b52923ffd99"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "9aa3f90365fde8f020d7d8d42193f97c3d0660e1",
+        "mode": "100644",
+        "path": "pets_aegis_hf/pets_aegis_hf/__init__.py",
+        "sha256": "5f26eddac90165a98630d94bb8e5f5206fa1e2e231a940c600ef0c2065ab25a7"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "75faa32505f01e15cfe19d9f6547e32c5f4d07e4",
+        "mode": "100644",
+        "path": "pets_aegis_hf/pets_aegis_hf/cli.py",
+        "sha256": "0c5255c9bb95da2f08df051aa5490274cad0e364d5a8bdc7eb995f3533ddd42a"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "e8d943b20b7da14346d27f26e82682ddec02321e",
+        "mode": "100644",
+        "path": "pets_aegis_hf/pets_aegis_hf/core.py",
+        "sha256": "7d34a5e8597cf159837ea3dece888ad43f3f5435fd1c0aafc37bafc3fe4d0a26"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "2cf355cd6bc52b2570096278e9d0c0dc44109b25",
+        "mode": "100644",
+        "path": "pets_aegis_hf/pyproject.toml",
+        "sha256": "0f623828fbc38526bc8e967f909c2e368db1934a987491dbe1e71f3455d93d50"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "41c30d2c4ee29d9e2444b5e52cd706c648e511da",
+        "mode": "100644",
+        "path": "pets_aegis_hf/tests/test_core.py",
+        "sha256": "ddb9542910bfa0f643b199651e38883c16b142790ccfe88fcc67afbc8ca7bcbc"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "31a68ea1e36b952c93dc83f49341dacae1fed19a",
+        "mode": "100644",
+        "path": "qbyte_engine.py",
+        "sha256": "0468b07f5e108c25b3f11473feb2dd93704057b723a80bf41ac8a636cfbf910f"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "19266a963557c189eada38869af32246c0e33bc2",
+        "mode": "100644",
+        "path": "quantum_service.py",
+        "sha256": "ba511b865e0c3e19e6d9d0d3f974404aaa1163a1be78b32402064cf9f267d165"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "f412915ed871cc1c6d94c821efc922ddc0bfdc20",
+        "mode": "100644",
+        "path": "requirements.txt",
+        "sha256": "8d1e80aa5fdb377928c0948c4bce8d5dd95eb397e00a86d615c0735bb3733f9c"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "244869bc6cae6da95bf1c9aff183a7f158117112",
+        "mode": "100644",
+        "path": "scheduler.py",
+        "sha256": "a3def1e15be5791ee7f2db9548433e8883b6f0e161c6c444d6b3f492bc15ede5"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "2a8137dcdf10c349618e990e22add842fcd9bf8e",
+        "mode": "100644",
+        "path": "search_truepeoplesearch.py",
+        "sha256": "31bdb63d29a613064182b3b0d33ec5aa86ea01d44afe39d3f03c3056892fce8c"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "615c0c7a5991a1918ca70a19a9500802d1e5a9c5",
+        "mode": "100644",
+        "path": "sovereign-ai/core/system.js",
+        "sha256": "e9f309357041e59b2839ac18d7d3eea7f507aba6590e4be1ef3aac040dc86370"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "17a70322241d17ef418b8f94ca20a578d25c388a",
+        "mode": "100644",
+        "path": "sovereign-ai/economic/economic.js",
+        "sha256": "068bff3de7329c6ab94045fc279587d33c2cb6ce2529bdd5c8e2636721a5a2e4"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "92aa1026316e7af6566d51fabe058d09f33db75b",
+        "mode": "100644",
+        "path": "sovereign-ai/matrix/agents.js",
+        "sha256": "587b8ef6bc8b45795142ae534bee17f75c4aabd848074af94f9210be57ef39a5"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "c81384cc3d1dfa4b115b4c88398436188f410b77",
+        "mode": "100644",
+        "path": "sovereign-ai/package.json",
+        "sha256": "0588812c87a1c7b8ca6351611681d581aae5fa1dd05b759f4e5b6e334ade45db"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "f845b1d340c8bb5b68cd77db897901acc635516a",
+        "mode": "100644",
+        "path": "sovereign-ai/vector/memory.js",
+        "sha256": "07a428b14a658b83dc86892f2658af45ac60079a9c2fd302f5deaea3110b3c43"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "7b199630544b2b79846d1eee915d43099017f1bb",
+        "mode": "100644",
+        "path": "tests/test_ip_shield_github.py",
+        "sha256": "73d12375bfae3b2b8053542b6c0b3ef4422496ab71b1b062792c4fda68a7b689"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "2fa5be4c9389ef41e892f344ee4b7404c438fed8",
+        "mode": "100644",
+        "path": "tests/test_sacred_atom_agents.py",
+        "sha256": "49057e1a3c2e9462e70b090331297542781f6b2e7cef871ba9e04c50c84c15f2"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "fb67f5ce7f275a8caee60687f0dbf231b401ce9d",
+        "mode": "100644",
+        "path": "tests/test_sacred_atom_integration.py",
+        "sha256": "36b664620d0d23203e60641bc53c4e991c67d975ce6c990e5113e76e8964e0a1"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "c529d91c8be6d6c4e374528e8140f6fecdac5d07",
+        "mode": "100644",
+        "path": "tests/test_sacred_atom_worker_pool.py",
+        "sha256": "c80058bef7c14f7c35a715aa0d336b9c37d9e5e04e13ee6b1a429a6827126e55"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "5fa76b3f6e49ce89921ad14432ecaee879a17bff",
+        "mode": "100644",
+        "path": "tests/test_universal_formula_engine.py",
+        "sha256": "36ebe95c585fac47dcb50150b875e8b7a4a2f2c13eee3ffeb8e646701740f87f"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "acd47cd1a82da65f26b998f6b93a51ca63ce0fc1",
+        "mode": "100644",
+        "path": "tests/test_universal_formula_objective.py",
+        "sha256": "ee735c1f48e228397945d7e99b516a594d5f31f6c494e53f42b18599f737c7d2"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "7a825d49043403b0263a9c74487fa462e7e3c11d",
+        "mode": "100644",
+        "path": "tests/test_universal_formula_review_hardening.py",
+        "sha256": "3c4e1a776df17aca0d670c5dd61ebe286b52aa1eace02db2693107cff28dfda7"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "d50b1ca18ece23cb7b5c36d67ea0bec535f78736",
+        "mode": "100644",
+        "path": "tests/test_universal_formula_runtime.py",
+        "sha256": "a18135b95ac25248d0401c9481c7c39f97a9807022c63ca03faebe70ff6d17e9"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "708f79b5bcd0484f5803f4923e0105e9ecd8b9bd",
+        "mode": "100644",
+        "path": "tools/ip_shield_github.py",
+        "sha256": "e0b1a6131fe08a9a5cca800bac36b095b48f6867ff7d085db658cf20d97e7a4f"
+      },
+      {
+        "bytes": 0,
+        "git_blob_oid": "0bc494566926baeea5b3e29a7839eeb56fae451e",
+        "mode": "100644",
+        "path": "ui/sacred-atom-multi-agent/index.html",
+        "sha256": "67e9eac41eb12f717dafc91610b8d720438e6a814a3650ea018deb90869a3fcc"
+      }
+    ],
+    "tracked_blob_count_recorded": 90,
+    "tracked_blob_count_total": 90,
+    "truncated": false
+  },
+  "limits": [
+    "Git author names and timestamps are self-declared commit metadata, not verified identity or trusted time.",
+    "SHA-256 fingerprints identify snapshot bytes; they do not prove authorship, originality, ownership or infringement.",
+    "No source-file contents are included; commit email addresses are hashed.",
+    "A ledger branch is versioned evidence, not immutable storage; administrators can rewrite it.",
+    "Only this configured repository and triggering refs are covered; this does not monitor every account repository."
+  ],
+  "manifest_type": "AEGIS_GITHUB_IP_SHIELD_PROVENANCE",
+  "manifest_version": "1.0",
+  "repository": "irstabyjorge/AEGIS_SUPERSTACK",
+  "source_commit": "ec30bad6ace214f55ddc0b7fc7112d9e2548facc",
+  "source_ref": "refs/heads/feat/universal-formula-durable-queue",
+  "source_ref_name": "feat/universal-formula-durable-queue",
+  "source_tree": "e06ff635c8d9e7c661349e66e517fb93c452551a",
+  "workflow_run_id": "43508298380"
+}
