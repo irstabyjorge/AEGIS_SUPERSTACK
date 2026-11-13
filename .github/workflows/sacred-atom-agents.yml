@@ -1,19 +1,19 @@
-name: Sacred Atom Multi-Agent Tests
+name: Sacred Atom Multi-Agent and Geometry Tests
 
 on:
   push:
     branches:
-      - feat/sacred-atom-multi-agent-engine
+      - feat/sacred-atom-geometry-adapter
     paths:
-      - "modules/pets/sacred_atom_agents.py"
-      - "tests/test_sacred_atom_agents.py"
+      - "modules/pets/sacred_atom_*.py"
+      - "tests/test_sacred_atom_*.py"
       - ".github/workflows/sacred-atom-agents.yml"
   pull_request:
     branches:
       - main
     paths:
-      - "modules/pets/sacred_atom_agents.py"
-      - "tests/test_sacred_atom_agents.py"
+      - "modules/pets/sacred_atom_*.py"
+      - "tests/test_sacred_atom_*.py"
       - ".github/workflows/sacred-atom-agents.yml"
 
 permissions:
@@ -31,7 +31,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Compile agent module
-        run: python -m py_compile modules/pets/sacred_atom_agents.py
-      - name: Run focused unit tests
-        run: python -m unittest discover -s tests -p "test_sacred_atom_agents.py" -v
+      - name: Compile Sacred Atom modules
+        run: python -m py_compile modules/pets/sacred_atom_agents.py modules/pets/sacred_atom_geometry.py modules/pets/sacred_atom_integration.py
+      - name: Run Sacred Atom unit tests
+        run: python -m unittest discover -s tests -p "test_sacred_atom_*.py" -v
