@@ -54,52 +54,94 @@ class ExecutionEngine:
         self.tasks = {}
 
     def add_tasks(self, tasks: Iterable[Task]):
-        for task in tasks:
-            if task.task_id in self.tasks:
+        """Validate a complete batch before changing engine state."""
+        batch = list(tasks)
+        candidate = dict(self.tasks)
+        for task in batch:
+            if task.task_id in candidate:
                 raise ValueError("duplicate task_id: " + task.task_id)
             if task.handler not in self.handlers:
                 raise ValueError("unregistered handler: " + task.handler)
-            if task.max_attempts < 1:
-                raise ValueError("max_attempts must be positive")
-            self.tasks[task.task_id] = task
-        self._validate_dependencies()
+            if task.max_attempts < 1 or task.attempts < 0:
+                raise ValueError("invalid attempt limits")
+            if task.status not in {s.value for s in TaskStatus}:
+                raise ValueError("invalid task status")
+            candidate[task.task_id] = task
+        self._validate_dependencies(candidate)
+        self.tasks = candidate
         self.checkpoint()
 
-    def _validate_dependencies(self):
-        for task in self.tasks.values():
-            missing = set(task.depends_on) - set(self.tasks)
+    @staticmethod
+    def _validate_dependencies(tasks):
+        for task in tasks.values():
+            missing = set(task.depends_on) - set(tasks)
             if missing:
                 raise ValueError("unknown dependencies for %s: %s" % (task.task_id, sorted(missing)))
         visiting, visited = set(), set()
+
         def visit(task_id):
             if task_id in visiting:
                 raise ValueError("dependency cycle detected")
             if task_id in visited:
                 return
             visiting.add(task_id)
-            for dep in self.tasks[task_id].depends_on:
+            for dep in tasks[task_id].depends_on:
                 visit(dep)
             visiting.remove(task_id)
             visited.add(task_id)
-        for task_id in self.tasks:
+
+        for task_id in tasks:
             visit(task_id)
 
+    def load_checkpoint(self, path=None):
+        """Restore validated task metadata; interrupted RUNNING tasks become PENDING.
+
+        Worker handlers must be idempotent because a process can stop after a
+        handler's effect but before its checkpoint is durably written.
+        """
+        source = Path(path) if path else self.checkpoint_path
+        if source is None:
+            raise ValueError("checkpoint path is required")
+        raw = json.loads(source.read_text(encoding="utf-8"))
+        if not isinstance(raw, dict):
+            raise ValueError("checkpoint root must be an object")
+        restored = {}
+        allowed_fields = set(Task.__dataclass_fields__)
+        for task_id, record in raw.items():
+            if not isinstance(record, dict) or set(record) - allowed_fields:
+                raise ValueError("invalid checkpoint record: " + str(task_id))
+            if record.get("task_id") != task_id:
+                raise ValueError("checkpoint task ID mismatch")
+            if record.get("handler") not in self.handlers:
+                raise ValueError("unregistered checkpoint handler: " + str(record.get("handler")))
+            task = Task(**record)
+            if task.status == TaskStatus.RUNNING.value:
+                task.status = TaskStatus.PENDING.value
+                task.error = "requeued after interrupted execution; handler must be idempotent"
+            if task.attempts > task.max_attempts:
+                raise ValueError("checkpoint attempts exceed configured maximum")
+            restored[task_id] = task
+        self._validate_dependencies(restored)
+        self.tasks = restored
+        self.checkpoint()
+        return self.snapshot()
+
     def _run_one(self, task):
+        if not self.policy.authorize(task.action):
+            task.status = TaskStatus.BLOCKED.value
+            task.error = "action requires explicit authorization: " + task.action
+            return task
         with self._lock:
             task.status = TaskStatus.RUNNING.value
             task.attempts += 1
         try:
-            if not self.policy.authorize(task.action):
-                task.status = TaskStatus.BLOCKED.value
-                task.error = "action requires explicit authorization: " + task.action
-                return task
             result = self.handlers[task.handler](dict(task.payload))
             if not isinstance(result, dict):
                 raise TypeError("worker handlers must return a dict")
             task.result = result
             task.error = None
             task.status = TaskStatus.PASSED.value
-        except Exception as exc:  # surfaced in checkpoint; no silent success
+        except Exception as exc:
             task.error = "%s: %s" % (type(exc).__name__, exc)
             task.status = (TaskStatus.PENDING.value if task.attempts < task.max_attempts
                            else TaskStatus.FAILED.value)
@@ -128,7 +170,8 @@ class ExecutionEngine:
             self.checkpoint()
 
     def snapshot(self):
-        return {task_id: asdict(task) for task_id, task in self.tasks.items()}
+        with self._lock:
+            return {task_id: asdict(task) for task_id, task in self.tasks.items()}
 
     def checkpoint(self):
         if not self.checkpoint_path:
