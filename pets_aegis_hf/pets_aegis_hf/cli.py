@@ -39,8 +39,37 @@ def inspect(api, repo_id, kind):
     }
 
 def write_json(path, obj):
-    path = Path(path); path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(obj, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(path.name + ".tmp")
+    temporary.write_text(json.dumps(obj, ensure_ascii=False, sort_keys=True, indent=2) + "\\n", encoding="utf-8")
+    temporary.replace(path)
+
+
+def manifest_filename(repo_id, kind):
+    safe = "".join(ch if ch.isalnum() or ch in "._-" else "_" for ch in repo_id)
+    suffix = hashlib.sha256(repo_id.encode("utf-8")).hexdigest()[:12]
+    return f"{safe}__{kind}__{suffix}.json"
+
+
+def load_verified_index(root):
+    root = Path(root)
+    index_path = root / "INDEX.json"
+    index = json.loads(index_path.read_text(encoding="utf-8"))
+    if index.get("schema") != "pets.aegis.hf.inventory.v2":
+        raise ValueError("Unsupported inventory schema.")
+    for item in index.get("repositories", []):
+        if item.get("status") != "inventoried":
+            continue
+        manifest_path = root / item["manifest"]
+        if manifest_path.parent != root or not manifest_path.is_file():
+            raise ValueError("Manifest path is missing or invalid.")
+        if not verify_manifest(json.loads(manifest_path.read_text(encoding="utf-8"))):
+            raise ValueError("Manifest integrity check failed; refusing remote operation.")
+    ledger_state = verify_ledger(root / "audit-ledger.jsonl")
+    if not ledger_state["valid"]:
+        raise ValueError("Audit ledger integrity check failed; refusing operation.")
+    return index
 
 def inventory(args):
     api = HfApi()
@@ -56,11 +85,11 @@ def inventory(args):
         try:
             record = inspect(api, repo_id, kind)
             manifest = make_manifest(record)
-            name = repo_id.replace("/", "__") + "__" + kind + ".json"
+            name = manifest_filename(repo_id, kind)
             write_json(root/name, manifest)
             index["repositories"].append({"repo_id":repo_id,"repo_type":kind,"revision":record["revision"],"file_count":record["file_count"],"manifest":name,"status":"inventoried"})
         except Exception as exc:
-            index["repositories"].append({"repo_id":repo_id,"repo_type":kind,"status":"error","error":str(exc)})
+            index["repositories"].append({"repo_id":repo_id,"repo_type":kind,"status":"error","error_type":type(exc).__name__})
     write_json(root/"INDEX.json", index)
     append_ledger(root/"audit-ledger.jsonl", {"action":"inventory","index_sha256":hashlib.sha256((root/"INDEX.json").read_bytes()).hexdigest(),"repositories":len(index["repositories"])})
     print(json.dumps({"repositories":len(index["repositories"]),"output":str(root)}, indent=2))
@@ -81,7 +110,7 @@ def verify(args):
 def audit(args):
     api = HfApi()
     root = Path(args.evidence)
-    index = json.loads((root/"INDEX.json").read_text(encoding="utf-8"))
+    index = load_verified_index(root)
     changes = []
     for old in index.get("repositories", []):
         if old.get("status") != "inventoried":
@@ -100,7 +129,7 @@ def publish(args):
         raise SystemExit("Explicit --confirm-write is required.")
     api = HfApi()
     root = Path(args.evidence)
-    index = json.loads((root/"INDEX.json").read_text(encoding="utf-8"))
+    index = load_verified_index(root)
     outcomes = []
     for item in index.get("repositories", []):
         if item.get("status") != "inventoried":
