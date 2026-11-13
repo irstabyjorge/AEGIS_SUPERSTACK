@@ -16,7 +16,11 @@ class RuntimeSupervisorTests(unittest.TestCase):
 
     def test_honors_cycle_budget(self):
         engine = ExecutionEngine({"ok": lambda payload: {"ok": True}})
-        supervisor = RuntimeSupervisor(engine, task_source=lambda health: [])
+        counter = {"value": 0}
+        def discover(_health):
+            counter["value"] += 1
+            return [Task("task-%d" % counter["value"], "ok")]
+        supervisor = RuntimeSupervisor(engine, task_source=discover)
         result = supervisor.run(max_cycles=3, max_runtime_seconds=10)
         self.assertEqual(result["cycle_count"], 3)
         self.assertEqual(result["stopped_reason"], "cycle_budget_exhausted")
