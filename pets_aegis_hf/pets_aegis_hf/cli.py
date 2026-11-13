@@ -13,7 +13,7 @@ def discover(api, owners):
             try:
                 result.extend((item.id, kind) for item in method(author=owner) if getattr(item, "id", None))
             except Exception as exc:
-                result.append({"owner": owner, "kind": kind, "error": str(exc)})
+                result.append({"owner": owner, "kind": kind, "error_type": type(exc).__name__})
     return result
 
 def inspect(api, repo_id, kind):
@@ -42,7 +42,7 @@ def write_json(path, obj):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + ".tmp")
-    temporary.write_text(json.dumps(obj, ensure_ascii=False, sort_keys=True, indent=2) + "\\n", encoding="utf-8")
+    temporary.write_text(json.dumps(obj, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
     temporary.replace(path)
 
 
@@ -101,7 +101,7 @@ def verify(args):
         try:
             results.append({"file":path.name,"valid":verify_manifest(json.loads(path.read_text(encoding="utf-8")))})
         except Exception as exc:
-            results.append({"file":path.name,"valid":False,"error":str(exc)})
+            results.append({"file":path.name,"valid":False,"error_type":type(exc).__name__})
     ledger = verify_ledger(root/"audit-ledger.jsonl")
     print(json.dumps({"manifests":results,"ledger":ledger}, indent=2))
     if any(not x["valid"] for x in results) or not ledger["valid"]:
@@ -119,7 +119,7 @@ def audit(args):
             current = inspect(api, old["repo_id"], old["repo_type"])
             changes.append({"repo_id":old["repo_id"],"previous_revision":old["revision"],"current_revision":current["revision"],"changed":old["revision"] != current["revision"]})
         except Exception as exc:
-            changes.append({"repo_id":old["repo_id"],"error":str(exc)})
+            changes.append({"repo_id":old["repo_id"],"error_type":type(exc).__name__})
     write_json(root/"AUDIT.json", {"schema":"pets.aegis.hf.audit.v1","changes":changes})
     append_ledger(root/"audit-ledger.jsonl", {"action":"audit","results":changes})
     print(json.dumps(changes, indent=2))
