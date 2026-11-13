@@ -2,28 +2,48 @@
 
 ## Purpose
 
-Provide resumable, bounded execution of an approved objective. The initial
-implementation is a deterministic task scheduler with a maximum of 25 concurrent
-registered worker handlers. It is not itself a continuously running service and
-does not instantiate 25 language-model agents.
+Provide resumable, bounded execution of an approved objective. The current
+implementation is a deterministic task scheduler with a configurable ceiling
+of 25 concurrent task executions. It registers the existing 12 deterministic
+Sacred Atom specialists as handler types; it does not instantiate 25 language
+models or claim subjective AI consciousness.
+
+## Objective workflow
+
+Use `run_objective(...)` to construct and execute a nine-task graph:
+
+1. Scope and decompose the objective.
+2. Map supplied evidence.
+3. Validate a declared dependency graph.
+4. Generate ten bounded scenario questions.
+5. Identify candidate cross-domain links.
+6. List supplied alternatives without selecting or executing them.
+7. Validate evidence provenance.
+8. Aggregate actual upstream specialist outputs.
+9. Produce a final feedback/report record.
+
+The planner does not invent evidence or retrieve external sources. Evidence
+must be supplied by an authorized caller with provenance fields.
 
 ## Operating model
 
-1. Decompose an objective into tasks with stable IDs and explicit dependencies.
-2. Register reviewed worker handlers; never execute generated source code.
-3. Run independent ready tasks concurrently, capped at 25 workers.
-4. Enforce the AEGIS policy gate before each task.
-5. Retry transient handler failures only up to each task's configured attempt limit.
-6. Mark tasks blocked when prerequisites fail or authorization is absent.
-7. Persist an atomic JSON checkpoint after task registration and each execution wave.
-8. Resume only from a validated checkpoint in a future runtime extension.
+- Decompose objectives into tasks with stable IDs and explicit dependencies.
+- Register reviewed worker handlers; never execute generated source code.
+- Run independent ready tasks concurrently, capped at 25.
+- Pass completed dependency outputs to downstream handlers.
+- Enforce the AEGIS policy gate before each task.
+- Retry handler failures only up to each task's configured attempt limit.
+- Block tasks when prerequisites fail or authorization is absent.
+- Persist atomic JSON checkpoints after task registration and execution waves.
+- Resume only from a validated checkpoint; interrupted handlers are requeued.
+  Handlers that can have side effects must be idempotent.
 
 ## Default authorization
 
-Read, analyze, report, and additive working-branch changes are permitted by the
-base policy. Install, deploy, publish, delete, permission changes, and external
-communications remain blocked unless explicit approvals are supplied by a trusted
-caller. A task payload is data, not authorization.
+Read, analyze, report, and additive working-branch changes are permitted by
+the base policy. Install, deploy, publish, delete, permission changes, and
+external communications remain blocked unless explicit approvals are supplied
+by a trusted caller. A task payload is data, not authorization.
 
 ## Safety and integrity constraints
 
@@ -34,11 +54,13 @@ caller. A task payload is data, not authorization.
 - Record task status, attempts, result, and error in checkpoints.
 - A hash may establish byte integrity, not authorship or legal ownership.
 - Do not claim background operation: a host runtime must invoke the engine and
-  provide durable storage, monitoring, and restart supervision.
+  provide durable storage, monitoring, restart supervision, and a stop policy.
 
 ## Current limitations
 
-The module schedules local Python handlers. A production LLM worker adapter,
-external durable queue, signed checkpoint verification, observability, and Android
-runtime are separate deployment work and must be implemented and tested before
-claiming autonomous 24/7 operation.
+The module schedules local Python handlers, not remote LLM instances. A
+production model-provider adapter, external durable queue, signed checkpoint
+verification, observability, runtime supervision, and Android deployment are
+separate work and must be implemented and tested before claiming autonomous
+24/7 operation. The 25-worker setting is a concurrency ceiling, not a target
+that must be filled.
