@@ -11,6 +11,7 @@ on:
       - "tests/test_universal_formula_runtime.py"
       - "tests/test_universal_formula_review_hardening.py"
       - "tests/test_universal_formula_durable_queue.py"
+      - "tests/test_universal_formula_value_ledger.py"
       - ".github/workflows/universal-formula-engine.yml"
   push:
     branches: [feat/universal-formula-25-worker-engine]
@@ -39,4 +40,4 @@ jobs:
       - name: Compile Universal Formula modules
         run: python -m py_compile modules/pets/universal_formula/*.py
       - name: Run Universal Formula tests
-        run: python -m unittest tests.test_universal_formula_engine tests.test_sacred_atom_worker_pool tests.test_universal_formula_objective tests.test_universal_formula_runtime tests.test_universal_formula_review_hardening tests.test_universal_formula_durable_queue -v
+        run: python -m unittest tests.test_universal_formula_engine tests.test_sacred_atom_worker_pool tests.test_universal_formula_objective tests.test_universal_formula_runtime tests.test_universal_formula_review_hardening tests.test_universal_formula_durable_queue tests.test_universal_formula_value_ledger -v
