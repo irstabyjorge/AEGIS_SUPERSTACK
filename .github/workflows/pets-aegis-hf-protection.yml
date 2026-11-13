@@ -1,0 +1,76 @@
+name: PETS AEGIS Hugging Face Protection
+
+on:
+  pull_request:
+    paths:
+      - "pets_aegis_hf/**"
+      - ".github/workflows/pets-aegis-hf-protection.yml"
+  push:
+    branches: [main]
+    paths:
+      - "pets_aegis_hf/**"
+      - ".github/workflows/pets-aegis-hf-protection.yml"
+  workflow_dispatch:
+  schedule:
+    - cron: "41 9 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pets-aegis-hf-protection
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate protection code (no Hub credentials)
+    if: github.event_name == 'pull_request' || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e ./pets_aegis_hf
+      - run: python -m compileall -q pets_aegis_hf
+      - run: PYTHONPATH=pets_aegis_hf python -m unittest discover -s pets_aegis_hf/tests -v
+      - run: pets-aegis-hf --help
+      - run: python -m pip install build && python -m build ./pets_aegis_hf
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pets-aegis-hf-package
+          path: pets_aegis_hf/dist/*
+          if-no-files-found: error
+          retention-days: 30
+
+  hub-readonly-inventory:
+    name: Read-only Hugging Face inventory
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e ./pets_aegis_hf
+      - name: Inventory Hugging Face repositories
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          if [ -z "$HF_TOKEN" ]; then
+            echo "HF_TOKEN secret is not configured; skipping authenticated inventory."
+            exit 0
+          fi
+          pets-aegis-hf inventory --owners AEGISGODMODE AEGISWALLS --output pets-aegis-evidence
+      - name: Upload inventory evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pets-aegis-hf-inventory-${{ github.run_id }}
+          path: pets-aegis-evidence/
+          if-no-files-found: ignore
+          retention-days: 30
