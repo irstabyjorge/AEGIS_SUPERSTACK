@@ -1,0 +1,37 @@
+name: Sacred Atom Multi-Agent Tests
+
+on:
+  push:
+    branches:
+      - feat/sacred-atom-multi-agent-engine
+    paths:
+      - "modules/pets/sacred_atom_agents.py"
+      - "tests/test_sacred_atom_agents.py"
+      - ".github/workflows/sacred-atom-agents.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "modules/pets/sacred_atom_agents.py"
+      - "tests/test_sacred_atom_agents.py"
+      - ".github/workflows/sacred-atom-agents.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Compile agent module
+        run: python -m py_compile modules/pets/sacred_atom_agents.py
+      - name: Run focused unit tests
+        run: python -m unittest discover -s tests -p "test_sacred_atom_agents.py" -v
