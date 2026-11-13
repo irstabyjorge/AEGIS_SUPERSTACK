@@ -41,7 +41,11 @@ def inspect(api, repo_id, kind):
 def write_json(path, obj):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
+    if path.exists():
+        raise FileExistsError(f"Refusing to overwrite existing evidence: {path.name}")
     temporary = path.with_name(path.name + ".tmp")
+    if temporary.exists():
+        raise FileExistsError(f"Temporary evidence path already exists: {temporary.name}")
     temporary.write_text(json.dumps(obj, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
     temporary.replace(path)
 
@@ -66,15 +70,28 @@ def load_verified_index(root):
             raise ValueError("Manifest path is missing or invalid.")
         if not verify_manifest(json.loads(manifest_path.read_text(encoding="utf-8"))):
             raise ValueError("Manifest integrity check failed; refusing remote operation.")
-    ledger_state = verify_ledger(root / "audit-ledger.jsonl")
+    ledger_path = root / "audit-ledger.jsonl"
+    ledger_state = verify_ledger(ledger_path)
     if not ledger_state["valid"]:
         raise ValueError("Audit ledger integrity check failed; refusing operation.")
+    index_hash = hashlib.sha256(index_path.read_bytes()).hexdigest()
+    ledger_records = [json.loads(line) for line in ledger_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    if not any(
+        row.get("event", {}).get("action") == "inventory"
+        and row.get("event", {}).get("index_sha256") == index_hash
+        for row in ledger_records
+    ):
+        raise ValueError("Inventory index is not anchored in the verified audit ledger.")
     return index
 
 def inventory(args):
     api = HfApi()
-    root = Path(args.output); root.mkdir(parents=True, exist_ok=True)
-    index = {"schema":"pets.aegis.hf.inventory.v2","master":"PETS","module":"AEGIS_OMEGA/HF_IP_SHIELD","repositories":[],"limitations":["Metadata only; no weights or dataset contents downloaded.","Git blob IDs are SHA-1; LFS SHA-256 is Hub-provided metadata.","Not proof of legal ownership, authorship, or trusted time."]}
+    output_root = Path(args.output)
+    output_root.mkdir(parents=True, exist_ok=True)
+    run_id = __import__("datetime").datetime.now(__import__("datetime").timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
+    root = output_root / ("run-" + run_id)
+    root.mkdir(parents=True, exist_ok=False)
+    index = {"schema":"pets.aegis.hf.inventory.v2","master":"PETS","module":"AEGIS_OMEGA/HF_IP_SHIELD","repositories":[],"run_id":run_id,"coverage_status":"partial_pending_review","limitations":["Metadata only; no weights or dataset contents downloaded.","Git blob IDs are SHA-1; LFS SHA-256 is Hub-provided metadata.","Not proof of legal ownership, authorship, or trusted time."]}
     targets = []
     for item in discover(api, args.owners):
         if isinstance(item, dict):
@@ -90,9 +107,11 @@ def inventory(args):
             index["repositories"].append({"repo_id":repo_id,"repo_type":kind,"revision":record["revision"],"file_count":record["file_count"],"manifest":name,"status":"inventoried"})
         except Exception as exc:
             index["repositories"].append({"repo_id":repo_id,"repo_type":kind,"status":"error","error_type":type(exc).__name__})
+    statuses = [item.get("status") for item in index["repositories"]]
+    index["coverage_status"] = "complete" if statuses and all(status == "inventoried" for status in statuses) else "partial"
     write_json(root/"INDEX.json", index)
-    append_ledger(root/"audit-ledger.jsonl", {"action":"inventory","index_sha256":hashlib.sha256((root/"INDEX.json").read_bytes()).hexdigest(),"repositories":len(index["repositories"])})
-    print(json.dumps({"repositories":len(index["repositories"]),"output":str(root)}, indent=2))
+    append_ledger(root/"audit-ledger.jsonl", {"action":"inventory","index_sha256":hashlib.sha256((root/"INDEX.json").read_bytes()).hexdigest(),"repositories":len(index["repositories"]),"coverage_status":index["coverage_status"]})
+    print(json.dumps({"repositories":len(index["repositories"]),"coverage_status":index["coverage_status"],"output":str(root)}, indent=2))
 
 def verify(args):
     root = Path(args.evidence)
