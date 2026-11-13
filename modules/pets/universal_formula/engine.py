@@ -51,6 +51,7 @@ class ExecutionEngine:
         self.max_workers = int(max_workers)
         self.checkpoint_path = Path(checkpoint_path) if checkpoint_path else None
         self._lock = Lock()
+        self._run_lock = Lock()
         self.tasks = {}
 
     def add_tasks(self, tasks: Iterable[Task]):
@@ -64,8 +65,10 @@ class ExecutionEngine:
                 raise ValueError("unregistered handler: " + task.handler)
             if task.max_attempts < 1 or task.attempts < 0:
                 raise ValueError("invalid attempt limits")
-            if task.status not in {s.value for s in TaskStatus}:
-                raise ValueError("invalid task status")
+            if task.status != TaskStatus.PENDING.value:
+                raise ValueError("new tasks must start pending")
+            if task.attempts != 0 or task.result is not None or task.error is not None:
+                raise ValueError("new tasks cannot contain execution history")
             candidate[task.task_id] = task
         self._validate_dependencies(candidate)
         self.tasks = candidate
@@ -116,10 +119,22 @@ class ExecutionEngine:
                 raise ValueError("unregistered checkpoint handler: " + str(record.get("handler")))
             task = Task(**record)
             if task.status == TaskStatus.RUNNING.value:
-                task.status = TaskStatus.PENDING.value
-                task.error = "requeued after interrupted execution; handler must be idempotent"
+                if task.attempts >= task.max_attempts:
+                    task.status = TaskStatus.FAILED.value
+                    task.error = "interrupted on final allowed attempt; not retried"
+                else:
+                    task.status = TaskStatus.PENDING.value
+                    task.error = "requeued after interrupted execution; handler must be idempotent"
             if task.attempts > task.max_attempts:
                 raise ValueError("checkpoint attempts exceed configured maximum")
+            evidence = task.payload.get("evidence") if isinstance(task.payload, dict) else None
+            if isinstance(evidence, list):
+                from modules.pets.sacred_atom_agents import Evidence
+                task.payload["evidence"] = [
+                    Evidence(**item) if isinstance(item, dict) and
+                    {"evidence_id", "source", "claim"}.issubset(item) else item
+                    for item in evidence
+                ]
             restored[task_id] = task
         self._validate_dependencies(restored)
         self.tasks = restored
@@ -152,26 +167,32 @@ class ExecutionEngine:
         return task
 
     def run_until_blocked(self):
-        """Run ready tasks in waves until complete or no safe progress is possible."""
-        while True:
-            for task in self.tasks.values():
-                if task.status == TaskStatus.PENDING.value and any(
-                    self.tasks[d].status in (TaskStatus.FAILED.value, TaskStatus.BLOCKED.value)
-                    for d in task.depends_on
-                ):
-                    task.status = TaskStatus.BLOCKED.value
-                    task.error = "dependency did not pass"
-            ready = [t for t in self.tasks.values()
-                     if t.status == TaskStatus.PENDING.value
-                     and all(self.tasks[d].status == TaskStatus.PASSED.value for d in t.depends_on)]
-            if not ready:
+        """Serialize scheduler runs and propagate blocked dependencies to a fixed point."""
+        with self._run_lock:
+            while True:
+                changed = True
+                while changed:
+                    changed = False
+                    for task in self.tasks.values():
+                        if task.status == TaskStatus.PENDING.value and any(
+                            self.tasks[d].status in (TaskStatus.FAILED.value, TaskStatus.BLOCKED.value)
+                            for d in task.depends_on
+                        ):
+                            task.status = TaskStatus.BLOCKED.value
+                            task.error = "dependency did not pass"
+                            changed = True
+
+                ready = [t for t in self.tasks.values()
+                         if t.status == TaskStatus.PENDING.value
+                         and all(self.tasks[d].status == TaskStatus.PASSED.value for d in t.depends_on)]
+                if not ready:
+                    self.checkpoint()
+                    return self.snapshot()
+                with ThreadPoolExecutor(max_workers=self.max_workers) as pool:
+                    futures = [pool.submit(self._run_one, task) for task in ready]
+                    for future in as_completed(futures):
+                        future.result()
                 self.checkpoint()
-                return self.snapshot()
-            with ThreadPoolExecutor(max_workers=self.max_workers) as pool:
-                futures = [pool.submit(self._run_one, task) for task in ready]
-                for future in as_completed(futures):
-                    future.result()
-            self.checkpoint()
 
     def snapshot(self):
         with self._lock:
