@@ -44,6 +44,13 @@ class IntegrityTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 append_ledger(path, {"action": "must-not-append"})
 
+    def test_empty_ledger_is_valid(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "audit.jsonl"
+            result = verify_ledger(path)
+            self.assertTrue(result["valid"])
+            self.assertEqual(result["events"], 0)
+
     def test_sequence_number_is_verified(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "audit.jsonl"
