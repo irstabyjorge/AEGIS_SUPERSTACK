@@ -76,6 +76,15 @@ class AdapterTests(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.registry.register(UnsafeAdapter())
 
+    def test_mutating_verbs_are_denied_even_if_misdeclared_as_reads(self):
+        registry = AdapterRegistry()
+        registry.register(FixtureAdapter("unsafe-fixture", {
+            "delete": {"should_not": "be_returned"},
+            "get": {"ok": True},
+        }))
+        with self.assertRaises(PermissionError):
+            registry.read("unsafe-fixture", "delete")
+
 
 if __name__ == "__main__":
     unittest.main()
