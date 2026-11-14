@@ -1,0 +1,85 @@
+# AEGIS/PETS Security Hardening — Universal Formula Baseline
+
+Status: proposed baseline on an isolated security branch. This document does not certify the repository or connected accounts as secure.
+
+## Universal Formula control cycle
+
+Observe → Classify → Constrain → Reason → Validate → Authorize → Act → Record → Learn.
+
+All remediation must be bounded, traceable, reversible, and independently verifiable. Keep conceptual architecture separate from deployed controls.
+
+## Confirmed observations from the inspected source files
+
+1. Several Python modules use `subprocess.run(..., shell=True)`, including `aegis_real.py`, `aegis_unified.py`, `modules/vuln_scanner.py`, `modules/forensics.py`, `modules/password_audit.py`, and `modules/ioc_scanner.py`. These are review targets, not proof of an exploitable vulnerability. Each call needs input-flow review before conversion to argument arrays.
+2. `aegis_real.py` generates a Fernet key and reports `stored: False`. A generated-but-unpersisted key cannot support later decryption. Do not replace or rotate any production key until a recovery plan exists.
+3. The inspected Hugging Face workflow uses `contents: read` and separates tests from an authenticated read-only inventory.
+4. The inspected `hub-docs` TruffleHog workflow checks full Git history and uses `contents: read`. Execution success and repository-wide coverage remain unverified.
+5. The IP SHIELD workflow writes snapshots to a ledger branch and therefore needs write access. Do not remove that permission without redesigning and testing the ledger publishing mechanism.
+
+## Changes in this branch
+
+- Adds `tools/security_static_audit.py`, a read-only Python AST heuristic that reports explicit `shell=True` calls.
+- Adds `.github/workflows/security-static-audit.yml` with read-only repository permissions, pinned action SHAs, disabled checkout credential persistence, and a 30-day report artifact.
+- This audit is advisory: it does not prove exploitability, inspect Git history, inspect secret values, or alter the source tree.
+
+## Remediation sequence
+
+1. Review each flagged subprocess call and its input sources. Convert safe cases to argument arrays with `shell=False`; preserve legitimate shell pipelines only where required and with fixed commands and strictly validated inputs.
+2. Add tests for command construction, path handling, timeouts, and error behavior.
+3. Define key lifecycle: generation, encrypted storage, access control, backup, recovery test, rotation procedure, and audit event. Never log key material.
+4. Run secret scanning over all branches and history; rotate only confirmed exposed credentials, after mapping dependencies.
+5. Pin every third-party Action to a verified full commit SHA and review release provenance.
+6. Keep `GITHUB_TOKEN` permissions job-scoped and least-privilege. Preserve write access only for jobs that demonstrably need it.
+7. Enable branch protection/rulesets, required reviews, and required checks where the account plan and repository settings support them.
+8. Verify signed release artifacts, APK manifest permissions, signing certificate fingerprints, and reproducible build provenance.
+9. Test backups by restoring into an isolated location and comparing hashes.
+10. Re-run the audit and retain reports with timestamp, commit SHA, SHA-256 digest, and reviewer decision.
+
+## Explicitly not verified by this repository-only change
+
+- Personal access token inventory/revocation, account sessions, MFA, recovery codes, OAuth approvals, or organization policy.
+- GitHub Actions secrets/variables values or their rotation.
+- Branch protection/rulesets and collaborator membership.
+- Railway deployment health or secret configuration.
+- Hugging Face account permissions and token scopes.
+- Local device firewall, OS patch level, Android app installation state, or backup restoration.
+- Any claim of compromise or attribution.
+
+## Evidence requirements
+
+For each change, record source commit, branch, file path, diff, author, UTC timestamp, validation result, reviewer, and rollback procedure. Do not include credentials, private keys, personal data, or raw secret values in reports.
+
+## Validation record — 2026-11-14
+
+- Commit reviewed by CI: `465198e2332cef25bf700ac42ff19ed76471d097`.
+- AEGIS Read-only Security Baseline run `43569848411`: success. The password-audit command tests, AST audit, and report upload steps all completed successfully.
+- Railway Foundation Tests run `43569853315`: success. Formatting, lint, compile/import smoke tests, API/QByte/Universal Formula tests, and Docker image build completed successfully.
+- AEGIS GitHub IP SHIELD run `43569853355`: success.
+- Audit artifact was created and is retained by GitHub Actions; the connector did not expose its ZIP contents for independent inspection here.
+- A later duplicate baseline run was pending at the last check; the successful run above is tied to the same commit SHA.
+
+These results validate the listed CI jobs only. They do not certify all repositories, account settings, secrets, devices, APKs, or production deployment health.
+
+## Additional staged remediation
+
+- `modules/forensics.py`: recent-file timeline now invokes `find` with an argument array and `shell=False`; the `hours` parameter is restricted to integer values from 1 through 8760. Output is capped to 30 paths per scanned directory in Python.
+- `tests/test_forensics_commands.py`: covers shell-free argument execution, invalid time-window rejection, and result handling.
+- The security workflow now discovers all `test_*_commands.py` tests, not only the password-auditor tests.
+- These newest changes are awaiting CI validation; do not treat them as passed until the current commit's workflow finishes.
+
+## Static audit artifact review — commit `b9e33f456f45acd95dc46484fc5f65285fd8f15e`
+
+The uploaded CI JSON artifact was downloaded and inspected. It reports **9 explicit `subprocess.run(..., shell=True)` callsites** in the repository working tree:
+
+- `aegis_chat.py`: line 40
+- `aegis_unified.py`: line 89
+- `aegis_omni.py`: lines 399 and 413
+- `aegis_real.py`: line 29
+- `modules/forensics.py`: line 21 (legacy helper remains for other shell-based commands)
+- `modules/password_audit.py`: line 20 (legacy helper remains for other shell-based commands)
+- `modules/ioc_scanner.py`: line 50
+- `modules/vuln_scanner.py`: line 20
+
+This is a callsite inventory, not a finding of nine exploitable vulnerabilities. The two remediated data paths now use their new argument-array helpers, but the legacy helpers remain because their other callers include shell pipelines and redirections. A complete conversion requires command-by-command refactoring and regression tests; replacing the generic helper globally would break legitimate commands or risk changing behavior.
+
+The artifact scope is the checked-out Python working tree at that commit. It does not scan Git history, binary files, secrets, runtime behavior, or other repositories.
