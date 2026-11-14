@@ -33,7 +33,7 @@ class ForensicsCommandTests(unittest.TestCase):
         result = forensics.analyze_recent_file_changes(24)
 
         self.assertEqual(result["hours_scanned"], 24)
-        self.assertEqual(run_args.call_args.args[0][:4], ["find", "/etc", "-type", "f"])
+        self.assertEqual(run_args.call_args_list[0].args[0][:4], ["find", "/etc", "-type", "f"])
         self.assertEqual(result["total_changed"], 12)
 
 
