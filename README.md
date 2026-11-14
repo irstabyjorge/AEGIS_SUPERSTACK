@@ -21,6 +21,10 @@ AEGIS SUPERSTACK is a comprehensive security intelligence platform combining rea
 | **Quantum Service** | `quantum_service.py` | Quantum security decision engine |
 | **GPU Benchmark** | `gpu_benchmark.py` | PyTorch/TensorFlow GPU performance testing |
 
+## Screenshot Reference Register
+
+- User-supplied repository screenshots are indexed in [`docs/SCREENSHOT_REFERENCE_REGISTER.md`](docs/SCREENSHOT_REFERENCE_REGISTER.md), including SHA-256 provenance, extracted implementation checklist, license/pricing transcription, and author attribution.
+
 ## External Design Reference
 
 - ChatGPT shared context/reference: https://chatgpt.com/s/cd_6a1519fdd3588191a5a202b0a35b31f4
@@ -261,15 +265,26 @@ python3 -c "from modules import api_server, log_analyzer, uptime_monitor, vuln_s
 - Treat collected telemetry as sensitive security data; store and retain it according to policy.
 - Require human approval for high-impact actions (blocking, quarantine, active response).
 
-## Next Implementation Steps
+## Implementation Checklist — Completed on Integration Branch
 
-- [ ] Add a centralized configuration file (`config.example.yaml`) with safe defaults and local-only bindings.
-- [ ] Add unit tests for `qbyte_engine.py` scoring signals and confidence calculations.
-- [ ] Add integration tests for `modules/api_server.py` endpoints using sample fixtures.
-- [ ] Add structured JSON logging with request/scan IDs for auditability.
-- [ ] Add role-based access controls and API auth middleware for multi-user deployments.
-- [ ] Add CI pipeline checks (format, lint, compile, import smoke tests).
-- [ ] Add threat-intel feed stubbing/mocking for deterministic offline tests.
+- [x] Add centralized configuration example (`config.example.yaml`) with safe defaults, loopback-only binding, offline threat-intel mode, and secrets supplied only through environment variables.
+- [x] Add deterministic unit tests for `qbyte_engine.py` scoring signals, thresholds, confidence calculations, and JSONL event logging.
+- [x] Add HTTP integration tests for `modules/api_server.py` using isolated sample fixtures; cover health, fail-closed authentication, role restrictions, and scan correlation headers.
+- [x] Add structured JSON request audit records with validated request IDs and scan IDs.
+- [x] Add role-based bearer-token access controls (`viewer`, `operator`, `admin`) and fail-closed authentication for API routes.
+- [x] Add CI checks for formatter, lint, compile, import smoke tests, unit/integration tests, Universal Formula tests, and Docker image build.
+- [x] Add offline threat-intel fixtures and mocks so tests do not depend on external feeds or DNS.
+
+### Configuration and API security
+
+- Copy `config.example.yaml` to a local `config.yaml`; do not commit real credentials or personal data.
+- The legacy API binds to `127.0.0.1` by default. Set `AEGIS_HOST` only when a deliberate, protected deployment requires another interface.
+- Set `AEGIS_API_TOKENS` to a JSON object mapping high-entropy bearer tokens (at least 24 characters) to roles, for example: `{"replace-with-long-random-token":"viewer"}`. Supply real values through a secret manager or environment configuration, never source control.
+- `viewer` can read status and basic operational reports; `operator` can run analysis endpoints; `admin` can access sensitive audit and administrative read endpoints.
+- `GET /api/scan/<ip>` is analysis-only and no longer changes the blocklist. High-impact response actions require a separate human-approved workflow.
+- `/healthz` is the only unauthenticated endpoint. All other API routes fail closed if token configuration is missing.
+- The test fixture `tests/fixtures/threat_intel.json` is documentation-only sample data, not a live reputation feed or a claim about any real IP.
+
 
 ## License
 

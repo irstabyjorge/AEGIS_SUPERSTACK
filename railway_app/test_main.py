@@ -22,7 +22,7 @@ class RailwayApiTests(unittest.TestCase):
         self.assertEqual(response.status_code, 503)
 
     def test_status_rejects_missing_or_invalid_token(self):
-        with patch.dict(os.environ, {"AEGIS_API_TOKEN": "test-secret"}):
+        with patch.dict(os.environ, {"AEGIS_API_TOKENS": '{"vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv":"viewer"}'}):
             self.assertEqual(self.client.get("/api/v1/status").status_code, 401)
             self.assertEqual(
                 self.client.get(
@@ -33,17 +33,17 @@ class RailwayApiTests(unittest.TestCase):
             )
 
     def test_status_accepts_valid_token(self):
-        with patch.dict(os.environ, {"AEGIS_API_TOKEN": "test-secret"}):
+        with patch.dict(os.environ, {"AEGIS_API_TOKENS": '{"vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv":"viewer"}'}):
             response = self.client.get(
                 "/api/v1/status",
-                headers={"Authorization": "Bearer test-secret"},
+                headers={"Authorization": "Bearer vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"},
             )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["readiness"], "api-online")
         self.assertEqual(response.json()["mode"], "read-only-foundation")
 
     def test_formula_endpoint_requires_authentication(self):
-        with patch.dict(os.environ, {"AEGIS_API_TOKEN": "test-secret"}):
+        with patch.dict(os.environ, {"AEGIS_API_TOKENS": '{"oooooooooooooooooooooooooooooooo":"operator"}'}):
             response = self.client.post(
                 "/api/v1/formula/evaluate",
                 json={"objective": "Review PETS architecture"},
@@ -51,10 +51,10 @@ class RailwayApiTests(unittest.TestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_formula_runs_nine_bounded_stages(self):
-        with patch.dict(os.environ, {"AEGIS_API_TOKEN": "test-secret"}):
+        with patch.dict(os.environ, {"AEGIS_API_TOKENS": '{"oooooooooooooooooooooooooooooooo":"operator"}'}):
             response = self.client.post(
                 "/api/v1/formula/evaluate",
-                headers={"Authorization": "Bearer test-secret"},
+                headers={"Authorization": "Bearer oooooooooooooooooooooooooooooooo"},
                 json={
                     "objective": "Review PETS and AEGIS integration",
                     "domains": ["engineering", "governance"],
@@ -78,9 +78,19 @@ class RailwayApiTests(unittest.TestCase):
         self.assertFalse(data["safety"]["source_mutation"])
         self.assertFalse(data["safety"]["persistent_storage"])
 
+    def test_viewer_cannot_execute_formula(self):
+        token = "v" * 32
+        with patch.dict(os.environ, {"AEGIS_API_TOKENS": '{"' + token + '":"viewer"}'}):
+            response = self.client.post(
+                "/api/v1/formula/evaluate",
+                headers={"Authorization": f"Bearer {token}"},
+                json={"objective": "Review PETS architecture"},
+            )
+        self.assertEqual(response.status_code, 403)
+
     def test_formula_rejects_empty_objective_and_extra_fields(self):
-        with patch.dict(os.environ, {"AEGIS_API_TOKEN": "test-secret"}):
-            headers = {"Authorization": "Bearer test-secret"}
+        with patch.dict(os.environ, {"AEGIS_API_TOKENS": '{"oooooooooooooooooooooooooooooooo":"operator"}'}):
+            headers = {"Authorization": "Bearer oooooooooooooooooooooooooooooooo"}
             empty = self.client.post(
                 "/api/v1/formula/evaluate", headers=headers,
                 json={"objective": "  "},
