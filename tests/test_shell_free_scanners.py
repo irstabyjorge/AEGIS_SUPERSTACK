@@ -25,12 +25,13 @@ class ShellFreeScannerTests(unittest.TestCase):
     def test_ioc_runner_rejects_command_string(self):
         self.assertEqual(ioc_scanner._run("echo unsafe"), "")
 
-    @patch("modules.ioc_scanner.psutil.process_iter")
-    def test_process_scan_handles_empty_process_list(self, process_iter):
-        process_iter.return_value = []
-        result = ioc_scanner.check_suspicious_processes()
+    def test_process_scan_fails_safely_without_optional_dependency(self):
+        import sys
+        with patch.dict(sys.modules, {"psutil": None}):
+            result = ioc_scanner.check_suspicious_processes()
         self.assertEqual(result["total_flagged"], 0)
-        self.assertEqual(result["severity"], 1)
+        self.assertEqual(result["severity"], 3)
+        self.assertIn("warning", result)
 
     @patch("modules.ioc_scanner._cron_lines", return_value=["# comment", "0 1 * * * /usr/bin/backup"])
     @patch("modules.ioc_scanner.Path")
