@@ -1,7 +1,7 @@
 {
   "schema": "AEGIS_PETS_INTEGRATION_REGISTRY",
-  "version": "1.0.0",
-  "updated": "2026-11-09",
+  "version": "1.0.1",
+  "updated": "2026-11-14",
   "target": "irstabyjorge/AEGIS_SUPERSTACK",
   "branch": "aegis-pets-cloud-integration",
   "lifecycle": [
@@ -17,20 +17,18 @@
     {
       "id": "PETS_CLOUD_CONTROL_PLANE",
       "state": "tested_partial",
-      "mode": "authenticated_read_only",
-      "evidence": "10 control-plane tests + 3 registry tests + 5 knowledge-engine tests passed"
+      "mode": "authenticated_read_only"
     },
     {
       "id": "SOVEREIGN_AI",
       "state": "tested_partial",
-      "mode": "private_sandbox",
-      "evidence": "Node 22 dependency install; better-sqlite3 12.11.1 SQLite round-trip; 6 Node tests passed; safe boot status verified"
+      "mode": "private_sandbox"
     },
     {
       "id": "SACRED_ATOM",
-      "state": "tested",
+      "state": "implemented_ci_pending",
       "mode": "knowledge_only",
-      "evidence": "4 Sacred Atom + 2 Divinity–Earth Circle Node tests passed; Sovereign status wiring verified"
+      "note": "The deployment copy has not independently passed the current CI workflow."
     },
     {
       "id": "DIVINITY_EARTH_CIRCLE",
@@ -64,21 +62,18 @@
       "id": "AG_UNIFIED_KNOWLEDGE_V5",
       "state": "installed_tested",
       "mode": "curated_local_read_only_index",
-      "note": "Prior conversation reported lab metrics; source engine not present in this repository checkout",
-      "evidence": "Original v5.0.0 source hash-verified; hardened integration; 13 project files indexed; 13/13 integrity verification; FTS5 punctuation tests passed; full Library corpus not imported"
+      "note": "The source engine is not present in this repository checkout; full Library corpus not imported."
     },
     {
       "id": "AEGIS_GUARDED_EVOLUTION",
       "state": "installed_tested",
       "mode": "static_triage_only",
-      "note": "Prior conversation reported classification metrics; source engine not present in this repository checkout",
-      "evidence": "Original v1.0.0 source hash-verified; hardened integration; 5 knowledge-engine tests passed; curated scan 8 admit-knowledge, 2 manual-review, 3 quarantine; no candidate execution"
+      "note": "No candidate execution."
     },
     {
       "id": "SPECIALIST_HANDLERS_22",
       "state": "historically_reported",
-      "mode": "not_present_in_current_checkout",
-      "note": "22 handlers were reported in a previous release summary; they are not asserted to be running here"
+      "mode": "not_present_in_current_checkout"
     },
     {
       "id": "ANDROID_TERMUX_BRIDGE",
@@ -99,11 +94,7 @@
       "id": "PETS_CIRCLE_COMPANION_BRIDGE",
       "state": "design_spec_only",
       "mode": "presentation_only",
-      "limits": [
-        "no_credentials",
-        "no_external_authority",
-        "no_third_party_sharing"
-      ]
+      "limits": ["no_credentials", "no_external_authority", "no_third_party_sharing"]
     },
     {
       "id": "OWNER_ONLY_DIVINITY_PRESET",
@@ -115,11 +106,7 @@
       "state": "design_spec_only",
       "mode": "aggregate_public_statistics_only",
       "scope": "Tijuana_2020_2026",
-      "limits": [
-        "no_individual_minor_identification",
-        "no_person_level_profiles",
-        "no_target_localization"
-      ]
+      "limits": ["no_individual_minor_identification", "no_person_level_profiles", "no_target_localization"]
     },
     {
       "id": "HUMAN_CONTROL_CONTRACT",
@@ -140,22 +127,13 @@
       "id": "NEURAL_INTERFACE_RESEARCH_CATALOG",
       "state": "research_only",
       "mode": "educational_reference_only",
-      "limits": [
-        "no_device_targeting",
-        "no_rf_interception",
-        "no_jamming",
-        "no_medical_inference"
-      ]
+      "limits": ["no_device_targeting", "no_rf_interception", "no_jamming", "no_medical_inference"]
     },
     {
       "id": "DEVICE_FORENSIC_EVIDENCE",
       "state": "local_private_evidence_only",
       "mode": "provenance_and_integrity_only",
-      "limits": [
-        "no_bulk_cloud_transfer",
-        "no_third_party_data",
-        "no_unbounded_collection"
-      ]
+      "limits": ["no_bulk_cloud_transfer", "no_third_party_data", "no_unbounded_collection"]
     },
     {
       "id": "LGDNNA_ART5_GOVERNANCE",
@@ -184,10 +162,10 @@
   },
   "deployment_record": {
     "environment": "production",
-    "status": "ready",
+    "status": "offline",
     "scope": "authenticated_read_only_control_plane",
-    "deployment_id": "dpl_9dKSeaVFkN6DNuLhdJRgSX2KUYxo",
-    "authorization": "explicit_owner_approval",
+    "deployment_id": "4a638ac5-155d-4613-8199-14d18ef64b95",
+    "authorization": "not_authorized_for_production_release",
     "legacy_modules_public": false
   }
 }

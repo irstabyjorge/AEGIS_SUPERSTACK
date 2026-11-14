@@ -25,8 +25,6 @@ class EvidenceStoreTests(unittest.TestCase):
     def test_update_and_delete_are_rejected(self):
         record = self.store.append(source="fixture", collected_by="test",
                                    payload={}, consent_basis="synthetic_test")
-        # Explicitly close the test connection; Connection context managers
-        # handle transactions but do not close the underlying file handle.
         with closing(self.store._connect()) as db:
             with db:
                 with self.assertRaises(Exception):
@@ -51,12 +49,41 @@ class PermissionTests(unittest.TestCase):
 
 
 class AdapterTests(unittest.TestCase):
-    def test_fixture_read_and_write_denial(self):
+    def setUp(self):
+        self.registry = AdapterRegistry()
+        self.registry.register(FixtureAdapter("fixture", {"search": {"count": 1}}))
+
+    def test_fixture_read(self):
+        self.assertEqual(self.registry.read("fixture", "search")["data"]["count"], 1)
+
+    def test_mutating_and_unlisted_operations_are_denied(self):
+        for operation in ("delete_record", "update", "create", "patch", "send", "deploy",
+                          "Delete", "SEARCH "):
+            with self.subTest(operation=operation):
+                with self.assertRaises(PermissionError):
+                    self.registry.read("fixture", operation)
+
+    def test_adapter_must_declare_read_allowlist(self):
+        class UnsafeAdapter:
+            provider = "unsafe"
+
+            def health(self):
+                return {"status": "ok"}
+
+            def read(self, operation, params):
+                return {"operation": operation}
+
+        with self.assertRaises(TypeError):
+            self.registry.register(UnsafeAdapter())
+
+    def test_mutating_verbs_are_denied_even_if_misdeclared_as_reads(self):
         registry = AdapterRegistry()
-        registry.register(FixtureAdapter("fixture", {"search": {"count": 1}}))
-        self.assertEqual(registry.read("fixture", "search")["data"]["count"], 1)
+        registry.register(FixtureAdapter("unsafe-fixture", {
+            "delete": {"should_not": "be_returned"},
+            "get": {"ok": True},
+        }))
         with self.assertRaises(PermissionError):
-            registry.read("fixture", "delete_record")
+            registry.read("unsafe-fixture", "delete")
 
 
 if __name__ == "__main__":
