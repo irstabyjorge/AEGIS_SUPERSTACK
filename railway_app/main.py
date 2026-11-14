@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hmac
+import json
 import os
 from datetime import datetime, timezone
 from typing import Annotated
@@ -20,21 +21,63 @@ app = FastAPI(
 )
 
 
-def require_api_token(authorization: str | None = Header(default=None)) -> None:
-    expected = os.getenv("AEGIS_API_TOKEN")
-    if not expected:
-        raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Authenticated API is not configured",
-        )
-    scheme, _, supplied = (authorization or "").partition(" ")
-    if scheme.lower() != "bearer" or not supplied or not hmac.compare_digest(supplied, expected):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Unauthorized",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
+ROLE_LEVEL = {"viewer": 1, "operator": 2, "admin": 3}
 
+
+def load_token_roles() -> dict[str, str]:
+    """Load token-to-role mappings from a secret environment variable."""
+    raw = os.getenv("AEGIS_API_TOKENS", "")
+    roles: dict[str, str] = {}
+    if raw:
+        try:
+            supplied = json.loads(raw)
+        except (TypeError, ValueError):
+            supplied = {}
+        if isinstance(supplied, dict):
+            roles.update({
+                token: role for token, role in supplied.items()
+                if isinstance(token, str) and len(token) >= 24
+                and isinstance(role, str) and role in ROLE_LEVEL
+            })
+    # Backward-compatible single token is treated as admin, but multi-user
+    # deployments should use AEGIS_API_TOKENS and distinct least-privilege roles.
+    legacy = os.getenv("AEGIS_API_TOKEN")
+    if legacy and len(legacy) >= 24:
+        roles.setdefault(legacy, "admin")
+    return roles
+
+
+def require_role(required_role: str):
+    def dependency(authorization: str | None = Header(default=None)) -> str:
+        roles = load_token_roles()
+        if not roles:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail="Authenticated API is not configured",
+            )
+        scheme, _, supplied = (authorization or "").partition(" ")
+        role = next(
+            (candidate for token, candidate in roles.items()
+             if scheme.lower() == "bearer" and hmac.compare_digest(supplied, token)),
+            None,
+        )
+        if role is None:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Unauthorized",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+        if ROLE_LEVEL[role] < ROLE_LEVEL[required_role]:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Insufficient role",
+            )
+        return role
+    return dependency
+
+
+require_viewer = require_role("viewer")
+require_operator = require_role("operator")
 
 ShortText = Annotated[str, Field(min_length=1, max_length=160)]
 
@@ -61,7 +104,7 @@ def healthz() -> dict[str, str]:
     return {"status": "ok"}
 
 
-@app.get("/api/v1/status", dependencies=[Depends(require_api_token)])
+@app.get("/api/v1/status", dependencies=[Depends(require_viewer)])
 def status_readonly() -> dict[str, str]:
     return {
         "application": "AEGIS_OMEGA_SUPERSTACK",
@@ -71,7 +114,7 @@ def status_readonly() -> dict[str, str]:
     }
 
 
-@app.post("/api/v1/formula/evaluate", dependencies=[Depends(require_api_token)])
+@app.post("/api/v1/formula/evaluate", dependencies=[Depends(require_operator)])
 def formula_evaluate(request: FormulaRequest) -> dict:
     """Run a bounded local objective graph; no external or persistent actions."""
     return evaluate_objective(
