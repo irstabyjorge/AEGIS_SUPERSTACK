@@ -60,7 +60,7 @@ def load_token_roles():
     return {
         token: role for token, role in values.items()
         if isinstance(token, str) and len(token) >= 24
-        and role in ROLE_LEVEL and token.strip()
+        and isinstance(role, str) and role in ROLE_LEVEL and token.strip()
     }
 
 
