@@ -22,6 +22,17 @@ def _run(cmd, timeout=10):
     except Exception:
         return ""
 
+def _run_args(args, timeout=10):
+    """Run a fixed executable and argument list without invoking a shell."""
+    try:
+        r = subprocess.run(
+            args, shell=False, text=True, capture_output=True, timeout=timeout,
+            check=False,
+        )
+        return r.stdout.strip()
+    except (OSError, subprocess.SubprocessError, TypeError, ValueError):
+        return ""
+
 
 def _log(event, payload):
     with open(LOGS / "password_audit.jsonl", "a") as f:
@@ -135,8 +146,10 @@ def check_password_aging():
             last_changed_days = int(last_changed)
             max_days_val = int(max_days)
             if max_days_val == 99999:
-                shell_check = _run(f"getent passwd {username} 2>/dev/null | cut -d: -f7")
-                if shell_check and shell_check in ("/bin/bash", "/bin/sh", "/bin/zsh", "/usr/bin/bash", "/usr/bin/zsh"):
+                passwd_entry = _run_args(["getent", "passwd", username])
+                passwd_fields = passwd_entry.split(":")
+                login_shell = passwd_fields[6] if len(passwd_fields) >= 7 else ""
+                if login_shell in ("/bin/bash", "/bin/sh", "/bin/zsh", "/usr/bin/bash", "/usr/bin/zsh"):
                     findings.append({
                         "username": username,
                         "issue": "password_never_expires",
