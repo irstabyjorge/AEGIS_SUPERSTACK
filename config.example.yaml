@@ -1,0 +1,36 @@
+# AEGIS SUPERSTACK safe example configuration.
+# Copy to config.yaml locally; never commit secrets or real user data.
+server:
+  host: "127.0.0.1"
+  port: 8443
+  require_authentication: true
+  docs_enabled: false
+  request_id_header: "X-Request-ID"
+
+security:
+  # Populate tokens through environment variables / secret manager only.
+  # JSON object: {"token-value":"viewer","another-token":"operator"}
+  token_map_env: "AEGIS_API_TOKENS"
+  allowed_roles: ["viewer", "operator", "admin"]
+  default_role: "viewer"
+  fail_closed_without_tokens: true
+
+runtime:
+  network_access: false
+  external_actions: false
+  persistent_storage: false
+  max_formula_workers: 5
+  local_only: true
+
+logging:
+  format: "json"
+  include_request_id: true
+  include_scan_id: true
+  redact_authorization: true
+  level: "INFO"
+
+threat_intel:
+  mode: "offline"
+  feeds_enabled: false
+  deterministic_fixtures: true
+  fixture_path: "tests/fixtures/threat_intel.json"
