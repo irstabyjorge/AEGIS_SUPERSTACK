@@ -40,7 +40,6 @@ class DurableQueueTests(unittest.TestCase):
             engine.add_tasks([Task("q1", "ok")])
             self.assertEqual(queue.discover(engine), [])
 
-
     def test_dependency_batch_is_preserved(self):
         with tempfile.TemporaryDirectory() as directory:
             queue = DurableTaskQueue(Path(directory) / "queue.sqlite")
@@ -53,11 +52,25 @@ class DurableQueueTests(unittest.TestCase):
             second = queue.discover(engine)
             self.assertEqual([task.task_id for task in second], ["02_child"])
 
+    def test_discovery_pages_past_ineligible_rows(self):
+        with tempfile.TemporaryDirectory() as directory:
+            queue = DurableTaskQueue(Path(directory) / "queue.sqlite",
+                                     clock=lambda: 100.0)
+            for index in range(120):
+                queue.enqueue(Task("child-%03d" % index, "ok",
+                                   depends_on=["parent-late"]))
+            queue.enqueue(Task("parent-late", "ok"))
+            engine = ExecutionEngine({"ok": lambda payload: {"ok": True}})
+            batch = queue.discover(engine, limit=1)
+            self.assertEqual([task.task_id for task in batch], ["parent-late"])
+
     def test_non_json_payload_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             queue = DurableTaskQueue(Path(directory) / "queue.sqlite")
             with self.assertRaises(ValueError):
                 queue.enqueue(Task("bad", "ok", payload={"not_json": object()}))
+            with self.assertRaises(ValueError):
+                queue.enqueue(Task("nan", "ok", payload={"not_finite": float("nan")}))
 
 
 if __name__ == "__main__":
