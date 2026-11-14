@@ -48,3 +48,14 @@ All remediation must be bounded, traceable, reversible, and independently verifi
 ## Evidence requirements
 
 For each change, record source commit, branch, file path, diff, author, UTC timestamp, validation result, reviewer, and rollback procedure. Do not include credentials, private keys, personal data, or raw secret values in reports.
+
+## Validation record — 2026-11-14
+
+- Commit reviewed by CI: `465198e2332cef25bf700ac42ff19ed76471d097`.
+- AEGIS Read-only Security Baseline run `43569848411`: success. The password-audit command tests, AST audit, and report upload steps all completed successfully.
+- Railway Foundation Tests run `43569853315`: success. Formatting, lint, compile/import smoke tests, API/QByte/Universal Formula tests, and Docker image build completed successfully.
+- AEGIS GitHub IP SHIELD run `43569853355`: success.
+- Audit artifact was created and is retained by GitHub Actions; the connector did not expose its ZIP contents for independent inspection here.
+- A later duplicate baseline run was pending at the last check; the successful run above is tied to the same commit SHA.
+
+These results validate the listed CI jobs only. They do not certify all repositories, account settings, secrets, devices, APKs, or production deployment health.
