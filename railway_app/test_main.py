@@ -89,7 +89,7 @@ class RailwayApiTests(unittest.TestCase):
         self.assertEqual(response.status_code, 403)
 
     def test_formula_rejects_empty_objective_and_extra_fields(self):
-        with patch.dict(os.environ, {"AEGIS_API_TOKEN": "test-secret"}):
+        with patch.dict(os.environ, {"AEGIS_API_TOKENS": '{"oooooooooooooooooooooooooooooooo":"operator"}'}):
             headers = {"Authorization": "Bearer oooooooooooooooooooooooooooooooo"}
             empty = self.client.post(
                 "/api/v1/formula/evaluate", headers=headers,
