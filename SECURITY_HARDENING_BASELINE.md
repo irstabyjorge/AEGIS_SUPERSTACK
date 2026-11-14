@@ -66,3 +66,20 @@ These results validate the listed CI jobs only. They do not certify all reposito
 - `tests/test_forensics_commands.py`: covers shell-free argument execution, invalid time-window rejection, and result handling.
 - The security workflow now discovers all `test_*_commands.py` tests, not only the password-auditor tests.
 - These newest changes are awaiting CI validation; do not treat them as passed until the current commit's workflow finishes.
+
+## Static audit artifact review — commit `b9e33f456f45acd95dc46484fc5f65285fd8f15e`
+
+The uploaded CI JSON artifact was downloaded and inspected. It reports **9 explicit `subprocess.run(..., shell=True)` callsites** in the repository working tree:
+
+- `aegis_chat.py`: line 40
+- `aegis_unified.py`: line 89
+- `aegis_omni.py`: lines 399 and 413
+- `aegis_real.py`: line 29
+- `modules/forensics.py`: line 21 (legacy helper remains for other shell-based commands)
+- `modules/password_audit.py`: line 20 (legacy helper remains for other shell-based commands)
+- `modules/ioc_scanner.py`: line 50
+- `modules/vuln_scanner.py`: line 20
+
+This is a callsite inventory, not a finding of nine exploitable vulnerabilities. The two remediated data paths now use their new argument-array helpers, but the legacy helpers remain because their other callers include shell pipelines and redirections. A complete conversion requires command-by-command refactoring and regression tests; replacing the generic helper globally would break legitimate commands or risk changing behavior.
+
+The artifact scope is the checked-out Python working tree at that commit. It does not scan Git history, binary files, secrets, runtime behavior, or other repositories.
