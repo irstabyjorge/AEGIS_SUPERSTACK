@@ -1,4 +1,5 @@
 """HTTP integration tests for the legacy API using isolated dependency fixtures."""
+
 import importlib.util
 import json
 import sys
@@ -7,8 +8,8 @@ import types
 import unittest
 from http.server import ThreadingHTTPServer
 from pathlib import Path
-from urllib.request import Request, urlopen
 from urllib.error import HTTPError
+from urllib.request import Request, urlopen
 from unittest.mock import patch
 
 
@@ -51,14 +52,19 @@ def _load_api_module():
             return {"mode": "fixture"}
 
     aegis = _module(
-        "aegis_omni", QByteEngine=QByte, SystemAnalyzer=System,
-        EntropyModule=Entropy, PredictiveEngine=Predictor,
-        BLOCKLIST=set(), __version__="test",
+        "aegis_omni",
+        QByteEngine=QByte,
+        SystemAnalyzer=System,
+        EntropyModule=Entropy,
+        PredictiveEngine=Predictor,
+        BLOCKLIST=set(),
+        __version__="test",
     )
     fixtures = {
         "modules.uptime_monitor": {"run_checks": lambda: {"fixture": True}},
         "modules.log_analyzer": {
-            "analyze_system_logs": lambda: {}, "analyze_aegis_threats": lambda: {},
+            "analyze_system_logs": lambda: {},
+            "analyze_aegis_threats": lambda: {},
         },
         "modules.vuln_scanner": {"full_scan": lambda: {}},
         "modules.ioc_scanner": {"full_scan": lambda: {}},
@@ -121,7 +127,9 @@ class ApiServerIntegrationTests(unittest.TestCase):
 
     def test_viewer_role_can_read_status_but_cannot_scan(self):
         token = "v" * 32
-        with patch.dict("os.environ", {"AEGIS_API_TOKENS": json.dumps({token: "viewer"})}):
+        with patch.dict(
+            "os.environ", {"AEGIS_API_TOKENS": json.dumps({token: "viewer"})}
+        ):
             status_code, _, _ = self.request("/api/status", token)
             scan_code, _, _ = self.request("/api/scan/203.0.113.8", token)
         self.assertEqual(status_code, 200)
@@ -129,7 +137,9 @@ class ApiServerIntegrationTests(unittest.TestCase):
 
     def test_operator_scan_is_read_only_and_has_scan_id(self):
         token = "o" * 32
-        with patch.dict("os.environ", {"AEGIS_API_TOKENS": json.dumps({token: "operator"})}):
+        with patch.dict(
+            "os.environ", {"AEGIS_API_TOKENS": json.dumps({token: "operator"})}
+        ):
             code, headers, body = self.request(
                 "/api/scan/203.0.113.8", token, "scan-fixture-001"
             )
