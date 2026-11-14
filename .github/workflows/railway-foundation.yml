@@ -36,3 +36,5 @@ jobs:
         run: python -m compileall -q modules/pets/universal_formula modules/pets/sacred_atom_agents.py railway_app
       - name: Run API and Universal Formula tests
         run: python -m unittest railway_app.test_main tests.test_universal_formula_engine tests.test_universal_formula_objective tests.test_universal_formula_runtime tests.test_universal_formula_review_hardening tests.test_universal_formula_durable_queue tests.test_universal_formula_durable_graph_store tests.test_sacred_atom_agents tests.test_sacred_atom_integration -v
+      - name: Build Railway Docker image
+        run: docker build --pull -t aegis-api-foundation:test .
