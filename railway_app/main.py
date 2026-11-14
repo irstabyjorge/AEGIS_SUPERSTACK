@@ -1,19 +1,19 @@
-"""Minimal, read-only AEGIS Railway entrypoint.
-
-This service intentionally does not expose host inspection, scanning, blocking,
-forensic collection, password auditing, or device-control operations.
-"""
+"""Authenticated, read-only AEGIS API with bounded PETS formula evaluation."""
 from __future__ import annotations
 
 import hmac
 import os
 from datetime import datetime, timezone
+from typing import Annotated
 
 from fastapi import Depends, FastAPI, Header, HTTPException, status
+from pydantic import BaseModel, ConfigDict, Field
+
+from railway_app.formula import evaluate_objective
 
 app = FastAPI(
     title="AEGIS OMEGA SUPERSTACK",
-    version="0.1.0",
+    version="0.2.0",
     docs_url=None,
     redoc_url=None,
     openapi_url=None,
@@ -36,6 +36,25 @@ def require_api_token(authorization: str | None = Header(default=None)) -> None:
         )
 
 
+ShortText = Annotated[str, Field(min_length=1, max_length=160)]
+
+
+class EvidenceInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    evidence_id: ShortText
+    source: ShortText
+    claim: Annotated[str, Field(min_length=1, max_length=2000)]
+    observed_at: Annotated[str | None, Field(max_length=80)] = None
+
+
+class FormulaRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    objective: Annotated[str, Field(min_length=3, max_length=500)]
+    evidence: list[EvidenceInput] = Field(default_factory=list, max_length=25)
+    domains: list[ShortText] = Field(default_factory=list, max_length=8)
+    options: list[ShortText] = Field(default_factory=list, max_length=8)
+
+
 @app.get("/healthz")
 def healthz() -> dict[str, str]:
     # Keep the public health response deliberately non-sensitive.
@@ -50,3 +69,14 @@ def status_readonly() -> dict[str, str]:
         "readiness": "api-online",
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
+
+
+@app.post("/api/v1/formula/evaluate", dependencies=[Depends(require_api_token)])
+def formula_evaluate(request: FormulaRequest) -> dict:
+    """Run a bounded local objective graph; no external or persistent actions."""
+    return evaluate_objective(
+        objective=request.objective,
+        evidence=[item.model_dump() for item in request.evidence],
+        domains=request.domains,
+        options=request.options,
+    )
