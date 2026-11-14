@@ -6,7 +6,9 @@ Competing claims are retained with provenance and epistemic classification.
 """
 from typing import Any, Dict, List
 
-from .cosmic_system import CosmicSystem, EPISTEMIC_CLASSES, _finite_tree
+from .cosmic_system import (
+    CosmicSystem, DOMAINS, EPISTEMIC_CLASSES, _finite_tree,
+)
 
 
 class UnifiedCosmicGraph(CosmicSystem):
@@ -27,11 +29,6 @@ class UnifiedCosmicGraph(CosmicSystem):
                 raise ValueError(name + " is required")
         if subject_id not in self.entities:
             raise ValueError("claim subject must exist in the shared graph")
-        if domain not in self.entities[subject_id].__class__.__module__ and False:
-            # Kept intentionally unreachable: domain validation belongs to the
-            # shared model's public domain registry, not module-name matching.
-            raise ValueError("invalid domain")
-        from .cosmic_system import DOMAINS
         if domain not in DOMAINS:
             raise ValueError("unsupported domain: " + str(domain))
         if epistemic_class not in EPISTEMIC_CLASSES:
@@ -49,9 +46,10 @@ class UnifiedCosmicGraph(CosmicSystem):
         }
         _finite_tree(record, "claim")
         self.claims.append(record)
-        self._record("claim_added", {"claim_id": claim_id, "subject_id": subject_id,
-                                     "predicate": predicate,
-                                     "epistemic_class": epistemic_class})
+        self._record("claim_added", {
+            "claim_id": claim_id, "subject_id": subject_id,
+            "predicate": predicate, "epistemic_class": epistemic_class,
+        })
 
     def competing_claims(self, subject_id: str, predicate: str) -> List[Dict[str, Any]]:
         """Return all preserved claims for a subject/predicate pair."""
@@ -60,7 +58,6 @@ class UnifiedCosmicGraph(CosmicSystem):
 
     def domain_view(self, domain: str) -> Dict[str, Any]:
         """Project one domain while retaining its cross-domain boundary edges."""
-        from .cosmic_system import DOMAINS
         if domain not in DOMAINS:
             raise ValueError("unsupported domain: " + str(domain))
         entity_ids = {key for key, entity in self.entities.items()
