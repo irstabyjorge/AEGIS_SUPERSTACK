@@ -44,12 +44,18 @@ class CosmicSystemTests(unittest.TestCase):
         transition = Transition(
             "new-moon",
             additions=[Entity("moon", "Moon", "other", source="astronomy record")],
-            relationships=[Relationship(
-                "earth-moon", "earth", "moon", "gravitational_interaction",
-                epistemic_class="established_model", source="astronomy model"
-            )],
-            rationale="Add a related astronomical entity",
-            evidence_refs=["fixture:earth-moon"],
+            relationships=[
+                Relationship(
+                    "earth-life", "earth", "life", "supports_ecological_systems",
+                    epistemic_class="established_model", source="ecology model"
+                ),
+                Relationship(
+                    "earth-moon", "earth", "moon", "gravitational_interaction",
+                    epistemic_class="established_model", source="astronomy model"
+                ),
+            ],
+            rationale="Add related ecological and astronomical entities",
+            evidence_refs=["fixture:earth-life", "fixture:earth-moon"],
             epistemic_class="established_model",
         )
         self.system.apply_transition(transition)
