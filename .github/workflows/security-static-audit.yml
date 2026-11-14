@@ -37,7 +37,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Run password audit command safety tests
-        run: python -m unittest discover -s tests -p "test_password_audit_commands.py" -v
+        run: python -m unittest discover -s tests -p "test_*_commands.py" -v
       - name: Run read-only AST security audit
         run: |
           python tools/security_static_audit.py --root . --output "${RUNNER_TEMP}/security-static-audit.json"
