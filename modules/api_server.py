@@ -104,8 +104,9 @@ class AegisAPIHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         path = self.path.split("?")[0]
-        self.request_id = str(uuid.uuid4())
-        self.scan_id = None
+        supplied_id = self.headers.get("X-Request-ID", "")
+        self.request_id = supplied_id if REQUEST_ID_RE.fullmatch(supplied_id) else str(uuid.uuid4())
+        self.scan_id = self.request_id if path.startswith("/api/scan/") else None
         if not self._authorize(path):
             return
         routes = {
