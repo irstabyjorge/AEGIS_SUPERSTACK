@@ -10,6 +10,7 @@ COPY railway_app/requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
 COPY railway_app /app/railway_app
+COPY modules /app/modules
 
 RUN useradd --create-home --uid 10001 appuser \
     && chown -R appuser:appuser /app
