@@ -1,4 +1,5 @@
 """Deterministic unit tests for QByte scoring and confidence calculations."""
+
 import json
 import tempfile
 import unittest
@@ -38,10 +39,14 @@ class QByteScoringTests(unittest.TestCase):
         self.assertEqual(result["recommended_action"], "ALLOW")
 
     def test_signal_weights_accumulate_and_confidence_tracks_signal_count(self):
-        result = self.engine.analyze({
-            "ip": "8.8.8.8", "hour": 12, "failed_auth": True,
-            "new_device": True,
-        })
+        result = self.engine.analyze(
+            {
+                "ip": "8.8.8.8",
+                "hour": 12,
+                "failed_auth": True,
+                "new_device": True,
+            }
+        )
         self.assertEqual(result["threat_score"], 0.50)
         self.assertEqual(result["confidence"], 0.74)
         self.assertEqual(result["threat_level"], "MEDIUM")
@@ -49,14 +54,24 @@ class QByteScoringTests(unittest.TestCase):
 
     def test_confidence_is_capped(self):
         event = {
-            "ip": "8.8.8.8", "hour": 12, "failed_auth": True,
-            "failed_auth_count": 12, "new_device": True,
-            "impossible_travel": True, "geo_mismatch": True,
-            "suspicious_ip": True, "credential_stuffing": True,
-            "password_spray": True, "api_abuse": True, "port_scan": True,
-            "sql_injection": True, "path_traversal": True,
-            "requests_per_minute": 900, "privilege_escalation": True,
-            "lateral_movement": True, "data_exfiltration": True,
+            "ip": "8.8.8.8",
+            "hour": 12,
+            "failed_auth": True,
+            "failed_auth_count": 12,
+            "new_device": True,
+            "impossible_travel": True,
+            "geo_mismatch": True,
+            "suspicious_ip": True,
+            "credential_stuffing": True,
+            "password_spray": True,
+            "api_abuse": True,
+            "port_scan": True,
+            "sql_injection": True,
+            "path_traversal": True,
+            "requests_per_minute": 900,
+            "privilege_escalation": True,
+            "lateral_movement": True,
+            "data_exfiltration": True,
         }
         result = self.engine.analyze(event)
         self.assertEqual(result["confidence"], 0.95)
