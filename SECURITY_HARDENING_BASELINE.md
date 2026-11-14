@@ -59,3 +59,10 @@ For each change, record source commit, branch, file path, diff, author, UTC time
 - A later duplicate baseline run was pending at the last check; the successful run above is tied to the same commit SHA.
 
 These results validate the listed CI jobs only. They do not certify all repositories, account settings, secrets, devices, APKs, or production deployment health.
+
+## Additional staged remediation
+
+- `modules/forensics.py`: recent-file timeline now invokes `find` with an argument array and `shell=False`; the `hours` parameter is restricted to integer values from 1 through 8760. Output is capped to 30 paths per scanned directory in Python.
+- `tests/test_forensics_commands.py`: covers shell-free argument execution, invalid time-window rejection, and result handling.
+- The security workflow now discovers all `test_*_commands.py` tests, not only the password-auditor tests.
+- These newest changes are awaiting CI validation; do not treat them as passed until the current commit's workflow finishes.
