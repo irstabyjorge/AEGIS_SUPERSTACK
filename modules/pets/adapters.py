@@ -58,7 +58,13 @@ class AdapterRegistry:
         if not normalized or normalized != operation.strip():
             raise PermissionError("read_only_adapter")
         adapter = self._adapters[provider]
-        if normalized not in adapter.read_operations:
+        mutation_verbs = {
+            "create", "update", "patch", "delete", "remove", "send", "write",
+            "deploy", "execute", "mutate", "put", "post", "upload", "revoke",
+            "grant", "set", "insert",
+        }
+        operation_tokens = set(normalized.replace("/", "_").replace(":", "_").replace("-", "_").replace(".", "_").split("_"))
+        if operation_tokens & mutation_verbs or normalized not in adapter.read_operations:
             raise PermissionError("read_only_adapter")
         if params is not None and not isinstance(params, dict):
             raise ValueError("params_must_be_object")
