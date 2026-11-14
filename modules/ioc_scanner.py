@@ -11,7 +11,6 @@ import stat
 from datetime import datetime, UTC
 from pathlib import Path
 
-import psutil
 
 LOGS = Path.home() / "aegis_omni_xeon" / "logs"
 LOGS.mkdir(parents=True, exist_ok=True)
@@ -52,6 +51,10 @@ def _log(event, payload):
 
 def check_suspicious_processes():
     findings = []
+    try:
+        import psutil
+    except ImportError:
+        return {"check": "suspicious_processes", "severity": 3, "findings": [], "total_flagged": 0, "warning": "process_enumeration_dependency_unavailable"}
     for proc in psutil.process_iter(["pid", "username", "name", "cmdline", "cpu_percent", "memory_percent"]):
         try:
             info = proc.info
