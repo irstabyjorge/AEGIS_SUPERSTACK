@@ -23,6 +23,17 @@ def _run(cmd, timeout=15):
     except Exception:
         return ""
 
+def _run_args(args, timeout=15):
+    """Execute a fixed command argument vector without a shell."""
+    try:
+        r = subprocess.run(
+            args, shell=False, text=True, capture_output=True, timeout=timeout,
+            check=False,
+        )
+        return r.stdout.strip()
+    except (OSError, subprocess.SubprocessError, TypeError, ValueError):
+        return ""
+
 
 def _log(event, payload):
     with open(LOGS / "forensics.jsonl", "a") as f:
@@ -51,12 +62,16 @@ def capture_volatile_state():
 
 
 def analyze_recent_file_changes(hours=24):
+    if isinstance(hours, bool) or not isinstance(hours, int) or not 1 <= hours <= 8760:
+        raise ValueError("hours must be an integer from 1 to 8760")
     findings = []
     critical_dirs = ["/etc", "/usr/bin", "/usr/sbin", "/usr/lib", "/bin", "/sbin"]
 
     for d in critical_dirs:
-        output = _run(f"find {d} -type f -mmin -{hours * 60} 2>/dev/null | head -30", timeout=20)
-        for filepath in output.splitlines():
+        output = _run_args(
+            ["find", d, "-type", "f", "-mmin", f"-{hours * 60}"], timeout=20
+        )
+        for filepath in output.splitlines()[:30]:
             if not filepath.strip():
                 continue
             try:
