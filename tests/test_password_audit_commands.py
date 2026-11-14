@@ -19,7 +19,7 @@ class PasswordAuditCommandTests(unittest.TestCase):
     @patch("modules.password_audit._run_args")
     @patch("modules.password_audit._run")
     def test_password_aging_uses_getent_argument_array(self, run, run_args):
-        run.return_value = "alice:x:1000:1000:,,,:/home/alice:$6$hash:20000:99999::::\n"
+        run.return_value = "alice:$6$hash:20000:0:99999:7:::\n"
         run_args.return_value = "alice:x:1000:1000:,,,:/home/alice:/bin/bash"
 
         result = password_audit.check_password_aging()
